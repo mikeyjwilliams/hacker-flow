@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --watchAll --verbose",
+    "test": "cross-env NODE_ENV=test jest --watchAll --runInBand --verbose",
     "server": "nodemon -r dotenv/config index.js",
     "start": "node index.js"
   },
