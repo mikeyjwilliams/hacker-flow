@@ -69,12 +69,23 @@ exports.seed = async function(knex) {
   await knex('questions').insert([
     // # 1 question w/ # 1 user
     {
+      // # 1 question w/ # 1 user
       title:
         'issue running "npm run server" not rerunning server on every save',
       category: 'node.js',
       question:
         'how do i rerun node.js server every time i save my server without having to manually restart my server?',
       attempt_tried: 'looked through articles but did not find an answer yet.',
+      comments: 'n/a',
+      user_id: 1,
+    },
+    // # 2 question w/ # 1 user
+    {
+      // # 2 question w/ # 1 user
+      title: 'how to create a new react app',
+      category: 'react',
+      question: 'what is the command for creating a new react app?',
+      attempt_tried: 'n/a',
       comments: 'n/a',
       user_id: 1,
     },
