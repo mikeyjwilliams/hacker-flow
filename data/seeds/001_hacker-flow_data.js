@@ -183,5 +183,14 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       dev_id: 5,
     },
+    // answer # 5 -> question # 5 => dev 6
+    {
+      // answer # 5 -> question # 5 => dev 6
+      title: 'proper package.json naming convention',
+      solution:
+        'proper package.json names do not have capitals in them. only lower case letters and dashes.',
+      comments: 'a proper name would look similar to `"name": "hacker-flow"`.',
+      dev_id: 6,
+    },
   ]);
 };
