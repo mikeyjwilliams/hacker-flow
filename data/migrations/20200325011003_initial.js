@@ -1,7 +1,7 @@
 /** @format */
 
 exports.up = async function(knex) {
-  knex.schema.createTable('users', tbl => {
+  await knex.schema.createTable('users', tbl => {
     tbl.increments('id');
     tbl
       .string('username', 165)
@@ -17,7 +17,7 @@ exports.up = async function(knex) {
     tbl.string('role', 15).notNullable();
   });
 
-  knex.schema.createTable('questions', tbl => {
+  await knex.schema.createTable('questions', tbl => {
     tbl.increments('id');
     tbl
       .string('title', 240)
@@ -33,7 +33,7 @@ exports.up = async function(knex) {
       .inTable('users');
   });
 
-  knex.schema.createTable('answers', tbl => {
+  await knex.schema.createTable('answers', tbl => {
     tbl.increments('id');
     tbl.string('title', 240).notNullable();
     tbl.text('solution').notNullable();
@@ -44,7 +44,7 @@ exports.up = async function(knex) {
       .inTable('users');
   });
 
-  knex.schema.createTable('question_statuses', tbl => {
+  await knex.schema.createTable('question_statuses', tbl => {
     tbl.increments('id');
     tbl
       .boolean('best_answer')
@@ -66,8 +66,8 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-  knex.schema.dropTableIfExists('question_statuses');
-  knex.schema.dropTableIfExists('answers');
-  knex.schema.dropTableIfExists('questions');
-  knex.schema.dropTableIfExists('users');
+  await knex.schema.dropTableIfExists('question_statuses');
+  await knex.schema.dropTableIfExists('answers');
+  await knex.schema.dropTableIfExists('questions');
+  await knex.schema.dropTableIfExists('users');
 };
