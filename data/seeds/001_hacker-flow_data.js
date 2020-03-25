@@ -248,6 +248,9 @@ exports.seed = async function(knex) {
       question_id: 3,
       answer_id: 3,
     },
+    //!! added question # 4 w/ answers #4 & #8 here
+    //!!-----------------------------------
+
     //! q_a # 4 -> Q # 4 -> A # 4
     {
       //! q_a # 4 -> Q # 4 -> A # 4
@@ -255,6 +258,39 @@ exports.seed = async function(knex) {
       solved: false,
       question_id: 4,
       answer_id: 4,
+    },
+    //! q_a # 5 -> Q # 4 -> A # 8
+    {
+      //! q_a # 5 -> Q # 4 -> A # 8
+      best_answer: false,
+      solved: false,
+      question_id: 4,
+      answer_id: 8,
+    },
+    //!!-----^^^----double answer question ^^^---------
+    //? q_a # 6 -> Q # 5 -> A # 5
+    {
+      //? q_a # 6 -> Q # 5 -> A # 5
+      best_answer: false,
+      solved: false,
+      question_id: 5,
+      answer_id: 5,
+    },
+    //? q_a # 7 -> Q # 6 -> A # 6
+    {
+      //? q_a # 7 -> Q # 6 -> A # 6
+      best_answer: false,
+      solved: false,
+      question_id: 6,
+      answer_id: 6,
+    },
+    //? q_a # 8 -> Q # 7 -> A # 7
+    {
+      //? q_a # 8 -> Q # 7 -> A # 7
+      best_answer: false,
+      solved: false,
+      question_id: 7,
+      answer_id: 7,
     },
   ]);
 };
