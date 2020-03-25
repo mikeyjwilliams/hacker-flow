@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 exports.seed = async function(knex) {
   await knex('users').insert([
-    // # 1 user
+    //? # 1 user
     {
       // # 1 user
       username: 'mickey65',
@@ -14,7 +14,7 @@ exports.seed = async function(knex) {
       last_name: 'mouse',
       role: 'user',
     },
-    // # 2 user
+    //? # 2 user
     {
       // # 2 user
       username: 'bri34fal',
@@ -24,7 +24,7 @@ exports.seed = async function(knex) {
       last_name: 'fallon',
       role: 'user',
     },
-    // # 3 user
+    //? # 3 user
     {
       // # 3 user
       username: 'trippygoof#2',
@@ -34,7 +34,7 @@ exports.seed = async function(knex) {
       last_name: 'dog',
       role: 'user',
     },
-    // # 4 user
+    //? # 4 user
     {
       // # 4 user
       username: 'menzinger54',
@@ -44,7 +44,7 @@ exports.seed = async function(knex) {
       last_name: 'jones',
       role: 'user',
     },
-    // # 5 DEV
+    //! # 5 DEV
     {
       // # 5 DEV
       username: 'mikey1',
@@ -54,7 +54,7 @@ exports.seed = async function(knex) {
       last_name: 'williamson',
       role: 'dev',
     },
-    // # 6 DEV
+    //! # 6 DEV
     {
       // # 6 DEV
       username: 'delaney3',
@@ -67,7 +67,7 @@ exports.seed = async function(knex) {
   ]);
 
   await knex('questions').insert([
-    // # 1 question w/ # 1 user
+    //? # 1 question w/ # 1 user
     {
       // # 1 question w/ # 1 user
       title: 'issue running "npm run start" not rerunning server on every save',
@@ -78,7 +78,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 1,
     },
-    // # 2 question w/ # 1 user
+    //? # 2 question w/ # 1 user
     {
       // # 2 question w/ # 1 user
       title: 'how to create a new react app',
@@ -88,7 +88,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 1,
     },
-    // # 3 question w/ # 2 user
+    //? # 3 question w/ # 2 user
     {
       // # 3 question w/ # 2 user
       title: 'how do i access knex migration?',
@@ -99,7 +99,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 2,
     },
-    // # 4 question w/ # 3 user
+    //? # 4 question w/ # 3 user
     {
       // # 4 question w/ # 3 user
       title: 'Session cookies or JWT tokens?',
@@ -110,7 +110,7 @@ exports.seed = async function(knex) {
         'I have applied mostly JWT tokens but have little experience to compare cookies with',
       user_id: 3,
     },
-    // # 5 question w/ # 4 user
+    //? # 5 question w/ # 4 user
     {
       // # 5 question w/ # 4 user
       title: 'Naming a package.json file',
@@ -121,7 +121,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 4,
     },
-    // # 6 question w/ # 4 user
+    //? # 6 question w/ # 4 user
     {
       // # 6 question w/ # 4 user
       title: 'package.json add to  project',
@@ -132,7 +132,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 4,
     },
-    // # 7 question w/ # 4 user
+    //? # 7 question w/ # 4 user
     {
       title: 'bootstrap add to react',
       category: 'react',
@@ -146,7 +146,7 @@ exports.seed = async function(knex) {
   ]);
 
   await knex('answers').insert([
-    // answer # 1 -> question # 1 -> dev # 5
+    //? answer # 1 -> question # 1 -> dev # 5
     {
       // answer # 1 -> question # 1 -> dev # 5
       title: 'Rerunning on every save',
@@ -156,7 +156,7 @@ exports.seed = async function(knex) {
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       dev_id: 5,
     },
-    // answer # 2 -> question # 2 -> dev # 5
+    //? answer # 2 -> question # 2 -> dev # 5
     {
       // answer # 2 -> question # 2 -> dev # 5
       title: 'create react app',
@@ -166,7 +166,7 @@ exports.seed = async function(knex) {
         'using that will give you the most up to date create-react-app available everytime and is the best practice as of now.. the other ways have been deprecated.',
       dev_id: 5,
     },
-    // answer # 3 -> question # 3 -> dev # 6
+    //? answer # 3 -> question # 3 -> dev # 6
     {
       // answer # 3 -> question # 3 -> dev # 6
       title: 'knexJS',
@@ -174,7 +174,7 @@ exports.seed = async function(knex) {
       comments: 'then you should have access to all the knex commands.',
       dev_id: 6,
     },
-    // answer # 4 -> question # 4 => dev # 5
+    //! answer # 4 -> question # 4 => dev # 5
     {
       // answer # 4 -> question # 4 => dev # 5
       title: 'cookeies or JWT',
@@ -183,7 +183,7 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       dev_id: 5,
     },
-    // answer # 5 -> question # 5 => dev 6
+    //? answer # 5 -> question # 5 => dev 6
     {
       // answer # 5 -> question # 5 => dev 6
       title: 'proper package.json naming convention',
@@ -192,7 +192,7 @@ exports.seed = async function(knex) {
       comments: 'a proper name would look similar to `"name": "hacker-flow"`.',
       dev_id: 6,
     },
-    // answer # 6 -> question # 6 => dev 5
+    //? answer # 6 -> question # 6 => dev 5
     {
       // answer # 6 -> question # 6 => dev 5
       title: 'add pre-populated package.json to project',
@@ -201,7 +201,7 @@ exports.seed = async function(knex) {
         'if you project folder is already connected to a github repo it will provide this info in the package too. also, then you can add your name to the Author, and change the license if you see fit.',
       dev_id: 5,
     },
-    // answer # 7 -> question # 7 => dev 6
+    //? answer # 7 -> question # 7 => dev 6
     {
       // answer # 7 -> question # 7 => dev 6
       title: 'adding bootstrap css min to project',
@@ -211,7 +211,7 @@ exports.seed = async function(knex) {
         'the example at reactstrap i believe shows to put it here too, just to point this out.',
       dev_id: 6,
     },
-    // answer # 8 -> question # 4 => dev 6
+    //! answer # 8 -> question # 4 => dev 6
     {
       // answer # 8 -> question # 4 => dev 6
       title: 'Sessions Vs. JWT tokens',
