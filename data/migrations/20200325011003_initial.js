@@ -9,7 +9,7 @@ exports.up = async function(knex) {
       .unique();
     tbl.text('password').notNullable();
     tbl
-      .string('username', 165)
+      .string('email', 165)
       .notNullable()
       .unique();
     tbl.string('first_name', 125).notNullable();
@@ -65,8 +65,8 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-  knex.schema.dropTablesIfExist('question_statuses');
-  knex.schema.dropTablesIfExist('answers');
-  knex.schema.dropTablesIfExist('questions');
-  knex.schema.dropTablesIfExist('users');
+  knex.schema.dropTableIfExists('question_statuses');
+  knex.schema.dropTableIfExists('answers');
+  knex.schema.dropTableIfExists('questions');
+  knex.schema.dropTableIfExists('users');
 };
