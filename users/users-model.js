@@ -4,13 +4,24 @@ const db = require('../data/config');
 const argon2 = require('argon2');
 
 module.exports = {
+  getUsers,
   findBy,
   findById,
   findPassByUser,
   addUser,
-  updateUser,
-  getUsers,
+  //deleteUser,
 };
+
+function getUsers() {
+  return db('users').select(
+    'id',
+    'username',
+    'email',
+    'first_name',
+    'last_name',
+    'role'
+  );
+}
 
 function findBy(filter) {
   return db('users')
@@ -38,9 +49,9 @@ async function addUser(user) {
 
   return findById(id);
 }
-
-async function updateUser(id, updates) {}
-
-function getUsers() {
-  return null;
-}
+//!! Foreign key constraints this.
+// function deleteUser(id) {
+//   return db('users')
+//     .where({ id })
+//     .del();
+// }

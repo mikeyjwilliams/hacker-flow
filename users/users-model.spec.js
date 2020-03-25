@@ -8,6 +8,13 @@ beforeEach(async () => {
 });
 
 describe('User Model Methods', () => {
+  describe('getUsers in users table', () => {
+    test('get all users', async () => {
+      const res = await User.getUsers();
+      expect(res).toHaveLength(6);
+    });
+  });
+
   describe('find a user By Filter', () => {
     test('findBy first_name Pass', async () => {
       const res = await User.findBy({ first_name: 'mickey' }).first();
@@ -85,4 +92,13 @@ describe('User Model Methods', () => {
       expect(res.role).toMatch(/dev/i);
     });
   });
+
+  //!! Foreign key constraint cannot do this right now.
+  //   describe('remove a user', () => {
+  //     test('delete user 5', async () => {
+  //       await User.deleteUser(5);
+  //       const res = await User.getUsers();
+  //       expect(res).toHaveLength(5);
+  //     });
+  //   });
 });
