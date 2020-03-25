@@ -7,6 +7,10 @@ beforeEach(async () => {
   await db.seed.run();
 });
 
+afterAll(async () => {
+  await db.destroy();
+});
+
 describe('User Model Methods', () => {
   describe('getUsers in users table', () => {
     test('get all users', async () => {
