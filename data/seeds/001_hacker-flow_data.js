@@ -192,5 +192,24 @@ exports.seed = async function(knex) {
       comments: 'a proper name would look similar to `"name": "hacker-flow"`.',
       dev_id: 6,
     },
+    // answer # 6 -> question # 6 => dev 5
+    {
+      // answer # 6 -> question # 6 => dev 5
+      title: 'add pre-populated package.json to project',
+      solution: 'you would go into the folder and use command `npm init -y`.',
+      comments:
+        'if you project folder is already connected to a github repo it will provide this info in the package too. also, then you can add your name to the Author, and change the license if you see fit.',
+      dev_id: 5,
+    },
+    // answer # 7 -> question # 7 => dev 6
+    {
+      // answer # 7 -> question # 7 => dev 6
+      title: 'adding bootstrap css min to project',
+      solution:
+        'I would suggest adding the min css file to your index file so it has global roots sort to speak. It can reach through to everything and there is no question where it can or cannot reach its guaranteed to be accessible through the whole application.',
+      comments:
+        'the example at reactstrap i believe shows to put it here too, just to point this out.',
+      dev_id: 6,
+    },
   ]);
 };
