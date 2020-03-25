@@ -100,5 +100,16 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 2,
     },
+    // # 4 question w/ # 3 user
+    {
+      // # 4 question w/ # 3 user
+      title: 'Session cookies or JWT tokens?',
+      category: 'authentication',
+      question: 'Whats better session cookies or JWT tokens?',
+      attempt_tried: 'n/a',
+      comments:
+        'I have applied mostly JWT tokens but have little experience to compare cookies with',
+      user_id: 3,
+    },
   ]);
 };
