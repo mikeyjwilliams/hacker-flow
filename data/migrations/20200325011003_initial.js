@@ -31,9 +31,21 @@ exports.up = async function(knex) {
       .references('id')
       .inTable('users');
   });
+
+  knex.schema.createTable('answers', tbl => {
+    tbl.increments('id');
+    tbl.string('title', 240).notNullable();
+    tbl.text('solution').notNullable();
+    tbl.text('comments').nullable();
+    tbl
+      .integer('dev_id')
+      .references('id')
+      .inTable('users');
+  });
 };
 
 exports.down = async function(knex) {
+  knex.schema.dropTablesIfExist('answers');
   knex.schema.dropTablesIfExist('questions');
   knex.schema.dropTablesIfExist('users');
 };
