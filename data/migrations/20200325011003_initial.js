@@ -1,7 +1,7 @@
 /** @format */
 
 exports.up = async function(knex) {
-  knex.schema.createTable('users', tbl => {
+  await knex.schema.createTable('users', tbl => {
     tbl.increments('id');
     tbl
       .string('username', 165)
@@ -9,14 +9,15 @@ exports.up = async function(knex) {
       .unique();
     tbl.text('password').notNullable();
     tbl
-      .string('username', 165)
+      .string('email', 165)
       .notNullable()
       .unique();
     tbl.string('first_name', 125).notNullable();
     tbl.string('last_name', 125).notNullable();
+    tbl.string('role', 15).notNullable();
   });
 
-  knex.schema.createTable('questions', tbl => {
+  await knex.schema.createTable('questions', tbl => {
     tbl.increments('id');
     tbl
       .string('title', 240)
@@ -32,7 +33,7 @@ exports.up = async function(knex) {
       .inTable('users');
   });
 
-  knex.schema.createTable('answers', tbl => {
+  await knex.schema.createTable('answers', tbl => {
     tbl.increments('id');
     tbl.string('title', 240).notNullable();
     tbl.text('solution').notNullable();
@@ -43,16 +44,16 @@ exports.up = async function(knex) {
       .inTable('users');
   });
 
-  knex.schema.createTable('question_statuses', tbl => {
+  await knex.schema.createTable('question_statuses', tbl => {
     tbl.increments('id');
     tbl
       .boolean('best_answer')
       .notNullable()
-      .defaultTo('false');
+      .defaultTo(false);
     tbl
       .boolean('solved')
       .notNullable()
-      .defaultTo('false');
+      .defaultTo(false);
     tbl
       .integer('question_id')
       .references('id')
@@ -65,8 +66,8 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-  knex.schema.dropTablesIfExist('question_statuses');
-  knex.schema.dropTablesIfExist('answers');
-  knex.schema.dropTablesIfExist('questions');
-  knex.schema.dropTablesIfExist('users');
+  await knex.schema.dropTableIfExists('question_statuses');
+  await knex.schema.dropTableIfExists('answers');
+  await knex.schema.dropTableIfExists('questions');
+  await knex.schema.dropTableIfExists('users');
 };
