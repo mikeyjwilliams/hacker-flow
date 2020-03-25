@@ -26,7 +26,10 @@ function findById(id) {
 }
 
 function findPassByUser(filter) {
-  return null;
+  return db('users')
+    .select('username', 'password', 'email')
+    .where(filter)
+    .first();
 }
 
 async function addUser(user) {

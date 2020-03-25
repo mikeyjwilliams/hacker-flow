@@ -41,4 +41,16 @@ describe('User Model Methods', () => {
       expect(res.first_name).toBe('brian');
     });
   });
+
+  describe('findPass by user name ', () => {
+    test('findPassByUser name test 1', async () => {
+      const res = await User.findPassByUser({ username: 'trippygoof#2' });
+      expect(res.password).toBe('abc');
+    });
+
+    test('findPassByUser name test 2', async () => {
+      const res = await User.findPassByUser({ username: 'menzinger54' });
+      expect(res.password).toBe('34Dc');
+    });
+  });
 });
