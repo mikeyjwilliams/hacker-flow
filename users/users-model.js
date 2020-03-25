@@ -33,7 +33,10 @@ function findPassByUser(filter) {
 }
 
 async function addUser(user) {
-  return null;
+  user.password = await argon2.hash(user.password);
+  const [id] = await db('users').insert(user);
+
+  return findById(id);
 }
 
 async function updateUser(id, updates) {}

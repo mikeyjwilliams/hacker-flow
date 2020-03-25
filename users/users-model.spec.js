@@ -53,4 +53,36 @@ describe('User Model Methods', () => {
       expect(res.password).toBe('34Dc');
     });
   });
+
+  describe('add a user to users table', () => {
+    test('addUser test 1', async () => {
+      const res = await User.addUser({
+        username: 'cartman64',
+        password: 'abc123',
+        email: 'cartman1@gmail.com',
+        first_name: 'cartman',
+        last_name: 'marsh',
+        role: 'user',
+      });
+      expect(res.username).toBe('cartman64');
+      expect(res.email).toMatch(/cartman1/i);
+      expect(res.last_name).toMatch(/marsh/i);
+      expect(res.role).toBe('user');
+    });
+
+    test('addUser 2nd test', async () => {
+      const res = await User.addUser({
+        username: 'randy1',
+        password: 'martian1',
+        email: 'randy@gmail.com',
+        first_name: 'Randy',
+        last_name: 'Marsh',
+        role: 'dev',
+      });
+      expect(res.username).toMatch(/randy1/i);
+      expect(res.first_name).toMatch(/randy/i);
+      expect(res.last_name).toMatch(/marsh/i);
+      expect(res.role).toMatch(/dev/i);
+    });
+  });
 });
