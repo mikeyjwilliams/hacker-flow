@@ -89,5 +89,16 @@ exports.seed = async function(knex) {
       comments: 'n/a',
       user_id: 1,
     },
+    // # 3 question w/ # 2 user
+    {
+      // # 3 question w/ # 2 user
+      title: 'how do i access knex migration?',
+      category: 'knexJs',
+      question:
+        'how do I gain access to knexJs and all of its methods such as "npx knex migrate....etc"?',
+      attempt_tried: 'n/a',
+      comments: 'n/a',
+      user_id: 2,
+    },
   ]);
 };
