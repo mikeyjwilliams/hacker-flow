@@ -70,11 +70,10 @@ exports.seed = async function(knex) {
     // # 1 question w/ # 1 user
     {
       // # 1 question w/ # 1 user
-      title:
-        'issue running "npm run server" not rerunning server on every save',
+      title: 'issue running "npm run start" not rerunning server on every save',
       category: 'node.js',
       question:
-        'how do i rerun node.js server every time i save my server without having to manually restart my server?',
+        'how do i rerun node.js start every time i save my server without having to manually restart my server?',
       attempt_tried: 'looked through articles but did not find an answer yet.',
       comments: 'n/a',
       user_id: 1,
@@ -143,6 +142,19 @@ exports.seed = async function(knex) {
         'I have added it in one app in the index.js and in another in the app.js file',
       comments: 'I am not sure it matters but i wanted a second opinion.',
       user_id: 4,
+    },
+  ]);
+
+  await knex('answers').insert([
+    // answer # 1 -> question # 1 -> dev # 5
+    {
+      // answer # 1 -> question # 1 -> dev # 5
+      title: 'Rerunning on every save',
+      solution:
+        'add package `nodemon` and script `server`: `nodemon index.js` to your package.json.',
+      comments:
+        'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
+      dev_id: 5,
     },
   ]);
 };
