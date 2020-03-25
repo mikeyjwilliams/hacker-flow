@@ -111,5 +111,38 @@ exports.seed = async function(knex) {
         'I have applied mostly JWT tokens but have little experience to compare cookies with',
       user_id: 3,
     },
+    // # 5 question w/ # 4 user
+    {
+      // # 5 question w/ # 4 user
+      title: 'Naming a package.json file',
+      category: 'json',
+      question: 'When naming a package.json file should you ever use capitals?',
+      attempt_tried:
+        'my VsCode editor gave an error when I created a package.json that had a capital in it.',
+      comments: 'n/a',
+      user_id: 4,
+    },
+    // # 6 question w/ # 4 user
+    {
+      // # 6 question w/ # 4 user
+      title: 'package.json add to  project',
+      category: 'json',
+      question:
+        'how do you create a package.json with most of the info filled out for you already in a project?',
+      attempt_tried: 'just creating a package.json from scratch.',
+      comments: 'n/a',
+      user_id: 4,
+    },
+    // # 7 question w/ # 4 user
+    {
+      title: 'bootstrap add to react',
+      category: 'react',
+      question:
+        'where is the best place to add bootstrap css file in a react app?',
+      attempt_tried:
+        'I have added it in one app in the index.js and in another in the app.js file',
+      comments: 'I am not sure it matters but i wanted a second opinion.',
+      user_id: 4,
+    },
   ]);
 };
