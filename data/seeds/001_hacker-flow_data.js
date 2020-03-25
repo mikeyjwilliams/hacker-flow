@@ -156,5 +156,15 @@ exports.seed = async function(knex) {
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       dev_id: 5,
     },
+    // answer # 2 -> question # 2 -> dev # 5
+    {
+      // answer # 2 -> question # 2 -> dev # 5
+      title: 'create react app',
+      solution:
+        'use following  `npx create-react-app <folder-name-holding-app>`',
+      comments:
+        'using that will give you the most up to date create-react-app available everytime and is the best practice as of now.. the other ways have been deprecated.',
+      dev_id: 5,
+    },
   ]);
 };
