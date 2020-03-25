@@ -211,5 +211,16 @@ exports.seed = async function(knex) {
         'the example at reactstrap i believe shows to put it here too, just to point this out.',
       dev_id: 6,
     },
+    // answer # 8 -> question # 4 => dev 6
+    {
+      // answer # 8 -> question # 4 => dev 6
+      title: 'Sessions Vs. JWT tokens',
+      solution:
+        'Majority of the time you will use JWT tokens. once in a while a cookie will be a better or you will find a reason to use it. But most part JWT is the way to go.',
+      comments:
+        'there are many other uses for cookies that are more appropriate but once in a while you do need that ability to log users out easily, or sign users out, etc... cookies come in handy.',
+      dev_id: 6,
+    },
+    //
   ]);
 };
