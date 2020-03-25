@@ -14,6 +14,7 @@ exports.up = async function(knex) {
       .unique();
     tbl.string('first_name', 125).notNullable();
     tbl.string('last_name', 125).notNullable();
+    tbl.string('role', 15).notNullable();
   });
 
   knex.schema.createTable('questions', tbl => {
