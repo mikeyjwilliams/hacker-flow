@@ -166,12 +166,22 @@ exports.seed = async function(knex) {
         'using that will give you the most up to date create-react-app available everytime and is the best practice as of now.. the other ways have been deprecated.',
       dev_id: 5,
     },
+    // answer # 3 -> question # 3 -> dev # 6
     {
       // answer # 3 -> question # 3 -> dev # 6
       title: 'knexJS',
       solution: 'you need the knex package installed `npm i knex` to install.',
       comments: 'then you should have access to all the knex commands.',
       dev_id: 6,
+    },
+    // answer # 4 -> question # 4 => dev # 5
+    {
+      // answer # 4 -> question # 4 => dev # 5
+      title: 'cookeies or JWT',
+      solution:
+        'Often JWT tokens are taking over... but there are certain situations cookies are more beneficial to use. So it depends n the situation.',
+      comments: 'n/a',
+      dev_id: 5,
     },
   ]);
 };
