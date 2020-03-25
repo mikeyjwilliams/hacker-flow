@@ -111,6 +111,23 @@ describe('Register a User', () => {
       expect(res.type).toBe('application/json');
       expect(res.body.message).toMatch(/role is required/i);
     });
+
+    test('username already exist', async () => {
+      const res = await supertest(server)
+        .post('/api/register')
+        .send({
+          username: 'mikey1',
+          password: 'abc123',
+          email: 'mikey@gmail.com',
+          first_name: 'mikey',
+          last_name: 'bravo',
+          role: 'dev',
+        });
+
+      expect(res.statusCode).toBe(409);
+      expect(res.type).toBe('application/json');
+      expect(res.body.message).toMatch(/username already exists/i);
+    });
   });
 
   describe('register pass', () => {
