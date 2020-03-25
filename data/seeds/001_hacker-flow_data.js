@@ -163,7 +163,7 @@ exports.seed = async function(knex) {
       solution:
         'use following  `npx create-react-app <folder-name-holding-app>`',
       comments:
-        'using that will give you the most up to date create-react-app available everytime and is the best practice as of now.. the other ways have been deprecated.',
+        'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
       dev_id: 5,
     },
     //? answer # 3 -> question # 3 -> dev # 6
@@ -221,6 +221,40 @@ exports.seed = async function(knex) {
         'there are many other uses for cookies that are more appropriate but once in a while you do need that ability to log users out easily, or sign users out, etc... cookies come in handy.',
       dev_id: 6,
     },
-    //
+  ]);
+
+  await knex('question_statuses').insert([
+    //? q_s # 1 -> Q # 1 -> A # 1
+    {
+      //? q_s # 1 -> Q # 1 -> A # 1
+      best_answer: false,
+      solved: false,
+      question_id: 1,
+      answer_id: 1,
+    },
+    //? q_s # 2 -> Q # 2 -> A # 2
+    {
+      //? q_s # 2 -> Q # 2 -> A # 2
+      best_answer: true,
+      solved: true,
+      question_id: 2,
+      answer_id: 2,
+    },
+    //? q_s # 3 -> Q # 3 -> A # 3
+    {
+      //? q_s # 3 -> Q # 3 -> A # 3
+      best_answer: false,
+      solved: false,
+      question_id: 3,
+      answer_id: 3,
+    },
+    //! q_a # 4 -> Q # 4 -> A # 4
+    {
+      //! q_a # 4 -> Q # 4 -> A # 4
+      best_answer: false,
+      solved: false,
+      question_id: 4,
+      answer_id: 4,
+    },
   ]);
 };
