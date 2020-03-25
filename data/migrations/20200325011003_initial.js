@@ -42,9 +42,30 @@ exports.up = async function(knex) {
       .references('id')
       .inTable('users');
   });
+
+  knex.schema.createTable('question_statuses', tbl => {
+    tbl.increments('id');
+    tbl
+      .boolean('best_answer')
+      .notNullable()
+      .defaultTo('false');
+    tbl
+      .boolean('solved')
+      .notNullable()
+      .defaultTo('false');
+    tbl
+      .integer('question_id')
+      .references('id')
+      .inTable('questions');
+    tbl
+      .integer('answer_id')
+      .references('id')
+      .inTable('answers');
+  });
 };
 
 exports.down = async function(knex) {
+  knex.schema.dropTablesIfExist('question_statuses');
   knex.schema.dropTablesIfExist('answers');
   knex.schema.dropTablesIfExist('questions');
   knex.schema.dropTablesIfExist('users');
