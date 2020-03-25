@@ -49,11 +49,11 @@ exports.up = async function(knex) {
     tbl
       .boolean('best_answer')
       .notNullable()
-      .defaultTo('false');
+      .defaultTo(false);
     tbl
       .boolean('solved')
       .notNullable()
-      .defaultTo('false');
+      .defaultTo(false);
     tbl
       .integer('question_id')
       .references('id')
