@@ -153,11 +153,47 @@ describe('Register a User', () => {
 });
 
 describe('Log in user', () => {
+	describe('login missing username', () => {
+		test('POST /api/login', async () => {
+			const res = await supertest(server)
+				.post('/api/login')
+				.send({ username: null });
+
+			expect(res.statusCode).toBe(400);
+			expect(res.type).toBe('application/json');
+			expect(res.body.message).toMatch(/username is required/i);
+		});
+	});
+
+	describe('login missing password', () => {
+		test('POST /api/login', async () => {
+			const res = await supertest(server)
+				.post('/api/login')
+				.send({ username: 'mikey1', password: null });
+
+			expect(res.statusCode).toBe(400);
+			expect(res.type).toBe('application/json');
+			expect(res.body.message).toMatch(/password is required/i);
+		});
+	});
+
+	describe('user is missing', () => {
+		test('POST /api/login', async () => {
+			const res = await supertest(server)
+				.post('/api/login')
+				.send({ username: 'johnny', password: 'john' });
+
+			expect(res.statusCode).toBe(400);
+			expect(res.type).toBe('application/json');
+			expect(res.body.message).toMatch(/user not found/i);
+		});
+	});
+
 	describe('login fail due to password', () => {
 		test('POST /api/login', async () => {
 			const res = await supertest(server)
 				.post('/api/login')
-				.send({ username: 'menzinger54', password: '34dC' });
+				.send({ username: 'menzinger54', password: '34' });
 
 			expect(res.statusCode).toBe(401);
 			expect(res.type).toBe('application/json');
@@ -173,7 +209,7 @@ describe('Log in user', () => {
 
 			expect(res.statusCode).toBe(200);
 			expect(res.type).toBe('application/json');
-			expect(res.body.role).toMatch(/user/i);
+			expect(res.body.role).toMatch('user');
 		});
 	});
 
@@ -185,7 +221,7 @@ describe('Log in user', () => {
 
 			expect(res.statusCode).toBe(200);
 			expect(res.type).toBe('application/json');
-			expect(res.body.role).toMatch(/dev/i);
+			expect(res.body.role).toMatch('dev');
 		});
 	});
 });
