@@ -153,6 +153,30 @@ describe('Register a User', () => {
 });
 
 describe('Log in user', () => {
+	describe('login missing username', () => {
+		test('POST /api/login', async () => {
+			const res = await supertest(server)
+				.post('/api/login')
+				.send({ username: null });
+
+			expect(res.statusCode).toBe(400);
+			expect(res.type).toBe('application/json');
+			expect(res.body.message).toMatch(/username is required/i);
+		});
+	});
+
+	describe('login missing password', () => {
+		test('POST /api/login', async () => {
+			const res = await supertest(server)
+				.post('/api/login')
+				.send({ username: 'mikey1', password: null });
+
+			expect(res.statusCode).toBe(400);
+			expect(res.type).toBe('application/json');
+			expect(res.body.message).toMatch(/password is required/i);
+		});
+	});
+
 	describe('login fail due to password', () => {
 		test('POST /api/login', async () => {
 			const res = await supertest(server)
