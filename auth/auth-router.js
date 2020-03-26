@@ -1,8 +1,8 @@
 /** @format */
 
 const express = require('express');
-const argon2 = require('argon2');
-
+const bcrypt = require('bcryptjs');
+const genToken = require('./genToken');
 const userModel = require('../users/users-model');
 
 const router = express.Router();
@@ -43,6 +43,31 @@ router.post('/register', async (req, res, next) => {
 		};
 		const newUser = await userModel.addUser(userReg);
 		res.status(201).json(newUser);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.post('/login', async (req, res, next) => {
+	const { username, password } = req.body;
+	if (!username) {
+		return res.status(400).json({ message: 'username is required' });
+	}
+	if (!password) {
+		return res.status(400).json({ message: 'password is required' });
+	}
+	try {
+		const user = await userModel.findPassByUser({ username });
+
+		if (!user) {
+			return res.status(400).json({ message: 'user not found' });
+		}
+
+		const passwordValid = await bcrypt.compare(password, user.password);
+
+		if (!passwordValid) {
+			return res.status(401).json({ message: 'invalid credentials' });
+		}
 	} catch (err) {
 		next(err);
 	}
