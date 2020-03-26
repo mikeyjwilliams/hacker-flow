@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secret = require('../Secret/secret');
 
-function genUserToken(user) {
+function genToken(user) {
 	const payload = {
 		userId: user.id,
 		username: user.username,
@@ -13,4 +13,4 @@ function genUserToken(user) {
 	return jwt.sign(payload, secret.jwtSecret, options);
 }
 
-module.exports = genUserToken;
+module.exports = genToken;
