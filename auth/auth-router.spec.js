@@ -209,7 +209,7 @@ describe('Log in user', () => {
 
 			expect(res.statusCode).toBe(200);
 			expect(res.type).toBe('application/json');
-			expect(res.body.role).toMatch(/user/i);
+			expect(res.body.role).toMatch('user');
 		});
 	});
 
@@ -221,7 +221,7 @@ describe('Log in user', () => {
 
 			expect(res.statusCode).toBe(200);
 			expect(res.type).toBe('application/json');
-			expect(res.body.role).toMatch(/dev/i);
+			expect(res.body.role).toMatch('dev');
 		});
 	});
 });
