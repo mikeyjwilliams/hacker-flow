@@ -68,7 +68,18 @@ router.post('/login', async (req, res, next) => {
 		if (!passwordValid) {
 			return res.status(401).json({ message: 'invalid credentials' });
 		}
+		const token = genToken(user);
+
+		res.cookie('token', token);
+		res.status(200).json({
+			message: `Welcome ${user.username}`,
+			userId: user.id,
+			username: user.username,
+			role: user.role,
+			token: token
+		});
 	} catch (err) {
+		console.log(err);
 		next(err);
 	}
 });
