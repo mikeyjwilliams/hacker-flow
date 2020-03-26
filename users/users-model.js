@@ -38,7 +38,7 @@ function findById(id) {
 
 function findPassByUser(filter) {
 	return db('users')
-		.select('username', 'password', 'email')
+		.select('id', 'username', 'password', 'email', 'role')
 		.where(filter)
 		.first();
 }
