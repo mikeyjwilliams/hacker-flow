@@ -7,6 +7,12 @@ const userModel = require('../users/users-model');
 
 const router = express.Router();
 
+/**
+ * @type POST /api/register
+ * @description register a user || dev with their info included.
+ * @checks all needed items or returns a 400 with specific message.
+ * @returns { user data that was set }
+ */
 router.post('/register', async (req, res, next) => {
 	const { username, password, email, first_name, last_name, role } = req.body;
 	if (!username) {
@@ -48,6 +54,12 @@ router.post('/register', async (req, res, next) => {
 	}
 });
 
+/**
+ * @type POST /api/login
+ * @description logs user in if username and password are correct.
+ * @checks username & password exist, password matches users.
+ * @returns { token, userId, role, username, greeting }
+ */
 router.post('/login', async (req, res, next) => {
 	const { username, password } = req.body;
 	if (!username) {
