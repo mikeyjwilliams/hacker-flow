@@ -70,13 +70,16 @@ router.post('/login', async (req, res, next) => {
 		}
 		const token = genToken(user);
 
-		res.cookie('token', token);
+		res.cookie('token', token); // token in cookie-parser for storage.
+		req.userId = user.id; // userId in req to pass myself.
+		req.role = user.role; // user role in req. for easier checks.
+		req.username = user.username; // username in req to send around.
 		res.status(200).json({
 			message: `Welcome ${user.username}`,
 			userId: user.id,
 			username: user.username,
 			role: user.role,
-			token: token
+			token: token // cookie avail for front-end auth
 		});
 	} catch (err) {
 		console.log(err);
