@@ -1,0 +1,14 @@
+# @format
+
+language: node_js
+
+install:
+  - npm install -g codecov
+
+git:
+  depth: 3
+
+branches:
+  except:
+    - legacy
+    - experimental

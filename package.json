@@ -1,44 +1,48 @@
 {
-	"name": "hacker-flow",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "cross-env NODE_ENV=test jest  --watchAll --runInBand --verbose",
-		"server": "nodemon -r dotenv/config index.js",
-		"start": "node index.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/mikeyjwilliams/hacker-flow.git"
-	},
-	"keywords": [],
-	"author": "Michael Williams",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/mikeyjwilliams/hacker-flow/issues"
-	},
-	"homepage": "https://github.com/mikeyjwilliams/hacker-flow#readme",
-	"devDependencies": {
-		"cross-env": "^7.0.2",
-		"dotenv-safe": "^8.2.0",
-		"jest": "^25.1.0",
-		"nodemon": "^2.0.2",
-		"supertest": "^4.0.2"
-	},
-	"dependencies": {
-		"argon2": "^0.26.1",
-		"bcryptjs": "^2.4.3",
-		"cookie-parser": "^1.4.5",
-		"cors": "^2.8.5",
-		"express": "^4.17.1",
-		"helmet": "^3.22.0",
-		"jsonwebtoken": "^8.5.1",
-		"knex": "^0.20.13",
-		"pg": "^7.18.2",
-		"sqlite3": "^4.1.1"
-	},
-	"jest": {
-		"testEnvironment": "node"
-	}
+  "name": "hacker-flow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest  --watchAll --runInBand ",
+    "server": "nodemon -r dotenv/config index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeyjwilliams/hacker-flow.git"
+  },
+  "keywords": [],
+  "author": "Michael Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikeyjwilliams/hacker-flow/issues"
+  },
+  "homepage": "https://github.com/mikeyjwilliams/hacker-flow#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "dotenv-safe": "^8.2.0",
+    "jest": "^25.2.3",
+    "jest-runner-eslint": "^0.7.6",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "argon2": "^0.26.1",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^3.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.13",
+    "pg": "^7.18.2",
+    "sqlite3": "^4.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  }
 }
