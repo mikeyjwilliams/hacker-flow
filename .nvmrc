@@ -1,2 +1,2 @@
-nvm install 12.16.1
-echo "lts/*" > .nvmrc # defaults to latest LTS version
+nvm install 12.16
+nvm alias default node # defaults to latest LTS version
