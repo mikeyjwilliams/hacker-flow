@@ -1,3 +1,0 @@
-nvm install --lts
-nvm use node
- # defaults to latest LTS version
