@@ -13,5 +13,5 @@ describe('questions models', () => {
         expect(res).toHaveLength(7)
        }) 
     })
-    
-}
+
+})
