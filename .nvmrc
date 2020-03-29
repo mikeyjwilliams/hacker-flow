@@ -1,2 +1,3 @@
-nvm install 12.16
-nvm alias default node # defaults to latest LTS version
+nvm install --lts
+nvm use node
+ # defaults to latest LTS version
