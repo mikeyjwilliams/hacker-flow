@@ -7,10 +7,11 @@ afterEach( async () => {
 
 describe('questions models', () => {
     describe('questions based off of question_status', () => {
-       test('get unasnwered questions', async () => {
+       test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
         expect(res).toHaveLength(7)
        }) 
     })
+    
 }
