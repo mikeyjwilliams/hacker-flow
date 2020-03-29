@@ -1,4 +1,11 @@
 # @format
+dist: bionic
+
+before_script:
+  - sudo apt-get update
+
+services:
+  - sqlite3
 
 language: node_js
 
