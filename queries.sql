@@ -1,3 +1,4 @@
+--- QUESTION STATUS
 --- unanswered questions
 Select DISTINCT(q."id"), q."title" as "title", q."category" as "category", q."attempt_tried" as "attempt_tried",
 q."comments" as "comments", 
@@ -20,3 +21,6 @@ ON qs."question_id" = q."id"
 JOIN "users" as u
 ON  q."user_id" = u."id"
 WHERE qs."solved" = 1;
+
+
+------
