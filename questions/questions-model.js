@@ -13,7 +13,9 @@ function unansweredQuestions() {
     .select(
       'q.title as title',
       'q.category as category',
+      'q.question as question',
       'q.attempt_tried as attempt_tried',
+      'q.comments as comments',
       'u.username as username'
     )
     .join('questions as q', 'qs.question_id', 'q.id')
@@ -27,7 +29,9 @@ function answeredQuestions() {
     .select(
       'q.title as title',
       'q.category as category',
+      'q.question as question',
       'q.attempt_tried as attempt_tried',
+      'q.comments as comments',
       'u.username as username'
     )
     .join('questions as q', 'qs.question_id', 'q.id')
