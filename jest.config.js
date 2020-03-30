@@ -53,16 +53,16 @@ module.exports = {
   projects: [
     {
       displayName: 'test'
-    },
-    {
-      displayName: 'jest-runner-eslint',
-      displayName: 'lint',
-      testMatch: ['<rootDir>/**/*.js']
-    },
-    {
-      displayName: 'jest-runner-prettier',
-      displayName: 'prettier',
-      testMatch: ['<rootDir>/**/*.js']
     }
+    // {
+    //   displayName: 'jest-runner-eslint',
+    //   displayName: 'lint',
+    //   testMatch: ['<rootDir>/**/*.js']
+    // },
+    // {
+    //   displayName: 'jest-runner-prettier',
+    //   displayName: 'prettier',
+    //   testMatch: ['<rootDir>/**/*.js']
+    // }
   ]
 };
