@@ -10,8 +10,15 @@ describe('questions models', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
-        expect(res).toHaveLength(7)
+        expect(res).toHaveLength(6)
        }) 
+
+       test('get answered questions', async () => {
+           const res = await QuestModel.answeredQuestions();
+
+           expect(res).toHaveLength(1);
+       })
     })
+
 
 })
