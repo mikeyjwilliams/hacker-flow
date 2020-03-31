@@ -1,6 +1,7 @@
 /** @format */
 const express = require('express');
 const restrict = require('../middleware/restrict');
+const questionVerify = require('../middleware/questionVerifyData');
 const QuestionModel = require('../questions/questions-model');
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get('/unanswered', restrict(), async (req, res, next) => {
     }
     res.status(200).json(unanswered);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 });
@@ -44,5 +46,30 @@ router.get('/unanswered/:id', restrict(), async (req, res, next) => {
     next(err);
   }
 });
+
+router.post(
+  '/new-question',
+  restrict(),
+  /* user only middle ware */
+  questionVerify(),
+  async (req, res, next) => {
+    const { title, category, question, attempt_tried, comments } = req.body;
+    try {
+      const newQuestion = {
+        title: title,
+        category: category,
+        question: question,
+        attempt_tried: attempt_tried || 'n/a',
+        comments: comments || 'n/a',
+        user_id: req.token.userId
+      };
+      const questionAdd = await QuestionModel.addQuestion(newQuestion);
+      res.status(201).json(questionAdd);
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  }
+);
 
 module.exports = router;
