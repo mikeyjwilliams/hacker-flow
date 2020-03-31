@@ -4,7 +4,7 @@ const restrict = require('../middleware/restrict');
 const QuestionModel = require('../questions/questions-model');
 const router = express.Router();
 
-router.get('/unanswered', async (req, res, next) => {
+router.get('/unanswered', restrict(), async (req, res, next) => {
   try {
     const unanswered = await QuestionModel.unansweredQuestions();
     if (unanswered.length <= 0) {
