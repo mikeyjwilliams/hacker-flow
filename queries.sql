@@ -12,7 +12,7 @@ FROM "question_statuses" as qs
 JOIN "questions" as q ON qs."question_id" = q."id"
 JOIN "users" as u ON q."user_id" = u."id"
 WHERE
-  qs."solved" = 0;
+  qs."solved" = false;
 --- answered questions
 Select
   DISTINCT(q."id"),
@@ -26,5 +26,5 @@ FROM "question_statuses" as qs
 JOIN "questions" as q ON qs."question_id" = q."id"
 JOIN "users" as u ON q."user_id" = u."id"
 WHERE
-  qs."solved" = 1;
+  qs."solved" = true;
 ------
