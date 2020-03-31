@@ -1,72 +1,39 @@
 /** @format */
 
-exports.up = async function(knex) {
-  await knex.schema.createTable('users', tbl => {
+exports.up = async function (knex) {
+  await knex.schema.createTable('users', (tbl) => {
     tbl.increments('id');
-    tbl
-      .string('username', 165)
-      .notNullable()
-      .unique();
+    tbl.string('username', 165).notNullable().unique();
     tbl.text('password').notNullable();
-    tbl
-      .string('email', 165)
-      .notNullable()
-      .unique();
+    tbl.string('email', 165).notNullable().unique();
     tbl.string('first_name', 125).notNullable();
     tbl.string('last_name', 125).notNullable();
     tbl.string('role', 15).notNullable();
   });
 
-  await knex.schema.createTable('questions', tbl => {
+  await knex.schema.createTable('questions', (tbl) => {
     tbl.increments('id');
-    tbl
-      .string('title', 240)
-      .notNullable()
-      .unique();
+    tbl.string('title', 240).notNullable().unique();
     tbl.string('category', 160).notNullable();
     tbl.text('question').notNullable();
     tbl.text('attempt_tried').nullable();
     tbl.text('comments').nullable();
-    tbl
-      .integer('user_id')
-      .references('id')
-      .inTable('users');
+    tbl.boolean('solved').notNullable().defaultTo('false');
+    tbl.integer('user_id').references('id').inTable('users');
   });
 
-  await knex.schema.createTable('answers', tbl => {
+  await knex.schema.createTable('answers', (tbl) => {
     tbl.increments('id');
     tbl.string('title', 240).notNullable();
     tbl.text('solution').notNullable();
     tbl.text('comments').nullable();
-    tbl
-      .integer('dev_id')
-      .references('id')
-      .inTable('users');
-  });
-
-  await knex.schema.createTable('question_statuses', tbl => {
-    tbl.increments('id');
-    tbl
-      .boolean('best_answer')
-      .notNullable()
-      .defaultTo(false);
-    tbl
-      .boolean('solved')
-      .notNullable()
-      .defaultTo(false);
-    tbl
-      .integer('question_id')
-      .references('id')
-      .inTable('questions');
-    tbl
-      .integer('answer_id')
-      .references('id')
-      .inTable('answers');
+    tbl.boolean('best_answer').notNullable().defaultTo('false');
+    tbl.integer('question_id').references('id').inTable('questions');
+    tbl.integer('dev_id').references('id').inTable('users');
   });
 };
 
-exports.down = async function(knex) {
-  await knex.schema.dropTableIfExists('question_statuses');
+exports.down = async function (knex) {
   await knex.schema.dropTableIfExists('answers');
   await knex.schema.dropTableIfExists('questions');
   await knex.schema.dropTableIfExists('users');
