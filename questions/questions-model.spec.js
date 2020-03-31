@@ -6,7 +6,7 @@ afterEach( async () => {
 })
 
 describe('questions models', () => {
-    describe('questions based off of question_status', () => {
+    describe('unanswered and answered questions all', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
@@ -18,6 +18,18 @@ describe('questions models', () => {
 
            expect(res).toHaveLength(1);
        })
+    })
+
+    describe('single question models', () => {
+        test('unansweredById', async () => {
+            const res = await QuestModel.unansweredById(1);
+
+            expect.objectContaining({
+                title: expect.any(String),
+                category: expect.any(String),
+            })
+            expect(res.username).toMatch(/mickey65/i);
+        })
     })
 
 
