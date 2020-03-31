@@ -83,9 +83,7 @@ router.post('/login', async (req, res, next) => {
     const token = genToken(user); // generate token for accessing other site sections. and pass role from db to api.
 
     res.cookie('token', token); // token in cookie-parser for storage.
-    req.userId = user.id; // userId in req to pass myself.
-    req.role = user.role; // user role in req. for easier checks.
-    req.username = user.username; // username in req to send around.
+
     res.status(200).json({
       message: `Welcome ${user.username}`,
       userId: user.id,
