@@ -14,7 +14,21 @@ router.get('/unanswered', restrict(), async (req, res, next) => {
     }
     res.status(200).json(unanswered);
   } catch (err) {
-    console.log(err);
+    next(err);
+  }
+});
+
+router.get('/unanswered/:id', restrict(), async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const unanswered = await QuestionModel.unansweredById(id);
+    if (!unanswered) {
+      return res
+        .status(404)
+        .json({ message: 'question with that ID does not exist' });
+    }
+    res.status(200).json(unanswered);
+  } catch (err) {
     next(err);
   }
 });
