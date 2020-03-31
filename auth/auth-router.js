@@ -80,7 +80,7 @@ router.post('/login', async (req, res, next) => {
     if (!passwordValid) {
       return res.status(401).json({ message: 'invalid credentials' });
     }
-    const token = genToken(user);
+    const token = genToken(user); // generate token for accessing other site sections. and pass role from db to api.
 
     res.cookie('token', token); // token in cookie-parser for storage.
     req.userId = user.id; // userId in req to pass myself.
