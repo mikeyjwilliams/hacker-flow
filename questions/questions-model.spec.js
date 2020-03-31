@@ -32,5 +32,32 @@ describe('questions models', () => {
         })
     })
 
+    describe('question by ID', () => {
+        test('questionById', async () => {
+            const res = await QuestModel.questionById(1);
+
+            expect(res.category).toMatch(/node.js/i);
+            expect(res.comments).toBe('n/a');
+            expect(res.username).toMatch(/mickey65/i);
+        })
+    })
+
+    describe('add a question', () => {
+        test('insert question', async () => {
+            const res = await QuestModel.addQuestion({
+                title: 'blank',
+                category: 'history',
+                question: 'who created node.js',
+                attempt_tried: 'n/a',
+                comments: 'n/a',
+                user_id: 2,
+            })
+
+            expect(res.title).toMatch(/blank/i);
+            expect(res.category).toMatch(/history/i);
+            expect(res.username).toMatch('bri34fal');
+        })
+    })
+
 
 })
