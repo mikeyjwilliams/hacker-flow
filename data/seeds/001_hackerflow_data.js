@@ -182,6 +182,7 @@ exports.seed = async function (knex) {
       comments:
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       best_answer: true,
+      question_id: 1,
       dev_id: 5
     },
     //? answer # 2 -> question # 2 -> dev # 5
@@ -193,6 +194,7 @@ exports.seed = async function (knex) {
       comments:
         'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
       best_answer: false,
+      question_id: 2,
       dev_id: 5
     },
     //? answer # 3 -> question # 3 -> dev # 6
@@ -202,6 +204,7 @@ exports.seed = async function (knex) {
       solution: 'you need the knex package installed `npm i knex` to install.',
       comments: 'then you should have access to all the knex commands.',
       best_answer: false,
+      question_id: 3,
       dev_id: 6
     }
     // //! answer # 4 -> question # 4 => dev # 5
