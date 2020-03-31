@@ -206,17 +206,18 @@ exports.seed = async function (knex) {
       best_answer: false,
       question_id: 3,
       dev_id: 6
+    },
+    //! answer # 4 -> question # 4 => dev # 5
+    {
+      // answer # 4 -> question # 4 => dev # 5
+      title: 'cookeies or JWT',
+      solution:
+        'Often JWT tokens are taking over... but there are certain situations cookies are more beneficial to use. So it depends n the situation.',
+      comments: 'n/a',
+      best_answer: false,
+      question_id: 3,
+      dev_id: 5
     }
-    // //! answer # 4 -> question # 4 => dev # 5
-    // {
-    //   // answer # 4 -> question # 4 => dev # 5
-    //   title: 'cookeies or JWT',
-    //   solution:
-    //     'Often JWT tokens are taking over... but there are certain situations cookies are more beneficial to use. So it depends n the situation.',
-    //   comments: 'n/a',
-    //    best_answer: false,
-    //   dev_id: 5
-    // },
     // //? answer # 5 -> question # 5 => dev 6
     // {
     //   // answer # 5 -> question # 5 => dev 6
