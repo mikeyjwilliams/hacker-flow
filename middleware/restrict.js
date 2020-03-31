@@ -16,6 +16,7 @@ function restrict() {
           return res.status(401).json(authError);
         } else {
           req.token = decoded;
+          console.log('person ', req.token);
           next();
         }
       });
