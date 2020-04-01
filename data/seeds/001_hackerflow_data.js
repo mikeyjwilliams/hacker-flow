@@ -62,6 +62,16 @@ exports.seed = async function (knex) {
       first_name: 'delaney',
       last_name: 'apples',
       role: 'dev'
+    },
+    //!! # 7 USER-DEV
+    {
+      // # 7 user-dev
+      username: 'userdev',
+      password: bcrypt.hashSync('user123', 10),
+      email: 'devuser@gmail.com',
+      first_name: 'devman',
+      last_name: 'prouser',
+      role: 'user-dev'
     }
   ]);
 
