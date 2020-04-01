@@ -140,6 +140,24 @@ describe('Register a User', () => {
         expect(res.body.role).toBe('dev');
       });
     });
+
+    describe('dev-user passes', () => {
+      test('POST /api/register', async () => {
+        const res = await supertest(server).post('/api/register').send({
+          username: 'userDevMan',
+          password: 'abc123',
+          email: 'userdev@gmail.com',
+          first_name: 'devuserman',
+          last_name: 'prouser',
+          role: 'user-dev'
+        });
+
+        expect(res.statusCode).toBe(201);
+        expect(res.type).toBe('application/json');
+        expect(res.body.username).toMatch(/userDevMan/i);
+        expect(res.body.role).toMatch(/user-dev/i);
+      });
+    });
   });
 });
 
@@ -215,6 +233,18 @@ describe('Login person Passes', () => {
       expect(res.statusCode).toBe(200);
       expect(res.type).toBe('application/json');
       expect(res.body.role).toMatch('dev');
+    });
+  });
+
+  describe('login pass role user-dev', () => {
+    test('POST /api/login', async () => {
+      const res = await supertest(server)
+        .post('/api/login')
+        .send({ username: 'userdev', password: 'user123' });
+
+      expect(res.statusCode).toBe(200);
+      expect(res.type).toBe('application/json');
+      expect(res.body.role).toMatch(/user-dev/i);
     });
   });
 });
