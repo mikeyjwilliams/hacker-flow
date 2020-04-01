@@ -1,30 +1,44 @@
 --- QUESTION STATUS
 --- unanswered questions
-Select
-  DISTINCT(q."id"),
-  q."title" as "title",
-  q."category" as "category",
-  q."question" as "quesion",
-  q."attempt_tried" as "attempt_tried",
-  q."comments" as "comments",
-  u."username" as "username"
-FROM "question_statuses" as qs
-JOIN "questions" as q ON qs."question_id" = q."id"
-JOIN "users" as u ON q."user_id" = u."id"
-WHERE
-  qs."solved" = false;
+SELECT q."solved" as "solved", q."title" as "title",
+ q."category" as "category", q."question" as "question",
+ q."attempt_tried" as "attempt_tried", q."comments" as "comments",
+ u."username" as "username"
+ FROM "questions" as q
+ JOIN "users" as u
+ ON q."user_id" = u."id"
+ WHERE q.solved = false;
+
+ -- unanswered by id
+
+SELECT q."solved" as "solved", q."title" as "title",
+ q."category" as "category", q."question" as "question",
+ q."attempt_tried" as "attempt_tried", q."comments" as "comments",
+ u."username" as "username"
+ FROM "questions" as q
+ JOIN "users" as u
+ ON q."user_id" = u."id"
+ WHERE q."solved" = false and q."id" = ?
+ LIMIT = 1;
+
 --- answered questions
-Select
-  DISTINCT(q."id"),
-  q."title" as "title",
-  q."category" as "category",
-  q."question" as "question",
-  q."attempt_tried" as "attempt_tried",
-  q."comments" as "comments",
-  u."username" as "username"
-FROM "question_statuses" as qs
-JOIN "questions" as q ON qs."question_id" = q."id"
-JOIN "users" as u ON q."user_id" = u."id"
-WHERE
-  qs."solved" = true;
-------
+SELECT q."solved" as "solved", q."title" as "title",
+q."category" as "category", q."question" as "question",
+ q."attempt_tried" as "attempt_tried", q."comments" as "comments",
+ u."username" as "username"
+ FROM "questions" as q
+ JOIN "users" as u
+ ON q."user_id" = u."id"
+ WHERE q.solved = true;
+
+-- answered question by id
+
+SELECT q."solved" as "solved", q."title" as "title",
+q."category" as "category", q."question" as "question",
+ q."attempt_tried" as "attempt_tried", q."comments" as "comments",
+ u."username" as "username"
+ FROM "questions" as q
+ JOIN "users" as u
+ ON q."user_id" = u."id"
+ WHERE q."solved" = true AND q."id" = ?
+ LIMIT = 1;
