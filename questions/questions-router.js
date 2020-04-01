@@ -2,6 +2,7 @@
 const express = require('express');
 const restrict = require('../middleware/restrict');
 const questionVerify = require('../middleware/questionVerifyData');
+const restrictRoleQuestion = require('../middleware/restrictRoleQuestion');
 const QuestionModel = require('../questions/questions-model');
 const router = express.Router();
 
@@ -47,10 +48,16 @@ router.get('/unanswered/:id', restrict(), async (req, res, next) => {
   }
 });
 
+/**
+ * @type POST /api/new-question
+ * @description user creates a new unsolved question to the board.
+ * @middleware restrict() => logged in, restrictRoleQuestion() => must be a user.
+ * @errors 401, 400, 403
+ */
 router.post(
   '/new-question',
   restrict(),
-  /* user only middle ware */
+  restrictRoleQuestion('user'),
   questionVerify(),
   async (req, res, next) => {
     const { title, category, question, attempt_tried, comments } = req.body;
@@ -61,12 +68,12 @@ router.post(
         question: question,
         attempt_tried: attempt_tried || 'n/a',
         comments: comments || 'n/a',
+        solved: false,
         user_id: req.token.userId
       };
       const questionAdd = await QuestionModel.addQuestion(newQuestion);
       res.status(201).json(questionAdd);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
