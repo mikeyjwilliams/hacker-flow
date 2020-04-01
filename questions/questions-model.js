@@ -42,7 +42,7 @@ function unansweredById(id) {
 
 function answeredQuestions() {
   return (
-    db('question as q')
+    db('questions as q')
       // .distinct('q.id')
       .select(
         'q.title as title',
