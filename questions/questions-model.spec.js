@@ -1,8 +1,12 @@
 const db = require('../data/config');
 const QuestModel = require('./questions-model');
 
-afterEach( async () => {
+beforeEach( async () => {
     await db.seed.run();
+})
+
+afterEach( async () => {
+    await db.destroy();
 })
 
 describe('questions models', () => {
@@ -16,19 +20,20 @@ describe('questions models', () => {
        test('get answered questions', async () => {
            const res = await QuestModel.answeredQuestions();
 
-           expect(res).toHaveLength(1);
+           expect(res).toHaveLength(3);
        })
     })
 
     describe('single question models', () => {
         test('unansweredById', async () => {
-            const res = await QuestModel.unansweredById(1);
+            const res = await QuestModel.unansweredById(4);
 
             expect.objectContaining({
                 title: expect.any(String),
                 category: expect.any(String),
             })
-            expect(res.username).toMatch(/mickey65/i);
+            
+            expect(res.username).toMatch(/trippygoof#2/i);
         })
     })
 
