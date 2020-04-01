@@ -5,7 +5,7 @@ beforeEach( async () => {
     await db.seed.run();
 })
 
-afterEach( async () => {
+afterAll( async () => {
     await db.destroy();
 })
 
