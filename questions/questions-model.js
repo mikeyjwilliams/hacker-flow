@@ -41,20 +41,17 @@ function unansweredById(id) {
 }
 
 function answeredQuestions() {
-  return (
-    db('questions as q')
-      // .distinct('q.id')
-      .select(
-        'q.title as title',
-        'q.category as category',
-        'q.question as question',
-        'q.attempt_tried as attempt_tried',
-        'q.comments as comments',
-        'u.username as username'
-      )
-      .join('users as u', 'q.user_id', 'u.id')
-      .where('q.solved', true)
-  );
+  return db('questions as q')
+    .select(
+      'q.title as title',
+      'q.category as category',
+      'q.question as question',
+      'q.attempt_tried as attempt_tried',
+      'q.comments as comments',
+      'u.username as username'
+    )
+    .join('users as u', 'q.user_id', 'u.id')
+    .where('q.solved', true);
 }
 
 function questionById(id) {
