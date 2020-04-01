@@ -1,12 +1,16 @@
 const db = require('../data/config');
 const QuestModel = require('./questions-model');
 
-afterEach( async () => {
+beforeEach( async () => {
     await db.seed.run();
 })
 
+afterEach( async () => {
+    await db.destroy();
+})
+
 describe('questions models', () => {
-    describe('questions based off of question_status', () => {
+    describe('unanswered and answered questions all', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
@@ -16,8 +20,48 @@ describe('questions models', () => {
        test('get answered questions', async () => {
            const res = await QuestModel.answeredQuestions();
 
-           expect(res).toHaveLength(1);
+           expect(res).toHaveLength(3);
        })
+    })
+
+    describe('single question models', () => {
+        test('unansweredById', async () => {
+            const res = await QuestModel.unansweredById(4);
+
+            expect.objectContaining({
+                title: expect.any(String),
+                category: expect.any(String),
+            })
+            
+            expect(res.username).toMatch(/trippygoof#2/i);
+        })
+    })
+
+    describe('question by ID', () => {
+        test('questionById', async () => {
+            const res = await QuestModel.questionById(1);
+
+            expect(res.category).toMatch(/node.js/i);
+            expect(res.comments).toBe('n/a');
+            expect(res.username).toMatch(/mickey65/i);
+        })
+    })
+
+    describe('add a question', () => {
+        test('insert question', async () => {
+            const res = await QuestModel.addQuestion({
+                title: 'blank',
+                category: 'history',
+                question: 'who created node.js',
+                attempt_tried: 'n/a',
+                comments: 'n/a',
+                user_id: 2,
+            })
+
+            expect(res.title).toMatch(/blank/i);
+            expect(res.category).toMatch(/history/i);
+            expect(res.username).toMatch('bri34fal');
+        })
     })
 
 
