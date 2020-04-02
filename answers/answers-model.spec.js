@@ -36,4 +36,25 @@ describe('Answer models', () => {
             })
         })
     })
+
+    describe('insert an answer return findById', () => {
+        test('insert an answer', async () => {
+
+            const add = {
+                title: 'blank',
+                solution: 'test solution',
+                comments: 'test comment',
+                best_answer: false,
+                question_id: 1,
+                dev_id: 6,
+            };
+
+            const res = await Amodel.addAnswer(add);
+
+            expect(res.title).toMatch(/blank/i);
+            expect(res.solution).toMatch(/test solution/i);
+            expect(res.comments).toMatch(/test comment/i);
+            expect(res.username).toMatch(/delaney3/i);
+        })
+    })
 })
