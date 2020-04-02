@@ -76,7 +76,7 @@ describe('questions unanswered displayed for users and devs', () => {
                         expect(res.statusCode).toBe(401);
                         expect(res.type).toBe('application/json');
                         expect(res.body.message).toMatch(/invalid credentials/i);
-                    })
+            });
 
             test('401 GET /api/unanswered/:id', async () => {
                 const res = await supertest(server).get('/api/unanswered/1');
@@ -84,9 +84,9 @@ describe('questions unanswered displayed for users and devs', () => {
                 expect(res.statusCode).toBe(401);
                 expect(res.type).toBe('application/json');
                 expect(res.body.message).toMatch(/invalid credentials/i);
-            })
+            });
 
-        })
+        });
         // describe('Passing tests', () => {
         //     test('200 GET /api/unanswered', async () => {
         //     const response = await supertest(server).get('/api/unanswered').set(mockUserToken);
@@ -94,7 +94,7 @@ describe('questions unanswered displayed for users and devs', () => {
         //     expect(response.statusCode).toBe(200);
         //     expect(response.type).toBe('application/json');
            
-        //     })
-        // })
+        ////     })
+        //// })
           
 })
