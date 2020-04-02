@@ -39,6 +39,10 @@ beforeAll(async () => {
     await db.seed.run();
 }) 
 
+afterAll(async () => {
+    await db.destroy();
+})
+
 // describe('Auth test', () => {
 //     test('calls post with correct path', async () => {
 //         // await supertest(server).post('/api/login')

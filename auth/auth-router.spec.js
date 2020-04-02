@@ -9,9 +9,9 @@ beforeAll(async () => {
   await db.seed.run();
 });
 
-// afterAll(async () => {
-//   await db.destroy();
-// });
+afterAll(async () => {
+  await db.destroy();
+});
 
 describe('Register a User', () => {
   describe('Register failing', () => {
