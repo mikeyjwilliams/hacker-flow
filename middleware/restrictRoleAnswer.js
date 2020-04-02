@@ -1,5 +1,5 @@
 
-function restrictRoleAnswer(user) {
+function restrictRoleAnswer() {
     return async (req, res, next) => {
         if(req.token && req.token.role === 'dev' ||
          req.token.role === 'user-dev') {
