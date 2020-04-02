@@ -15,14 +15,14 @@ describe('Answer models', () => {
             const res = await Amodel.getQuestionAnswers(1);
 
             expect(res.length).toBeGreaterThanOrEqual(1);
-        })
+        });
 
         test('0 result no answers for question', async () => {
             const res = await Amodel.getQuestionAnswers(4);
             
             expect(res.length).toBeFalsy();
-        })
-    })
+        });
+    });
 
     describe('answer by id', () => {
         test('find an answer by id', async () => {
@@ -57,4 +57,6 @@ describe('Answer models', () => {
             expect(res.username).toMatch(/delaney3/i);
         })
     })
+
+    
 })
