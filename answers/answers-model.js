@@ -35,7 +35,9 @@ function findById(id) {
 }
 
 async function addAnswer(answer) {
-    return null; 
+    const [id] = await  db('answers').insert(answer);
+
+    return findById(id);
 }
 
 async function updateAnswer(id, changes) {
