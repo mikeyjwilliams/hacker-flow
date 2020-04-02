@@ -15,6 +15,7 @@ describe('User Model Methods', () => {
   describe('getUsers in users table', () => {
     test('get all users', async () => {
       const res = await User.getUsers();
+
       expect(res).toHaveLength(7);
     });
   });
@@ -30,8 +31,9 @@ describe('User Model Methods', () => {
 
     test('findBy last_name Pass', async () => {
       const res = await User.findBy({ last_name: 'fallon' }).first();
+
       expect(res.username).toMatch(/bri34fal/i);
-      expect(res.email).toMatch(/brianfallon/i);
+      expect(res.email).toMatch(/brianfallon@hotmail.com/i);
       expect(res.role).toMatch(/user/i);
     });
   });
