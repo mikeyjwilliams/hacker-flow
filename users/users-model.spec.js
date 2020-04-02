@@ -76,7 +76,7 @@ describe('User Model Methods', () => {
         role: 'user'
       });
       expect(res.username).toBe('cartman64');
-      expect(res.email).toMatch(/cartman1/i);
+      expect(res.email).toMatch(/cartman1@gmail.com/i);
       expect(res.last_name).toMatch(/marsh/i);
       expect(res.role).toBe('user');
     });
