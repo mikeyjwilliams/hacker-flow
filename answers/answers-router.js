@@ -9,7 +9,6 @@ const answerVerify = require('../middleware/answerVerify');
 const router = express.Router();
 
 router.post('/question/:id/answer',
-restrictRoleAnswer(),
 answerVerify(),
     async (req, res, next) => {
 
@@ -19,22 +18,20 @@ answerVerify(),
         title: title,
         solution: solution,
         comments: comments || 'n/a',
+        best_answer: false,
         question_id: id,
         dev_id: req.token.userId,
     };
     try {
         const answer = await Amodel.addAnswer(newAnswer);
         if(!answer) {
-            return res.status(404).json({'question ID does not exist'});
-        }
-        res.status(201).json(answer);
+            return res.status(404).json({message: 'question ID does not exist'});
+        } 
+        res.status(201).json(answer); 
     } catch(err) {
         console.log(err);
         next(err);
     }
-
-
-
 })
 
 
