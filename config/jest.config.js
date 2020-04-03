@@ -4,15 +4,7 @@ module.exports = {
   verbose: true,
   browser: false,
   errorOnDeprecated: true,
-  moduleFileExtensions: [
-    'cookie-parser',
-    'js',
-    'json',
-    'jsx',
-    'ts',
-    'tsx',
-    'node'
-  ],
+  moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
   collectCoverageFrom: [
     '**/*{.js,jsx}',
     '!**/node_modules/**',
@@ -27,7 +19,7 @@ module.exports = {
     'text-summary',
     'json-summary'
   ],
-  testPathIgnorePatterns: ['./**/server.js', './**/index.js'],
+  testPathIgnorePatterns: ['./**/server', './**/index'],
   coverageThreshold: {
     global: {
       branches: 50,
