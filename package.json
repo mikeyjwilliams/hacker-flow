@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pretty": "prettier --check '**/*.js' ",
-    "test": "NODE_ENV=test jest --runInBand ",
-    "test-watch": "cross-env NODE_ENV=test jest  --watchAll --runInBand ",
+    "test": "NODE_ENV=test jest --runInBand --verbose",
+    "test:cov": "NODE_ENV=test jest --runInBand",
+    "test:watch": "cross-env NODE_ENV=test jest  --watchAll --runInBand ",
     "server": "nodemon -r dotenv/config index.js",
     "start": "node index.js"
   },
@@ -49,12 +50,6 @@
     "sqlite3": "^4.1.1"
   },
   "jest": {
-    "testEnvironment": "node",
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "globals": {
-      "__DEV__": true,
-      "token": true
-    }
+    "testEnvironment": "node"
   }
 }
