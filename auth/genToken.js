@@ -11,7 +11,7 @@ function genToken(user) {
 		role: user.role
 	};
 	const options = {
-		expiresIn: '3d'
+		expiresIn: '25d'
 	};
 	return jwt.sign(payload, secret.jwtSecret, options);
 }
