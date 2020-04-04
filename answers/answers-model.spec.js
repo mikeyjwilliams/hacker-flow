@@ -19,7 +19,7 @@ describe('Answer models', () => {
 
         test('0 result no answers for question', async () => {
             const res = await Amodel.getQuestionAnswers(4);
-            
+
             expect(res.length).toBeFalsy();
         });
     });
@@ -27,7 +27,7 @@ describe('Answer models', () => {
     describe('answer by id', () => {
         test('find an answer by id', async () => {
             const res = await Amodel.findById(2);
-            
+
             expect.objectContaining({
                 title: expect.any(String),
                 solution: expect.any(String),
@@ -58,5 +58,4 @@ describe('Answer models', () => {
         })
     })
 
-    
 })
