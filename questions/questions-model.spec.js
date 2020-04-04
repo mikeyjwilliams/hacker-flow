@@ -5,7 +5,7 @@ beforeEach( async () => {
     await db.seed.run();
 })
 
-afterEach( async () => {
+afterAll( async () => {
     await db.destroy();
 })
 
@@ -14,15 +14,16 @@ describe('questions models', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
-        expect(res).toHaveLength(6)
-       }) 
+        expect(res).toHaveLength(6);
+       });
 
        test('get answered questions', async () => {
            const res = await QuestModel.answeredQuestions();
 
            expect(res).toHaveLength(3);
-       })
-    })
+       });
+    });
+
 
     describe('single question models', () => {
         test('unansweredById', async () => {
@@ -34,8 +35,8 @@ describe('questions models', () => {
             })
             
             expect(res.username).toMatch(/trippygoof#2/i);
-        })
-    })
+        });
+    });
 
     describe('question by ID', () => {
         test('questionById', async () => {
@@ -44,8 +45,9 @@ describe('questions models', () => {
             expect(res.category).toMatch(/node.js/i);
             expect(res.comments).toBe('n/a');
             expect(res.username).toMatch(/mickey65/i);
-        })
-    })
+        });
+    
+    });
 
     describe('add a question', () => {
         test('insert question', async () => {
@@ -61,8 +63,8 @@ describe('questions models', () => {
             expect(res.title).toMatch(/blank/i);
             expect(res.category).toMatch(/history/i);
             expect(res.username).toMatch('bri34fal');
-        })
-    })
+        });
+    });
 
 
-})
+});
