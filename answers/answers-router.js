@@ -9,7 +9,10 @@ const answerVerify = require('../middleware/answerVerify');
 const router = express.Router();
 
 router.post('/question/:id/answer',
+restrict(),
+restrictRoleAnswer(),
 answerVerify(),
+
     async (req, res, next) => {
 
     const { id } = req.params;
