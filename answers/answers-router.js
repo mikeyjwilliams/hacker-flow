@@ -2,7 +2,6 @@ const express = require('express');
 const Amodel = require('./answers-model');
 // middle ware -----
 const restrict = require('../middleware/restrict');
-const restrictRoleAnswer = require('../middleware/restrictRoleAnswer');
 const answerVerify = require('../middleware/answerVerify');
 // middle ware ----
 
@@ -10,7 +9,6 @@ const router = express.Router();
 
 router.post('/question/:id/answer',
 restrict(),
-restrictRoleAnswer(),
 answerVerify(),
 
     async (req, res, next) => {

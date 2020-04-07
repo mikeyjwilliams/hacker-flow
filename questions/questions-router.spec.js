@@ -3,11 +3,6 @@ const supertest = require('supertest');
 const server = require('../server');
 const db = require('../data/config');
 // testing below. -----
-const genToken = require('../auth/genToken');
-const bcrypt = require('bcryptjs');
-const authVerify = require('../middleware/authVerify');
-
-
 
 // console.log('token ', res.request.header.token);
 // console.log('Role ', res.request.header.role);
@@ -15,25 +10,8 @@ beforeAll(async () => {
     await db.seed.run();
 
 })
-
-const mockRequest = (sessionData) => {
-    return {
-        token: { data: sessionData }
-    }
-}
-
-const mockResponse = () => {
-    const res = {};
-    res.status = jest.fn().mockReturnValue(res);
-    res.json = jest.fn().mockReturnValue(res);
-    return res;
-};
-
-
-
 afterAll(async () => {
     await db.destroy();
-    //userCookie.mockReset();
 })
 
 
