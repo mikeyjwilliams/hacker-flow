@@ -3,69 +3,69 @@ const bcrypt = require('bcryptjs');
 
 exports.seed = async function (knex) {
   await knex('users').insert([
-    //? # 1 user
+    //? # 1
     {
-      // # 1 user
+      // # 1
       username: 'mickey65',
       password: bcrypt.hashSync('123', 10),
       email: 'mickey@gmail.com',
       first_name: 'mickey',
       last_name: 'mouse',
-      role: 'user'
+      role: 'user-dev'
     },
-    //? # 2 user
+    //? # 2
     {
-      // # 2 user
+      // # 2
       username: 'bri34fal',
       password: bcrypt.hashSync('abc123', 10),
       email: 'brianfallon@hotmail.com',
       first_name: 'brian',
       last_name: 'fallon',
-      role: 'user'
+      role: 'user-dev'
     },
-    //? # 3 user
+    //? # 3
     {
-      // # 3 user
+      // # 3
       username: 'trippygoof#2',
       password: bcrypt.hashSync('abc', 10),
       email: 'gooft345@outlook.com',
       first_name: 'goofy',
       last_name: 'dog',
-      role: 'user'
+      role: 'user-dev'
     },
-    //? # 4 user
+    //? # 4
     {
-      // # 4 user
+      // # 4
       username: 'menzinger54',
       password: bcrypt.hashSync('34Dc', 10),
       email: 'menzingers@gmail.com',
       first_name: 'matt',
       last_name: 'jones',
-      role: 'user'
+      role: 'user-dev'
     },
-    //! # 5 DEV
+    //! # 5
     {
-      // # 5 DEV
+      // # 5
       username: 'mikey1',
       password: bcrypt.hashSync('abc123', 10),
       email: 'mikey123@gmail.com',
       first_name: 'miguel',
       last_name: 'williamson',
-      role: 'dev'
+      role: 'user-dev'
     },
-    //! # 6 DEV
+    //! # 6
     {
-      // # 6 DEV
+      // # 6
       username: 'delaney3',
       password: bcrypt.hashSync('del45', 10),
       email: 'delannee45@gmail.com',
       first_name: 'delaney',
       last_name: 'apples',
-      role: 'dev'
+      role: 'user-dev'
     },
-    //!! # 7 USER-DEV
+    //!! # 7
     {
-      // # 7 user-dev
+      // # 7
       username: 'userdev',
       password: bcrypt.hashSync('user123', 10),
       email: 'devuser@gmail.com',
