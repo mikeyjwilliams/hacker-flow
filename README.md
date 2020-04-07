@@ -1,5 +1,30 @@
 # hacker-flow
 
+## Auth
+
+POST `/register`
+
+endpoint to add a user to users table.
+data needed is laid out below.
+
+- `username` - unique, required, up to 165 characters.
+- `password` - required
+- `email` - unique,  required, up to 165 chars.
+- `first_name` - required, up to 125 chars.
+- `last_name` - required, up to 125 chars.
+- `role` - required. should be either(`user`, `dev`, or `user-dev`)
+
+A valid entry will return a status of `201` and
+
+- `id`
+- `username`
+- `email`
+- `first_name`
+- `last_name`
+- `role`
+
+back as a json object.
+
 ---
 
 [![codecov](https://codecov.io/gh/mikeyjwilliams/hacker-flow/branch/master/graph/badge.svg)](https://codecov.io/gh/mikeyjwilliams/hacker-flow)
