@@ -26,7 +26,7 @@ describe('User Model Methods', () => {
 
       expect(res.username).toBe('mickey65');
       expect(res.last_name).toBe('mouse');
-      expect(res.role).toBe('user');
+      expect(res.role).toBe('user-dev');
     });
 
     test('findBy last_name Pass', async () => {
@@ -34,7 +34,7 @@ describe('User Model Methods', () => {
 
       expect(res.username).toMatch(/bri34fal/i);
       //// expect(res.email).toMatch(/brianfallon@hotmail.com/i);
-      expect(res.role).toMatch(/user/i);
+      expect(res.role).toMatch(/user-dev/i);
     });
   });
 
@@ -45,7 +45,7 @@ describe('User Model Methods', () => {
       expect(res.username).toBe('mickey65');
       expect(res.email).toBe('mickey@gmail.com');
       expect(res.last_name).toBe('mouse');
-      expect(res.role).toBe('user');
+      expect(res.role).toBe('user-dev');
     });
 
     test('findById(2) brian', async () => {

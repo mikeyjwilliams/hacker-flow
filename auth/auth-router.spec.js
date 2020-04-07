@@ -104,7 +104,7 @@ describe('Register a User', () => {
   });
 
   describe('register pass', () => {
-    describe('user Pass', () => {
+    describe('user Pass FUTURE CASE', () => {
       test('POST /api/register', async () => {
         const res = await supertest(server).post('/api/register').send({
           username: 'mikey',
@@ -122,7 +122,7 @@ describe('Register a User', () => {
         expect(res.body.role).toMatch(/user/i);
       });
     });
-    describe('dev passes', () => {
+    describe('dev passes FUTURE CASE', () => {
       test('POST /api/register', async () => {
         const res = await supertest(server).post('/api/register').send({
           username: 'miguel23',
@@ -212,7 +212,7 @@ describe('Log in user fails', () => {
 });
 
 describe('Login person Passes', () => {
-  describe('login pass role user', () => {
+  describe('login pass role user FUTURE CASE', () => {
     test('POST /api/login', async () => {
       const res = await supertest(server)
         .post('/api/login')
@@ -224,7 +224,7 @@ describe('Login person Passes', () => {
     });
   });
 
-  describe('login pass role dev', () => {
+  describe('login pass role dev FUTURE CASE', () => {
     test('POST /api/login', async () => {
       const res = await supertest(server)
         .post('/api/login')
