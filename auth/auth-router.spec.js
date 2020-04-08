@@ -1,7 +1,7 @@
 /** @format */
 
 const supertest = require('supertest');
-const userModel = require('../users/users-model');
+
 const server = require('../server');
 const db = require('../data/config');
 
@@ -104,7 +104,7 @@ describe('Register a User', () => {
   });
 
   describe('register pass', () => {
-    describe('user Pass FUTURE CASE', () => {
+    describe('user Pass FUTURE CASE -> USER', () => {
       test('POST /api/register', async () => {
         const res = await supertest(server).post('/api/register').send({
           username: 'mikey',
@@ -122,7 +122,7 @@ describe('Register a User', () => {
         expect(res.body.role).toMatch(/user/i);
       });
     });
-    describe('dev passes FUTURE CASE', () => {
+    describe('dev passes FUTURE CASE -> DEV', () => {
       test('POST /api/register', async () => {
         const res = await supertest(server).post('/api/register').send({
           username: 'miguel23',
@@ -141,7 +141,7 @@ describe('Register a User', () => {
       });
     });
 
-    describe('dev-user passes', () => {
+    describe('user-dev passes', () => {
       test('POST /api/register', async () => {
         const res = await supertest(server).post('/api/register').send({
           username: 'userDevMan',
@@ -212,29 +212,29 @@ describe('Log in user fails', () => {
 });
 
 describe('Login person Passes', () => {
-  describe('login pass role user FUTURE CASE', () => {
-    test('POST /api/login', async () => {
-      const res = await supertest(server)
-        .post('/api/login')
-        .send({ username: 'menzinger54', password: '34Dc' });
+  // describe('login pass role user FUTURE CASE', () => {
+  //   test('POST /api/login', async () => {
+  //     const res = await supertest(server)
+  //       .post('/api/login')
+  //       .send({ username: '', password: '' });
 
-      expect(res.statusCode).toBe(200);
-      expect(res.type).toBe('application/json');
-      expect(res.body.role).toMatch('user');
-    });
-  });
+  //     expect(res.statusCode).toBe(200);
+  //     expect(res.type).toBe('application/json');
+  //     expect(res.body.role).toMatch('user');
+  //   });
+  // });
 
-  describe('login pass role dev FUTURE CASE', () => {
-    test('POST /api/login', async () => {
-      const res = await supertest(server)
-        .post('/api/login')
-        .send({ username: 'mikey1', password: 'abc123' });
+  // describe('login pass role dev FUTURE CASE', () => {
+  //   test('POST /api/login', async () => {
+  //     const res = await supertest(server)
+  //       .post('/api/login')
+  //       .send({ username: '', password: '' });
 
-      expect(res.statusCode).toBe(200);
-      expect(res.type).toBe('application/json');
-      expect(res.body.role).toMatch('dev');
-    });
-  });
+  //     expect(res.statusCode).toBe(200);
+  //     expect(res.type).toBe('application/json');
+  //     expect(res.body.role).toMatch('dev');
+  //   });
+  // });
 
   describe('login pass role user-dev', () => {
     test('POST /api/login', async () => {

@@ -13,6 +13,7 @@ module.exports = {
 function unansweredQuestions() {
   return db('questions as q')
     .select(
+      'q.id as id',
       'q.title as title',
       'q.category as category',
       'q.question as question',
@@ -27,6 +28,7 @@ function unansweredQuestions() {
 function unansweredById(id) {
   return db('questions as q')
     .select(
+      'q.id as id',
       'q.title as title',
       'q.category as category',
       'q.question as question',
@@ -43,6 +45,7 @@ function unansweredById(id) {
 function answeredQuestions() {
   return db('questions as q')
     .select(
+      'q.id as id',
       'q.title as title',
       'q.category as category',
       'q.question as question',
@@ -58,6 +61,7 @@ function questionById(id) {
   return db('questions as q')
     .where('q.id', id)
     .select(
+      'q.id as id',
       'q.title as title',
       'q.category as category',
       'q.question as question',
