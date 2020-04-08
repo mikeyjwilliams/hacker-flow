@@ -65,7 +65,7 @@ router.post('/login', authVerify(), async (req, res, next) => {
       return res.status(401).json({ message: 'invalid credentials' });
     }
     const token = genToken(user); // generate token for accessing other site sections. and pass role from db to api.
-
+    console.log('!! before production add expiresIn in genToken');
     res.cookie('token', token); // token in cookie-parser for storage.
 
     res.status(200).json({

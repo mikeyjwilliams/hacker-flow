@@ -11,7 +11,7 @@ function genToken(user) {
 		role: user.role
 	};
 	const options = {
-		expiresIn: '25d'
+		//!! expiresIn: '25d' these tokens never expire!!!
 	};
 	return jwt.sign(payload, secret.jwtSecret, options);
 }
