@@ -28,7 +28,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
     # - name: Codecov-coverage
       uses: codecov/codecov-action@v1.0.6
-        uses: actions/setup-node@v1.0.5
+        uses: actions/setup-node@v1.0.6
       with:
         node-version: ${{ matrix.node-version }}
       with:
