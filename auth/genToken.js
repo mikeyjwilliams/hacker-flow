@@ -10,10 +10,10 @@ function genToken(user) {
 		username: user.username,
 		role: user.role
 	};
-	const options = {
-		expiresIn: '25d'
-	};
-	return jwt.sign(payload, secret.jwtSecret, options);
+	// const options = {
+	// 	//!! expiresIn: '25d' these tokens never expire!!!
+	// };
+	return jwt.sign(payload, secret.jwtSecret);
 }
 
 module.exports = genToken;
