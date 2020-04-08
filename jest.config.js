@@ -5,7 +5,7 @@ module.exports = {
   browser: false,
   errorOnDeprecated: true,
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
-  coverageDirectory: './test-results.txt',
+  coverageDirectory: './coverage',
   collectCoverageFrom: [
     // coverage for these files.
     '<rootDir>/auth/**/*.js',
@@ -36,7 +36,6 @@ module.exports = {
   coverageReporters: [
     'json',
     'lcov',
-    'gcov',
     'text',
     'clover',
     'text-summary',
