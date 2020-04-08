@@ -42,8 +42,6 @@
 #         flags:  # optional
 #         # Specify whether or not CI build should fail if Codecov runs into an error during upload
 #         fail_ci_if_error: false
-
-
 codecov:
   token: ${{secrets.CODECOV_TOKEN}}
   require_ci_to_pass: yes
