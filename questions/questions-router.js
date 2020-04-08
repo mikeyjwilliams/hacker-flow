@@ -5,7 +5,7 @@ const QuestionModel = require('../questions/questions-model');
 // middle ware used --------------
 const restrict = require('../middleware/restrict');
 const questionVerify = require('../middleware/questionVerifyData');
-
+const restrictRole = require('../middleware/restrictRole');
 // end middle ware ---------------
 const router = express.Router();
 
@@ -54,12 +54,13 @@ router.get('/unanswered/:id', restrict(), async (req, res, next) => {
 /**
  * @type POST /api/new-question
  * @description user creates a new unsolved question to the board.
- * @middleware restrict() => logged in,
+ * @middleware restrict() => logged in, restrictRole() => user-dev only
  * @errors 401, 400, 403
  */
 router.post(
   '/new-question',
   restrict(),
+  restrictRole(),
   questionVerify(),
   async (req, res, next) => {
     const { title, category, question, attempt_tried, comments } = req.body;
