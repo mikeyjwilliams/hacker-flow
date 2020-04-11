@@ -9,6 +9,7 @@ module.exports = {
   addQuestion,
   questionById,
   getQuestionAnswers
+  // allQuestionsAndAnswers,
 };
 
 function unansweredQuestions() {
@@ -80,6 +81,10 @@ async function addQuestion(question) {
   return questionById(id);
 }
 
+// function allQuestionsAndAnswers() {
+
+// }
+
 function getQuestionAnswers(question_id) {
   return db('questions as q')
     .select(
@@ -87,7 +92,8 @@ function getQuestionAnswers(question_id) {
       'a.solution as solution',
       'a.comments as comments',
       'a.best_answer as best_answer',
-      'd.username as username'
+      'd.username as username',
+      'q.id as question_id'
     )
     .join('answers as a', 'a.question_id', 'q.id')
     .join('users as d', 'a.dev_id', 'd.id')
