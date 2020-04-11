@@ -65,7 +65,7 @@ describe('answer invalid credentials', () => {
         test('401 POST /api/question/:id/answer', async () => {
             
             const res = await supertest(server)
-                .post('/api/question/9/answer')
+                .post('/api/question/9/answers')
                 .send({
                     title: 'answer title',
                     solution: 'solution',
@@ -110,7 +110,7 @@ describe('answers routes', () => {
         test('POST /api/question/:id/answer', async () => {
 
             const res = await supertest(server)
-                .post('/api/question/9/answer')
+                .post('/api/question/9/answers')
                 .send({
                     title: 'answer title',
                     solution: 'solution',
@@ -130,7 +130,7 @@ describe('answers routes', () => {
         test('POST /api/question/:id/answer', async () => {
 
             const res = await supertest(server)
-                .post('/api/question/9/answer')
+                .post('/api/question/9/answers')
                 .send({
                     title: 'title answer',
                     solution: 'solution box',
