@@ -56,15 +56,20 @@ for now everyone is a `user-dev`.
   - all roles able to sign up.
   - all roles able to sign in.
   - unanswered questions shown to logged in users.
-  - a `user` || `user-dev` can ask a question.
-  - a `dev` cannot ask a question.
-  - a `dev` || `user-dev` can post an answer to question.
-    - a `user` cannot answer a question.
-
-- To GO:
-  - all roles can read the answers posted on a question.
+  - `user-dev` can ask and answer questions, let alone view both.
+    - **update** 
+      - originally there was 3 user roles.
+      - `user` who could only ask questions not answer them.
+      - `dev` who could only answer questions not ask them.
+      - `user-dev` who could ask questions **and** answer them.
+  - it only made sense to get rid of these other two user roles at this time.
+  - the restrict role middle ware for both are still in the middleware
+  - restrictRoleAnswer => restricts only `dev` && `user-dev` access at the moment.
+  - restrictRoleQuestion => restricts only `user` && `user-dev` access at the moment.
+  - these are ready and easily to be modifiable for other role granting.
+  
 
 - future goals:
-  - be able to mark a `user` question `solved`.
-  - be able to mark a `devs` answer `best_answer`.
+  - be able to mark a `user-dev` question `solved`.
+  - be able to mark a `user-dev` answer `best_answer`.
   - filter questions by `unanswered`, `solved`, or `all questions`, other options possible...
