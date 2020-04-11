@@ -1,11 +1,11 @@
 const db = require('../data/config');
 
 module.exports = {
-    getQuestionAnswers,
     findById,
     addAnswer,
     updateAnswer,
     removeAnswer,
+    getAllQuestionAnswers,
 
 }
 
@@ -34,5 +34,9 @@ async function updateAnswer(id, changes) {
 }
 
 function removeAnswer(id) {
+    return null;
+}
+
+function getAllQuestionAnswers(question_id) {
     return null;
 }
