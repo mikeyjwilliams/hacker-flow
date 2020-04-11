@@ -10,18 +10,21 @@ afterAll( async () => {
 })
 
 describe('questions models', () => {
-    describe('unanswered and answered questions all', () => {
+    describe('unanswered questions', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
         expect(res).toHaveLength(6);
        });
 
-       test('get answered questions', async () => {
+       });
+
+    describe('answered questions', () => {
+         test('get answered questions', async () => {
            const res = await QuestModel.answeredQuestions();
 
            expect(res).toHaveLength(3);
-       });
+    })
     });
 
 
@@ -65,6 +68,12 @@ describe('questions models', () => {
             expect(res.username).toMatch('bri34fal');
         });
     });
+
+    describe('questionsAnswers all of them', () => {
+        describe('gives all answers to a question', () => {
+            test('')
+        })
+    })
 
 
 });
