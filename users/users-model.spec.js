@@ -33,7 +33,7 @@ describe('User Model Methods', () => {
       const res = await User.findBy({ last_name: 'fallon' }).first();
 
       expect(res.username).toMatch(/bri34fal/i);
-      //// expect(res.email).toMatch(/brianfallon@hotmail.com/i);
+      expect(res.email).toBe('brianfallon@hotmail.com');
       expect(res.role).toMatch(/user-dev/i);
     });
   });
@@ -68,23 +68,8 @@ describe('User Model Methods', () => {
     });
   });
 
-  describe('add a user to users table', () => {
-    test('addUser test 1', async () => {
-      const res = await User.addUser({
-        username: 'cartman64',
-        password: 'abc123',
-        email: 'cartman1@gmail.com',
-        first_name: 'cartman',
-        last_name: 'marsh',
-        role: 'user'
-      });
-      expect(res.username).toBe('cartman64');
-      expect(res.email).toMatch(/cartman1@gmail.com/i);
-      expect(res.last_name).toMatch(/marsh/i);
-      expect(res.role).toBe('user');
-    });
-
-    test('addUser 2nd test', async () => {
+  describe('Add User', () => {
+    test('add a user to user table', async () => {
       const res = await User.addUser({
         username: 'randy1',
         password: 'martian1',
