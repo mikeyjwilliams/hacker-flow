@@ -10,20 +10,6 @@ afterAll( async () => {
 })
 
 describe('Answer models', () => {
-    describe('receive answer models', () => {
-        test('get all answers for a question', async () => {
-            const res = await Amodel.getQuestionAnswers(1);
-
-            expect(res.length).toBeGreaterThanOrEqual(1);
-        });
-
-        test('0 result no answers for question', async () => {
-            const res = await Amodel.getQuestionAnswers(4);
-
-            expect(res.length).toBeFalsy();
-        });
-    });
-
     describe('answer by id', () => {
         test('find an answer by id', async () => {
             const res = await Amodel.findById(2);
@@ -56,6 +42,6 @@ describe('Answer models', () => {
             expect(res.comments).toMatch(/test comment/i);
             expect(res.username).toMatch(/delaney3/i);
         })
-    })
+    });
 
 })

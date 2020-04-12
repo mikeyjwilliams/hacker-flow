@@ -5,7 +5,6 @@ module.exports = {
     addAnswer,
     updateAnswer,
     removeAnswer,
-    getAllQuestionAnswers,
 
 }
 
@@ -37,6 +36,3 @@ function removeAnswer(id) {
     return null;
 }
 
-function getAllQuestionAnswers(question_id) {
-    return null;
-}
