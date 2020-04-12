@@ -74,8 +74,12 @@ SELECT
   a."title" as "title",
   a."solution" as "solution",
   a."comments" as "comments",
-  a."best_answer" as "best_answer"
+  a."best_answer" as "best_answer",
+  d."username" as "username",
+  q."id" as "question_id",
+  a."id" as "answer_id"
 FROM "answers" as a
 JOIN "questions" as q ON a."question_id" = q."id"
+JOIN "users" as d ON a."dev_id" = d."id"
 WHERE
   q."id" = ?;

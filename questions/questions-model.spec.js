@@ -10,6 +10,27 @@ afterAll( async () => {
 })
 
 describe('questions models', () => {
+
+    describe('getQuestionAnswers', () => {
+        test('get all answers for a question', async () => {
+            const res = await QuestModel.getQuestionAnswers(1);
+
+            expect(res.length).toBeGreaterThanOrEqual(1);
+        });
+
+        test('0 result no answers for question', async () => {
+            const res = await QuestModel.getQuestionAnswers(4);
+
+            expect(res.length).toBeFalsy();
+        });
+
+        test('exact num of answers for a question', async () => {
+            const res = await QuestModel.getQuestionAnswers(3);
+
+            expect(res).toHaveLength(2);
+        });
+    });
+
     describe('unanswered questions', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
@@ -69,11 +90,6 @@ describe('questions models', () => {
         });
     });
 
-    describe('questionsAnswers all of them', () => {
-        describe('gives all answers to a question', () => {
-            test('')
-        })
-    })
 
 
 });

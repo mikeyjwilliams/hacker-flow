@@ -93,7 +93,8 @@ function getQuestionAnswers(question_id) {
       'a.comments as comments',
       'a.best_answer as best_answer',
       'd.username as username',
-      'q.id as question_id'
+      'q.id as question_id',
+      'a.id as answer_id'
     )
     .join('answers as a', 'a.question_id', 'q.id')
     .join('users as d', 'a.dev_id', 'd.id')
