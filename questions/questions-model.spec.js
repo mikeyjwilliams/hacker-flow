@@ -10,18 +10,22 @@ afterAll( async () => {
 })
 
 describe('questions models', () => {
-    describe('unanswered and answered questions all', () => {
+
+    describe('unanswered questions', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
 
         expect(res).toHaveLength(6);
        });
 
-       test('get answered questions', async () => {
+       });
+
+    describe('answered questions', () => {
+         test('get answered questions', async () => {
            const res = await QuestModel.answeredQuestions();
 
            expect(res).toHaveLength(3);
-       });
+    })
     });
 
 
@@ -66,5 +70,24 @@ describe('questions models', () => {
         });
     });
 
+describe('getAllQuestionAnswers', () => {
+        test('get all answers for a question', async () => {
+            const res = await QuestModel.getAllQuestionAnswers(1);
+
+            expect(res.length).toBeGreaterThanOrEqual(1);
+        });
+
+        test('0 result no answers for question', async () => {
+            const res = await QuestModel.getAllQuestionAnswers(4);
+
+            expect(res.length).toBeFalsy();
+        });
+
+        test('exact num of answers for a question', async () => {
+            const res = await QuestModel.getAllQuestionAnswers(3);
+
+            expect(res).toHaveLength(2);
+        });
+    });
 
 });

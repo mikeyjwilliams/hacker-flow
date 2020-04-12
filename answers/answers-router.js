@@ -8,7 +8,7 @@ const restrictRole = require('../middleware/restrictRole');
 
 const router = express.Router();
 
-router.post('/question/:id/answer',
+router.post('/question/:id/answers',
 restrict(),
 restrictRole(),
 answerVerify(),

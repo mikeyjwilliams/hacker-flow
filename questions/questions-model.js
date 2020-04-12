@@ -7,7 +7,9 @@ module.exports = {
   unansweredById,
   answeredQuestions,
   addQuestion,
-  questionById
+  questionById,
+  getAllQuestionAnswers
+  // allQuestionsAndAnswers,
 };
 
 function unansweredQuestions() {
@@ -77,4 +79,24 @@ async function addQuestion(question) {
   const [id] = await db('questions').insert(question);
 
   return questionById(id);
+}
+
+// function allQuestionsAndAnswers() {
+
+// }
+
+function getAllQuestionAnswers(question_id) {
+  return db('questions as q')
+    .select(
+      'a.title as title',
+      'a.solution as solution',
+      'a.comments as comments',
+      'a.best_answer as best_answer',
+      'd.username as username',
+      'q.id as question_id',
+      'a.id as answer_id'
+    )
+    .join('answers as a', 'a.question_id', 'q.id')
+    .join('users as d', 'a.dev_id', 'd.id')
+    .where('q.id', question_id);
 }

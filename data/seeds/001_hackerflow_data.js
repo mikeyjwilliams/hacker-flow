@@ -217,9 +217,9 @@ exports.seed = async function (knex) {
       question_id: 3,
       dev_id: 6
     },
-    //! answer # 4 -> question # 4 => dev # 5
+    //! answer # 4 -> question # 3 => dev # 5
     {
-      // answer # 4 -> question # 4 => dev # 5
+      // answer # 4 -> question # 3 => dev # 5
       title: 'cookeies or JWT',
       solution:
         'Often JWT tokens are taking over... but there are certain situations cookies are more beneficial to use. So it depends n the situation.',

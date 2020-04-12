@@ -82,4 +82,29 @@ router.post(
   }
 );
 
+/**
+ * @type GET /api/question/:id/answers-only
+ * @description retrieves only the answers back for question stated in param
+ * @middleware restrict() -> logged-in, restrictRole() -> user-dev access only
+ * @errors 404
+ */
+router.get('/question/:id/answers-only', async (req, res, next) => {
+  const question_id = req.params.id;
+  try {
+    const questionAnswers = await QuestionModel.getAllQuestionAnswers(
+      question_id
+    );
+    if (questionAnswers.length <= 0) {
+      return res
+        .status(404)
+        .json({ message: 'Sorry there are no answers for this question.' });
+    }
+
+    res.status(200).json(questionAnswers);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
 module.exports = router;
