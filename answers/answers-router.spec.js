@@ -3,41 +3,19 @@ const server = require('../server');
 const db = require('../data/config');
 const Amodel = require('./answers-model');
 
-const userdevTestHelper = require('./__mocks__/userdev-test-helper');
-const badTestHelper = require('./__mocks__/bad-test-helper');
+const userdevAnswerTestHelper = require('./__mocks__/userdev-answer-test-helper');
+const badAnswerTestHelper = require('./__mocks__/bad-answer-test-helper');
 let userDevCookie;
 let badCookie;
 beforeAll(  async () => {
     await db.seed.run();
 
-    await supertest(server)
-        .post('/api/login')
-        .send({ 
-            username: process.env.USERDEV_TEST_NAME,
-            password: process.env.USERDEV_TEST_PASSWORD })
-        .expect(200)
-        .then((res) =>{
-            // const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
-            // cookie = cookies.join(';');
-            const cookies = userdevTestHelper();
+            const cookies = userdevAnswerTestHelper();
             userDevCookie = cookies;
-        })
     
-       await supertest(server)
-        .post('/api/login')
-        .send({ 
-            username: process.env.BAD_TEST_NAME,
-            password: process.env.BAD_TEST_PASSWORD
-         })
-        .expect(200)
-        .then((res) =>{
-            // const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
-            // cookie = cookies.join(';');
-            const cookie = badTestHelper();
-            badCookie = cookie;
-        })
-
-     
+       
+            const cookie = badAnswerTestHelper();
+            badCookie = cookie;    
 });
 
 

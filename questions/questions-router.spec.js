@@ -4,12 +4,31 @@ const server = require('../server');
 const db = require('../data/config');
 // testing below. -----
 
-// console.log('token ', res.request.header.token);
-// console.log('Role ', res.request.header.role);
+const badCookieTest = require('./__mocks__/bad-question-test-helper');
+
+const userDevCookieTest = require('./__mocks__/userdev-question-test-helper');
+
+
+let badCookie;
+
+
+let questionCookie;
+ 
+
 beforeAll(async () => {
-    await db.seed.run();
+    const cookie = userDevCookieTest();
+    questionCookie = cookie;
+
+    const cookies = badCookieTest();
+    badCookie = cookies;
+    
 
 })
+
+beforeEach( async () => {
+   await db.seed.run();
+})
+
 afterAll(async () => {
     await db.destroy();
 })
@@ -28,13 +47,14 @@ afterAll(async () => {
 //     })      // const response = await supertest(server).get('/api/unanswered')
 
 
-describe('questions unanswered displayed for users and devs', () => {
+describe('questions routes', () => {
 
         describe('failure tests', () => {
 
             test('401 GET /api/unanswered', async () => {
 
                         const res = await supertest(server).get('/api/unanswered')
+                        .set('Cookie', badCookie);
 
                         expect(res.statusCode).toBe(401);
                         expect(res.type).toBe('application/json');
@@ -42,7 +62,7 @@ describe('questions unanswered displayed for users and devs', () => {
             })
 
             test('401 GET /api/unanswered/:id', async () => {
-                const res = await supertest(server).get('/api/unanswered/1')
+                const res = await supertest(server).get('/api/unanswered/1').set('Cookie', badCookie);
 
                 expect(res.statusCode).toBe(401);
                 expect(res.type).toBe('application/json');
@@ -51,14 +71,36 @@ describe('questions unanswered displayed for users and devs', () => {
 
         });
 
-        // describe('Passing tests', () => {
-        //     test('200 GET /api/unanswered', async () => {
-        //     const response = await supertest(server).get('/api/unanswered').set('res.cookie', 'token');
+        describe('200 GET /api/unanswered', () => {
+            test('get unanswered questions', async () => {
+            const response = await supertest(server).get('/api/unanswered').set('Cookie', questionCookie);
 
-        //     expect(response.statusCode).toBe(200);
-        //     expect(response.type).toBe('application/json');
+            expect(response.statusCode).toBe(200);
+            expect(response.type).toBe('application/json');
 
-        //     })
-        // })
+            })
+        })
+
+        describe('GET /question/:id/answers-only route', () => {
+            test('no questions to display, return 404 and  no answers message', async () => {
+                const res = await supertest(server)
+                .post('/api/question/5/answers-only')
+                .set('Cookie', questionCookie);
+                
+                expect(res.statusCode).toBe(404);
+                expect(res.type).toBe('application/json');
+            })
+
+            test('display answers for a specific question w/o question.', async () => {
+                const res = await supertest(server)
+                .post('/api/question/3/answers-only')
+                .set('Cookie', questionCookie);
+
+                
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe('application/json');
+                expect(res).toHaveLength(2);
+            })
+        })
 
 })
