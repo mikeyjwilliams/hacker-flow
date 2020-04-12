@@ -69,3 +69,13 @@ JOIN "users" as d ON d."id" = a."dev_id"
 JOIN "questions" as q ON a."question_id" = q."id"
 WHERE
   q."id" = ?;
+-- get all answers for a question without question.
+SELECT
+  a."title" as "title",
+  a."solution" as "solution",
+  a."comments" as "comments",
+  a."best_answer" as "best_answer"
+FROM "answers" as a
+JOIN "questions" as q ON a."question_id" = q."id"
+WHERE
+  q."id" = ?;
