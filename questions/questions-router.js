@@ -102,6 +102,20 @@ router.get('/question/:id/answers-only', async (req, res, next) => {
 
     res.status(200).json(questionAnswers);
   } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/all-questions', async (req, res, next) => {
+  try {
+    const allQuestions = await QuestionModel.getAllQuestions();
+    if (allQuestions.length <= 0) {
+      return res
+        .status(404)
+        .json({ message: 'sorry no questions to display at this time' });
+    }
+    res.status(200).json(allQuestions);
+  } catch (err) {
     console.log(err);
     next(err);
   }

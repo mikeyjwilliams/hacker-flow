@@ -9,8 +9,8 @@ afterAll( async () => {
     await db.destroy();
 })
 
-describe('questions models', () => {
 
+describe('questions models', () => {
     describe('unanswered questions', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
@@ -61,6 +61,7 @@ describe('questions models', () => {
                 question: 'who created node.js',
                 attempt_tried: 'n/a',
                 comments: 'n/a',
+                solved: false,
                 user_id: 2,
             })
 
@@ -90,4 +91,13 @@ describe('getAllQuestionAnswers', () => {
         });
     });
 
-});
+    describe('getAllQuestions', () => {
+        test('get all questions answered and unanswered', async () => {
+            const res = await QuestModel.getAllQuestions();
+
+            expect(res).toHaveLength(9);
+
+        })
+    })
+
+})

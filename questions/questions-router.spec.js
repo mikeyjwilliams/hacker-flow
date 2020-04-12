@@ -93,13 +93,24 @@ describe('questions routes', () => {
 
             test('display answers for a specific question w/o question.', async () => {
                 const res = await supertest(server)
-                .post('/api/question/3/answers-only')
+                .get('/api/question/3/answers-only')
                 .set('Cookie', questionCookie);
 
                 
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe('application/json');
-                expect(res).toHaveLength(2);
+                expect(res.body).toHaveLength(2);
+            })
+        })
+
+        describe('GET /all-questions', () => {
+            test('all questions displayed whether they have an answer or not', async () => {
+                const res = await supertest(server)
+                    .get('/api/all-questions').set('Cookie', questionCookie);
+                
+                expect(res.body.length).toBeGreaterThan(7);
+                expect(res.body.length).toBeLessThan(10);
+                expect(res.body).toHaveLength(9);
             })
         })
 
