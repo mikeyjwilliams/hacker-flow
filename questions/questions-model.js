@@ -8,7 +8,8 @@ module.exports = {
   answeredQuestions,
   addQuestion,
   questionById,
-  getAllQuestionAnswers
+  getAllQuestionAnswers,
+  getAllQuestions
   // allQuestionsAndAnswers,
 };
 
@@ -99,4 +100,18 @@ function getAllQuestionAnswers(question_id) {
     .join('answers as a', 'a.question_id', 'q.id')
     .join('users as d', 'a.dev_id', 'd.id')
     .where('q.id', question_id);
+}
+
+function getAllQuestions() {
+  return db('questions as q')
+    .select(
+      'q.solved as solved',
+      'q.title as title',
+      'q.category as category',
+      'q.question as question',
+      'q.attempt_tried as attempt_tried',
+      'q.comments as comments',
+      'u.username as username'
+    )
+    .join('users as u', 'q.user_id', 'u.id');
 }

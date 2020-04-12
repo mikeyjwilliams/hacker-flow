@@ -107,4 +107,10 @@ router.get('/question/:id/answers-only', async (req, res, next) => {
   }
 });
 
+router.get('/all-questions', async (req, res, next) => {
+  try {
+    const allQuestions = await QuestionModel.getAllQuestions();
+  }
+});
+
 module.exports = router;

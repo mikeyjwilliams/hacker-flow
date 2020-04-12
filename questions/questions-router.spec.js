@@ -103,4 +103,15 @@ describe('questions routes', () => {
             })
         })
 
+        describe('GET /all-questions', () => {
+            test('all questions displayed whether they have an answer or not', async () => {
+                const res = await supertest(server)
+                    .get('/api/all-questions').set('Cookie', questionCookie);
+
+                expect(res).toBeGreaterThan(7);
+                expect(res).toBeLessThan(10);
+                expect(res).toHaveLength(9);
+            })
+        })
+
 })
