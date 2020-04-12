@@ -10,7 +10,7 @@ afterAll( async () => {
 })
 
 
-
+describe('questions models', () => {
     describe('unanswered questions', () => {
        test('get unanswered questions', async () => {
         const res = await QuestModel.unansweredQuestions();
@@ -100,4 +100,4 @@ describe('getAllQuestionAnswers', () => {
         })
     })
 
-
+})
