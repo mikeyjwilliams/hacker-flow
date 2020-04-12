@@ -105,6 +105,7 @@ function getAllQuestionAnswers(question_id) {
 function getAllQuestions() {
   return db('questions as q')
     .select(
+      'q.id as question_id',
       'q.solved as solved',
       'q.title as title',
       'q.category as category',
