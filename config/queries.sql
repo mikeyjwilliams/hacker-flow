@@ -1,6 +1,7 @@
 --- QUESTION STATUS
 --- unanswered questions
 SELECT
+  q."id" as "question_id",
   q."solved" as "solved",
   q."title" as "title",
   q."category" as "category",
@@ -14,6 +15,7 @@ WHERE
   q.solved = false;
 -- unanswered by id
 SELECT
+  q."id" as "question_id",
   q."solved" as "solved",
   q."title" as "title",
   q."category" as "category",
@@ -30,6 +32,7 @@ LIMIT
   = 1;
 --- answered questions
 SELECT
+  q."id" as "question_id",
   q."solved" as "solved",
   q."title" as "title",
   q."category" as "category",
