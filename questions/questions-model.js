@@ -8,7 +8,7 @@ module.exports = {
   answeredQuestions,
   addQuestion,
   questionById,
-  getQuestionAnswers
+  getAllQuestionAnswers
   // allQuestionsAndAnswers,
 };
 
@@ -85,7 +85,7 @@ async function addQuestion(question) {
 
 // }
 
-function getQuestionAnswers(question_id) {
+function getAllQuestionAnswers(question_id) {
   return db('questions as q')
     .select(
       'a.title as title',
