@@ -118,4 +118,16 @@ describe('questions routes', () => {
             })
         })
 
+        describe('GET /answered route, answeredQuestions model', () => {
+            test('display answered questions only', async () => {
+                const res = await supertest(server)
+                    .get('/api/answered')
+                    .set('Cookie', questionCookie);
+
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe('application/json');
+                expect(res.body).toHaveLength(3);
+            })
+        })
+
 })
