@@ -42,6 +42,15 @@ describe('questions models', () => {
         });
     });
 
+    describe('answeredById', () => {
+        test('answered question by id given', async () => {
+            const res = await QuestModel.answeredById(1);
+
+            expect(res.category).toBe('node.js');
+            expect(res.comments).toBe('n/a');
+        })
+    })
+
     describe('question by ID', () => {
         test('questionById', async () => {
             const res = await QuestModel.questionById(1);

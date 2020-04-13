@@ -6,6 +6,7 @@ module.exports = {
   unansweredQuestions,
   unansweredById,
   answeredQuestions,
+  answeredById,
   addQuestion,
   questionById,
   getAllQuestionAnswers,
@@ -42,6 +43,22 @@ function unansweredById(id) {
     .join('users as u', 'q.user_id', 'u.id')
     .where('q.solved', false)
     .where('q.id', id)
+    .first();
+}
+
+function answeredById(id) {
+  return db('questions as q')
+    .select(
+      'q.solved as solved',
+      'q.title as title',
+      'q.category as category',
+      'q.question as question',
+      'q.attempt_tried as attempt_tried',
+      'q.comments as comments',
+      'u.username as username'
+    )
+    .join('users as u', 'q.user_id', 'u.id')
+    .where({ 'q.solved': true, 'q.id': id })
     .first();
 }
 
