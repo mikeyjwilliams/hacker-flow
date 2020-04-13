@@ -25,7 +25,6 @@ router.get('/unanswered', restrict(), async (req, res, next) => {
     }
     res.status(200).json(unanswered);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 });
@@ -55,7 +54,7 @@ router.get('/unanswered/:id', restrict(), async (req, res, next) => {
  * @type POST /api/new-question
  * @description user creates a new unsolved question to the board.
  * @middleware restrict() => logged in, restrictRole() => user-dev only
- * @errors 401, 400, 403
+ * @errors 401, 400, 403, 500
  */
 router.post(
   '/new-question',
@@ -86,56 +85,82 @@ router.post(
  * @type GET /api/question/:id/answers-only
  * @description retrieves only the answers back for question stated in param
  * @middleware restrict() -> logged-in, restrictRole() -> user-dev access only
- * @errors 404
+ * @errors 404, 500
  */
-router.get('/question/:id/answers-only', async (req, res, next) => {
-  const question_id = req.params.id;
-  try {
-    const questionAnswers = await QuestionModel.getAllQuestionAnswers(
-      question_id
-    );
-    if (questionAnswers.length <= 0) {
-      return res
-        .status(404)
-        .json({ message: 'Sorry there are no answers for this question.' });
-    }
+router.get(
+  '/question/:id/answers-only',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    const question_id = req.params.id;
+    try {
+      const questionAnswers = await QuestionModel.getAllQuestionAnswers(
+        question_id
+      );
+      if (questionAnswers.length <= 0) {
+        return res
+          .status(404)
+          .json({ message: 'Sorry there are no answers for this question.' });
+      }
 
-    res.status(200).json(questionAnswers);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/all-questions', async (req, res, next) => {
-  try {
-    const allQuestions = await QuestionModel.getAllQuestions();
-    if (allQuestions.length <= 0) {
-      return res
-        .status(404)
-        .json({ message: 'sorry no questions to display at this time' });
+      res.status(200).json(questionAnswers);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(allQuestions);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
-router.get('/question/:id/answers', async (req, res, next) => {
-  const question_id = req.params.id;
-  try {
-    const questionAnswers = await QuestionModel.getQuestionAndAnswers(
-      question_id
-    );
-    if (questionAnswers.length <= 0) {
-      return res
-        .status(404)
-        .json({ message: 'sorry this question has no answers' });
+/**
+ * @type GET /api/all-questions
+ * @description gets all questions answered or not back
+ * @middleware restrict() => logged in, restrictRole => user-dev only.
+ * @errors 404, 500
+ */
+router.get(
+  '/all-questions',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    try {
+      const allQuestions = await QuestionModel.getAllQuestions();
+      if (allQuestions.length <= 0) {
+        return res
+          .status(404)
+          .json({ message: 'sorry no questions to display at this time' });
+      }
+      res.status(200).json(allQuestions);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(questionAnswers);
-  } catch (err) {
-    console.log(err);
-    next(err);
   }
-});
+);
+
+/**
+ * @type GET /api/question/:id/answers
+ * @description get answers from specific question id
+ * @middleware restrict -> logged in, restrictRole -> user-dev only
+ * @errors 404, 500
+ */
+router.get(
+  '/question/:id/answers',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    const question_id = req.params.id;
+    try {
+      const questionAnswers = await QuestionModel.getQuestionAndAnswers(
+        question_id
+      );
+      if (questionAnswers.length <= 0) {
+        return res
+          .status(404)
+          .json({ message: 'sorry this question has no answers' });
+      }
+      res.status(200).json(questionAnswers);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 module.exports = router;

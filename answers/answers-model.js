@@ -9,7 +9,11 @@ module.exports = {
 }
 
 
-
+/**
+ * @for answer model
+ * @description find answer by id
+ * @param {answer} id 
+ */
 function findById(id) {
     return db('answers as a')
     .select('a.title as title',
@@ -22,6 +26,11 @@ function findById(id) {
     .where('a.id', id).first();
 }
 
+/**
+ * @name addAnswer
+ * @param {data} answer 
+ * @description add answer to answer table display answer data back after.
+ */
 async function addAnswer(answer) {
     const [id] = await  db('answers').insert(answer);
 

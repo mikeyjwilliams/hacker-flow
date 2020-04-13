@@ -76,7 +76,6 @@ router.post('/login', authVerify(), async (req, res, next) => {
       token: token // cookie avail for front-end auth
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 });
