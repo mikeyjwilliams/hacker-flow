@@ -104,3 +104,25 @@ JOIN "users" as d ON a."dev_id" = d."id"
 WHERE
   q."id" = ?;
 --------------------------------------------------------------
+  --- select question and all answers under the question.
+SELECT
+  q."id" as "question_id",
+  q."title" as "question_title",
+  q."category" as "question_category",
+  q."question" as "question_question",
+  q."attempt_tried" as "question_attempt_tried",
+  q."comments" as "question_comments",
+  q."solved" as "question_solved",
+  user."username" as "question_username",
+  a."id" as "answer_id",
+  a."title" as "answer_title",
+  a."solution" as "answer_solution",
+  a."comments" as "answer_comments",
+  a."best_answer" as "answer_best_answer",
+  answer."username" as "answer_username"
+FROM "questions" as q
+JOIN "answers" as a ON a."question_id" = q."id"
+JOIN "users" as user ON q."user_id" = user."id"
+JOIN "users" as answer ON a."dev_id" = answer."id"
+WHERE
+  q."id" = ?;

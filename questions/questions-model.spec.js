@@ -100,4 +100,12 @@ describe('getAllQuestionAnswers', () => {
         })
     })
 
+    describe('getQuestionAndAnswers', () => {
+        test('get question by id and all answers along with it', async () => {
+            const res = await QuestModel.getQuestionAndAnswers(3);
+            
+            expect(res).toHaveLength(2);
+        })
+    })
+
 })
