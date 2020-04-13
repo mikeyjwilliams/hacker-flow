@@ -72,6 +72,27 @@ router.get('/answered', restrict(), restrictRole(), async (req, res, next) => {
 });
 
 /**
+ * @type GET /api/answered/:id
+ * @description a specific question must be answered.
+ * @middleware restrict() => logged, restrictRole => user-dev only
+ * @errors 401, 404, 500
+ */
+router.get('/answered/:id', async (req, res, next) => {
+  const question_id = req.params.id;
+  try {
+    const answeredQuestion = await QuestionModel.answeredById(question_id);
+
+    if (!answeredQuestion) {
+      return res.status(404).json({ message: 'question ID does not exist' });
+    }
+    res.status(200).json(answeredQuestion);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+/**
  * @type POST /api/new-question
  * @description user creates a new unsolved question to the board.
  * @middleware restrict() => logged in, restrictRole() => user-dev only
