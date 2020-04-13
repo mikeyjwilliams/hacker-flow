@@ -26,7 +26,9 @@ function restrict() {
         }
       });
     } catch (err) {
+      console.log('logged out');
       console.log(err);
+
       next(err);
     }
   };
