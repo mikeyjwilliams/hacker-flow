@@ -9,8 +9,8 @@ module.exports = {
   addQuestion,
   questionById,
   getAllQuestionAnswers,
-  getAllQuestions
-  // allQuestionsAndAnswers,
+  getAllQuestions,
+  getQuestionAndAnswers
 };
 
 function unansweredQuestions() {
@@ -115,4 +115,28 @@ function getAllQuestions() {
       'u.username as username'
     )
     .join('users as u', 'q.user_id', 'u.id');
+}
+
+function getQuestionAndAnswers(question_id) {
+  return db('questions as q')
+    .select(
+      'q.id as question_id',
+      'q.title as question_title',
+      'q.category as question_category',
+      'q.question as question_question',
+      'q.attempt_tried as question_attempt_tried',
+      'q.comments as question_comments',
+      'q.solved as question_solved',
+      'user.username as question_username',
+      'a.id as answer_id',
+      'a.title as answer_title',
+      'a.solution as answer_solution',
+      'a.comments as answer_comments',
+      'a.best_answer as answer_best_answer',
+      'answer.username as answer_username'
+    )
+    .join('answers as a', 'a.question_id', 'q.id')
+    .join('users as user', 'q.user_id', 'user.id')
+    .join('users as answer', 'a.dev_id', 'answer.id')
+    .where('q.id', question_id);
 }
