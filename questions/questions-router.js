@@ -87,7 +87,6 @@ router.get('/answered/:id', async (req, res, next) => {
     }
     res.status(200).json(answeredQuestion);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 });
