@@ -117,4 +117,22 @@ describe('getAllQuestionAnswers', () => {
         })
     })
 
+    // describe('updateQuestion model', () => {
+    //     test('update a question that was asked', async () => {
+    //         const res = await QuestModel.updateQuestion(8,{
+    //             title: 'node creator',
+    //             category: 'node.js',
+    //             question: 'who created node.js?',
+    //             attempt_tried: 'I looked through the docs...',
+    //             comments: 'I was wondering who created node.js for a report',
+    //             solved: false,
+    //             user_id: 2
+    //         });
+
+    //         expect(res.body.attempt_tried).toMatch(/i looked through the docs/i);
+    //         expect(res.body.category).toBe('node.js');
+    //         expect(res.body.title).toBe('node creator');
+    //     })
+    // })
+
 })

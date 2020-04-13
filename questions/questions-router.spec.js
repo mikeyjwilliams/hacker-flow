@@ -96,6 +96,27 @@ describe('questions routes', () => {
             })
         })
 
+        describe('PUT /question/:id update question', () => {
+            test('update a questions data', async () => {
+                const res = await supertest(server)
+                    .put('/question/9')
+                    .send({
+                        title: 'node creator',
+                        category: 'node.js',
+                        question: 'who created node.js?',
+                        attempt_tried: 'I looked through the docs...',
+                        comments: 'I was wondering who created node.js for a report',
+                        solved: false,
+                        user_id: 7,
+                    })
+                    .set('Cookie', questionCookie);
+
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe('application/json');
+                expect(res.body.attempt_tried).toMatch(/i looked through the docs.../i);
+            })
+        })
+
         describe('GET /question/:id/answers', () => {
             test('question plus all answers', async () => {
                 const res = await supertest(server)
@@ -143,5 +164,6 @@ describe('questions routes', () => {
                 expect(res.body.username).toMatch(/mickey65/i);
             })
         })
+
 
 })
