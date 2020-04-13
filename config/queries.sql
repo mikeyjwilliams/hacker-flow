@@ -30,7 +30,7 @@ WHERE
   q."solved" = false
   and q."id" = ?
 LIMIT
-  = 1;
+  1;
 ---------------------------------
   --- answered questions
 SELECT
@@ -62,7 +62,7 @@ WHERE
   q."solved" = true
   AND q."id" = ?
 LIMIT
-  = 1;
+  1;
 ---------------------------------------
   -- all questions answered or unanswered.
 SELECT

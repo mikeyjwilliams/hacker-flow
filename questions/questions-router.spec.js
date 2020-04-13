@@ -130,4 +130,18 @@ describe('questions routes', () => {
             })
         })
 
+        describe('GET /answered/:id route, answeredQuestions model', ()=> {
+            test('display a specific answered question only', async () => {
+                const res = await supertest(server)
+                    .get('/api/answered/1')
+                    .set('Cookie', questionCookie);
+
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe('application/json');
+                expect(res.body.category).toBe('node.js');
+                expect(res.body.comments).toBe('n/a');
+                expect(res.body.username).toMatch(/mickey65/i);
+            })
+        })
+
 })
