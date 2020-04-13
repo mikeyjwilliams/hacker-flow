@@ -116,6 +116,23 @@ router.get('/all-questions', async (req, res, next) => {
     }
     res.status(200).json(allQuestions);
   } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/question/:id/answers', async (req, res, next) => {
+  const question_id = req.params.id;
+  try {
+    const questionAnswers = await QuestionModel.getQuestionAndAnswers(
+      question_id
+    );
+    if (questionAnswers.length <= 0) {
+      return res
+        .status(404)
+        .json({ message: 'sorry this question has no answers' });
+    }
+    res.status(200).json(questionAnswers);
+  } catch (err) {
     console.log(err);
     next(err);
   }

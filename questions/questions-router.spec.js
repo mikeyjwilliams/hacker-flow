@@ -10,19 +10,14 @@ const userDevCookieTest = require('./__mocks__/userdev-question-test-helper');
 
 
 let badCookie;
-
-
 let questionCookie;
  
-
 beforeAll(async () => {
     const cookie = userDevCookieTest();
     questionCookie = cookie;
 
     const cookies = badCookieTest();
     badCookie = cookies;
-    
-
 })
 
 beforeEach( async () => {
@@ -32,20 +27,6 @@ beforeEach( async () => {
 afterAll(async () => {
     await db.destroy();
 })
-
-
-// describe('Auth test', () => {
-//     test('calls post with correct path', async () => {
-
-//          const response = await supertest(server)
-//          .get('/api/unanswered')
-//          .set('Authorization', userCookie());
-
-//          expect(response.statusCode).toBe(200)
-
-//         })
-//     })      // const response = await supertest(server).get('/api/unanswered')
-
 
 describe('questions routes', () => {
 
@@ -70,6 +51,7 @@ describe('questions routes', () => {
             });
 
         });
+
 
         describe('200 GET /api/unanswered', () => {
             test('get unanswered questions', async () => {
@@ -111,6 +93,28 @@ describe('questions routes', () => {
                 expect(res.body.length).toBeGreaterThan(7);
                 expect(res.body.length).toBeLessThan(10);
                 expect(res.body).toHaveLength(9);
+            })
+        })
+
+        describe('GET /question/:id/answers', () => {
+            test('question plus all answers', async () => {
+                const res = await supertest(server)
+                    .get('/api/question/3/answers')
+                    .set('Cookie', questionCookie);
+
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe('application/json');
+                expect(res.body).toHaveLength(2);
+
+            })
+
+            test('question has no answers', async () => {
+                const res = await supertest(server)
+                .get('/api/question/7/answers')
+                .set('Cookie', questionCookie);
+
+                expect(res.statusCode).toBe(404);
+                expect(res.body.message).toMatch(/sorry this question has no answers/i);
             })
         })
 
