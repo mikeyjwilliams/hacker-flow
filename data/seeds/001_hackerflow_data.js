@@ -160,6 +160,7 @@ exports.seed = async function (knex) {
       user_id: 4
     },
     //! # 8 question w/ # 2 user || NO answer
+    //!! UPDATE TEST QUESTION
     {
       title: 'node.js creator',
       category: 'node.js',
@@ -170,6 +171,7 @@ exports.seed = async function (knex) {
       user_id: 2
     },
     //!! # 9 question w/ # 3 user || NO answer
+    //
     {
       title: 'bootstrap or bulma css',
       category: 'css',
