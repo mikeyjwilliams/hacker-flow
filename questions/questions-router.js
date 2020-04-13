@@ -51,6 +51,27 @@ router.get('/unanswered/:id', restrict(), async (req, res, next) => {
 });
 
 /**
+ * @type GET /api/answered
+ * @description get all answered questions only / no answers
+ * @middleware restrict() => logged, restrictRole() => user-dev only
+ * @errors 404, 500
+ */
+router.get('/answered', restrict(), restrictRole(), async (req, res, next) => {
+  try {
+    const answeredQuestions = await QuestionModel.answeredQuestions();
+
+    if (answeredQuestions.length <= 0) {
+      return res
+        .status(404)
+        .json({ message: 'there are no answered questions yet' });
+    }
+    res.status(200).json(answeredQuestions);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
  * @type POST /api/new-question
  * @description user creates a new unsolved question to the board.
  * @middleware restrict() => logged in, restrictRole() => user-dev only
