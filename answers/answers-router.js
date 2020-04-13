@@ -8,6 +8,14 @@ const restrictRole = require('../middleware/restrictRole');
 
 const router = express.Router();
 
+/**
+ * @route /api/question/:id/answers
+ * @type POST
+ * @description post a new answer to specific question parent.
+ * @middleware restrict() => loggedin, restrictRole() => user-devs only, answerVerify() => checks
+ * needed data
+ * @errors 400, 404, 500
+ */
 router.post('/question/:id/answers',
 restrict(),
 restrictRole(),
@@ -32,7 +40,6 @@ answerVerify(),
         } 
         res.status(201).json(answer); 
     } catch(err) {
-        console.log(err);
         next(err);
     }
 })
