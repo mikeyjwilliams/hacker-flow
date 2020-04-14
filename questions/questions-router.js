@@ -207,7 +207,7 @@ router.get(
 );
 
 router.put(
-  '/unanswered/:id',
+  '/question/:id',
   restrict(),
   restrictRole(),
   questionVerify(),
@@ -222,7 +222,7 @@ router.put(
       attempt_tried: attempt_tried || 'n/a',
       comments: comments || 'n/a',
       solved: false,
-      user_id: req.token.user_id
+      user_id: req.token.userId
     };
 
     try {
