@@ -23,7 +23,6 @@ Express@4.17.1
 ## Endpoints
 ---
 
-
 ### Auth
 
 |Method   | Endpoint  | Access Control  | Description  |
