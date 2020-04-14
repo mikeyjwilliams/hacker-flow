@@ -44,5 +44,29 @@ answerVerify(),
     }
 })
 
+router.put('/question/:id/answer/:answerId',
+restrict(), restrictRole(), answerVerify(),
+ async (req, res, next) => {
+    const { id, answerId } = req.params;
+    const { title, solution, comments } = req.body;
+
+    const answer = {
+        title: title,
+        solution: solution,
+        comments: comments,
+        best_answer: false,
+        question_id: id,
+        dev_id: req.token.userId,
+    }
+    try {
+        const update = await Amodel.updateAnswer(answerId, answer);
+        if(!update) {
+            res.status(404).json({message: 'answer does not exist'});
+        }
+        res.status(200).json(update);
+    } catch(err){
+      next(err);
+    }
+})
 
 module.exports = router;
