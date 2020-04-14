@@ -31,6 +31,10 @@ Express@4.17.1
 | POST  | `/login`  | none  | log user in  |
 
 
+
+----
+## Work in Progress
+---
 POST `/register`
 
 endpoint to add a user to users table.
