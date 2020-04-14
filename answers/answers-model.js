@@ -38,7 +38,10 @@ async function addAnswer(answer) {
 }
 
 async function updateAnswer(id, changes) {
-    return null;
+    await db('answers').where({ id }).update(changes)
+    ;
+
+    return findById(id);
 }
 
 function removeAnswer(id) {

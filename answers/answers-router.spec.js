@@ -126,5 +126,24 @@ describe('answers routes', () => {
             expect(res.body.username).toBe('userdev');
             
         })
+
+        describe('updateAnswer route', () => {
+            test('PUT /api/question/:id/answer/:answerId', async () => {
+                const res = await supertest(server)
+                    .put('/api/question/3/answer/3')
+                    .send({
+                        title: 'knexJS',
+      solution: 'you need the knex package installed `npm i knex` to install.',
+      comments: 'update comments',
+      best_answer: false,
+      question_id: 3,
+      dev_id: 6
+                    }).set('Cookie', userDevCookie);
+
+            expect(res.statusCode).toBe(200);
+            expect(res.type).toBe('application/json');
+            expect(res.body.comments).toMatch(/update comments/i);
+            })
+        })
     })
 })

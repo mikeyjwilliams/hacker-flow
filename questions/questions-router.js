@@ -18,13 +18,13 @@ const router = express.Router();
 router.get('/unanswered', restrict(), async (req, res, next) => {
   try {
     const unanswered = await QuestionModel.unansweredQuestions();
-    console.log('L ', unanswered.length);
+
     if (unanswered.length <= 0) {
       return res.status(400).json({
         message: 'sorry no questions to ask.'
       });
     }
-    console.log('L ', unanswered.length);
+
     res.status(200).json(unanswered);
   } catch (err) {
     next(err);
