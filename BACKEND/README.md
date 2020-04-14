@@ -1,6 +1,51 @@
-# hacker-flow
+# API Documentation
 
-## Auth
+## Hacker-flow
+
+## Getting started
+
+To get the server up running locally:
+
+- clone this repo
+- cd BACKEND/
+- `npm i` to install allrequired dependencies
+- `npm run server` to start the local server
+- `npm run test` to start server using testing environment.
+
+## Backend Framework
+
+Express@4.17.1
+
+- it is un-opinionated when it comes to what you use with it.
+- minimal and flexible for what is offers.
+- lots of middleware and utility methods available.
+
+## Endpoints
+---
+
+### Auth
+
+|Method   | Endpoint  | Access Control  | Description  |
+|---|---|---|---|
+| POST  | `/register`  | none  | user register   |
+| POST  | `/login`  | none  | log user in  |
+
+
+
+----
+## Work in Progress
+---
+
+## Questions
+---
+
+- GET `/unanswered` -> displays unanswered questions only.
+- GET `/unanswered/:id` -> displays specific unanswered question by id only
+- GET `/answered` -> displays all answered questions
+- GET `/answered/:id` -> displays specific answered question of said id.
+- POST `/new-question` -> create a question
+- GET `/question/:id/answers-only` -> get back a specific questions answers back w/o the question.
+- GET `/all-questions` -> get back all questions answered or not.
 
 POST `/register`
 

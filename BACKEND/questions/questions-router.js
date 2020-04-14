@@ -3,33 +3,38 @@ const express = require('express');
 const QuestionModel = require('../questions/questions-model');
 
 // middle ware used --------------
-const restrict = require('../middleware/restrict');
-const questionVerify = require('../middleware/questionVerifyData');
-const restrictRole = require('../middleware/restrictRole');
+const restrict = require('../BACKEND/middleware/restrict');
+const questionVerify = require('../BACKEND/middleware/questionVerifyData');
+const restrictRole = require('../BACKEND/middleware/restrictRole');
 // end middle ware ---------------
 const router = express.Router();
 
 /**
  * @type GET /api/unanswered
  * @description get all unanswered question data back w/ username who asked.
- * @middleware restrict() => must be logged in to access.
+ * @middleware restrict() => must be logged in to access. restrictRole() => user-dev only.
  * @errors 0 unanswered questions return a 400 'no questions to ask'
  */
-router.get('/unanswered', restrict(), async (req, res, next) => {
-  try {
-    const unanswered = await QuestionModel.unansweredQuestions();
+router.get(
+  '/unanswered',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    try {
+      const unanswered = await QuestionModel.unansweredQuestions();
 
-    if (unanswered.length <= 0) {
-      return res.status(400).json({
-        message: 'sorry no questions to ask.'
-      });
+      if (unanswered.length <= 0) {
+        return res.status(400).json({
+          message: 'sorry no questions to ask.'
+        });
+      }
+
+      res.status(200).json(unanswered);
+    } catch (err) {
+      next(err);
     }
-
-    res.status(200).json(unanswered);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 /**
  * @type Get /api/unanswered/:id
@@ -37,20 +42,25 @@ router.get('/unanswered', restrict(), async (req, res, next) => {
  * @middleware restrict() => must be logged in to access.
  * @errors none existent question id will return a 404
  */
-router.get('/unanswered/:id', restrict(), async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    const unanswered = await QuestionModel.unansweredById(id);
-    if (!unanswered) {
-      return res
-        .status(404)
-        .json({ message: 'question with that ID does not exist' });
+router.get(
+  '/unanswered/:id',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const unanswered = await QuestionModel.unansweredById(id);
+      if (!unanswered) {
+        return res
+          .status(404)
+          .json({ message: 'question with that ID does not exist' });
+      }
+      res.status(200).json(unanswered);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(unanswered);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 /**
  * @type GET /api/answered
@@ -79,19 +89,24 @@ router.get('/answered', restrict(), restrictRole(), async (req, res, next) => {
  * @middleware restrict() => logged, restrictRole => user-dev only
  * @errors 401, 404, 500
  */
-router.get('/answered/:id', async (req, res, next) => {
-  const question_id = req.params.id;
-  try {
-    const answeredQuestion = await QuestionModel.answeredById(question_id);
+router.get(
+  '/answered/:id',
+  restrict(),
+  restrictRole(),
+  async (req, res, next) => {
+    const question_id = req.params.id;
+    try {
+      const answeredQuestion = await QuestionModel.answeredById(question_id);
 
-    if (!answeredQuestion) {
-      return res.status(404).json({ message: 'question ID does not exist' });
+      if (!answeredQuestion) {
+        return res.status(404).json({ message: 'question ID does not exist' });
+      }
+      res.status(200).json(answeredQuestion);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(answeredQuestion);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 /**
  * @type POST /api/new-question
