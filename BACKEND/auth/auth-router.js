@@ -3,10 +3,10 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const genToken = require('./genToken');
-const userModel = require('../users/users-model');
+const userModel = require('../../users/users-model');
 // middle ware ---
-const authVerify = require('../middleware/authVerify');
-const registerVerify = require('../middleware/registerVerify');
+const authVerify = require('../../middleware/authVerify');
+const registerVerify = require('../../middleware/registerVerify');
 // middleware end ---
 
 const router = express.Router();

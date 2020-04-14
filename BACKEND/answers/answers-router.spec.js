@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 const server = require('../server');
-const db = require('../data/config');
+const db = require('../../data/config');
 const Amodel = require('./answers-model');
 
 const userdevAnswerTestHelper = require('./__mocks__/userdev-answer-test-helper');

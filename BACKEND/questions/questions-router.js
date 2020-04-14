@@ -3,9 +3,9 @@ const express = require('express');
 const QuestionModel = require('../questions/questions-model');
 
 // middle ware used --------------
-const restrict = require('../middleware/restrict');
-const questionVerify = require('../middleware/questionVerifyData');
-const restrictRole = require('../middleware/restrictRole');
+const restrict = require('../BACKEND/middleware/restrict');
+const questionVerify = require('../BACKEND/middleware/questionVerifyData');
+const restrictRole = require('../BACKEND/middleware/restrictRole');
 // end middle ware ---------------
 const router = express.Router();
 
