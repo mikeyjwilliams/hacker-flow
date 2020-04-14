@@ -35,6 +35,18 @@ Express@4.17.1
 ----
 ## Work in Progress
 ---
+
+## Questions
+---
+
+- GET `/unanswered` -> displays unanswered questions only.
+- GET `/unanswered/:id` -> displays specific unanswered question by id only
+- GET `/answered` -> displays all answered questions
+- GET `/answered/:id` -> displays specific answered question of said id.
+- POST `/new-question` -> create a question
+- GET `/question/:id/answers-only` -> get back a specific questions answers back w/o the question.
+- GET `/all-questions` -> get back all questions answered or not.
+
 POST `/register`
 
 endpoint to add a user to users table.
