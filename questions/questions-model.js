@@ -160,7 +160,7 @@ function getQuestionAndAnswers(question_id) {
 }
 
 async function updateQuestion(id, changes) {
-  await db('questions').update(changes);
+  await db('questions').where({ id }).update(changes);
 
   return questionById(id);
 }
