@@ -220,6 +220,7 @@ exports.seed = async function (knex) {
       dev_id: 6
     },
     //! answer # 4 -> question # 3 => dev # 5
+    //!! updated answer test
     {
       // answer # 4 -> question # 3 => dev # 5
       title: 'cookeies or JWT',
