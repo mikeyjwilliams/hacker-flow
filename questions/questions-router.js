@@ -18,11 +18,13 @@ const router = express.Router();
 router.get('/unanswered', restrict(), async (req, res, next) => {
   try {
     const unanswered = await QuestionModel.unansweredQuestions();
+    console.log('L ', unanswered.length);
     if (unanswered.length <= 0) {
       return res.status(400).json({
         message: 'sorry no questions to ask.'
       });
     }
+    console.log('L ', unanswered.length);
     res.status(200).json(unanswered);
   } catch (err) {
     next(err);
@@ -199,6 +201,41 @@ router.get(
       }
       res.status(200).json(questionAnswers);
     } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.put(
+  '/question/:id',
+  restrict(),
+  restrictRole(),
+  questionVerify(),
+  async (req, res, next) => {
+    const { id } = req.params;
+    const { title, category, question, attempt_tried, comments } = req.body;
+
+    const update = {
+      title: title,
+      category: category,
+      question: question,
+      attempt_tried: attempt_tried || 'n/a',
+      comments: comments || 'n/a',
+      solved: false,
+      user_id: req.token.userId
+    };
+
+    try {
+      const updated = await QuestionModel.updateQuestion(id, update);
+
+      if (!updated) {
+        return res
+          .status(404)
+          .json({ message: 'sorry question does not exist' });
+      }
+      res.status(200).json(updated);
+    } catch (err) {
+      console.log(err);
       next(err);
     }
   }

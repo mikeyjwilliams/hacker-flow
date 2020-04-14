@@ -11,7 +11,8 @@ module.exports = {
   questionById,
   getAllQuestionAnswers,
   getAllQuestions,
-  getQuestionAndAnswers
+  getQuestionAndAnswers,
+  updateQuestion
 };
 
 function unansweredQuestions() {
@@ -156,4 +157,10 @@ function getQuestionAndAnswers(question_id) {
     .join('users as user', 'q.user_id', 'user.id')
     .join('users as answer', 'a.dev_id', 'answer.id')
     .where('q.id', question_id);
+}
+
+async function updateQuestion(id, changes) {
+  await db('questions').where({ id }).update(changes);
+
+  return questionById(id);
 }
