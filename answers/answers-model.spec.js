@@ -44,4 +44,22 @@ describe('Answer models', () => {
         })
     });
 
+    describe('updateAnswer id changes', () => {
+        test('update an answer with id and changes', async () => {
+            const res = await Amodel.updateAnswer(4, {
+                title: 'cookies or JWT',
+      solution:
+        'Often JWT tokens are taking over... but there are certain situations cookies are more beneficial to use. So it depends n the situation.',
+      comments: 'n/a',
+      best_answer: false,
+      question_id: 3,
+      dev_id: 5
+            })
+
+            expect(res.title).toMatch(/cookies or jwt/i);
+            expect(res.comments).toBe('n/a');
+
+        })
+    })
+
 })
