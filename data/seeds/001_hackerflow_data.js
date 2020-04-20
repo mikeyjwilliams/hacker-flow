@@ -2,77 +2,158 @@
 const bcrypt = require('bcryptjs');
 
 exports.seed = async function (knex) {
+  await knex('sign_in').insert([
+    //? # 1 user-dev
+    { 
+     email: 'mickey@gmail.com',
+     password: bcrypt.hashSync('123', 10)
+    },
+    {
+      //? # 2 user-dev
+      email: 'brianfallon@hotmail.com',
+      password: bcrypt.hashSync('abc123', 10),
+    },
+    {
+      //? # 3 user-dev
+      
+      email: 'gooft345@outlook.com',
+      password: bcrypt.hashSync('abc', 10),
+    },
+    {
+      //? # 4 user-dev
+      email: 'menzingers@gmail.com',
+      
+      password: bcrypt.hashSync('34Dc', 10),
+    },
+    {
+      //? # 5 user-dev
+      
+      email: 'mikey123@gmail.com',
+      password: bcrypt.hashSync('abc123', 10),
+    },
+    {
+      //? # 6 user-dev
+      
+      email: 'delannee45@gmail.com',
+      password: bcrypt.hashSync('del45', 10),
+    },
+    {
+      //? # 7 user-dev
+      
+      email: 'devuser@gmail.com',
+      password: bcrypt.hashSync('user123', 10),
+    },
+    {
+      //? # 8 admin
+      
+      email: 'admin-miller@gmail.com',
+      password: bcrypt.hashSync('adMin123', 10),
+    },
+  ]);
+
   await knex('users').insert([
     //? # 1
     {
       // # 1
-      username: 'mickey65',
-      password: bcrypt.hashSync('123', 10),
-      email: 'mickey@gmail.com',
+      username: 'mickey65'
       first_name: 'mickey',
       last_name: 'mouse',
-      role: 'user-dev'
+      signin_id: 1
     },
     //? # 2
     {
       // # 2
       username: 'bri34fal',
-      password: bcrypt.hashSync('abc123', 10),
-      email: 'brianfallon@hotmail.com',
       first_name: 'brian',
       last_name: 'fallon',
-      role: 'user-dev'
+      signin_id: 2,
+      
     },
     //? # 3
     {
-      // # 3
       username: 'trippygoof#2',
-      password: bcrypt.hashSync('abc', 10),
-      email: 'gooft345@outlook.com',
       first_name: 'goofy',
       last_name: 'dog',
-      role: 'user-dev'
+      signin_id: 3
     },
     //? # 4
     {
-      // # 4
       username: 'menzinger54',
-      password: bcrypt.hashSync('34Dc', 10),
-      email: 'menzingers@gmail.com',
       first_name: 'matt',
       last_name: 'jones',
-      role: 'user-dev'
+      signin_id: 4
     },
     //! # 5
     {
-      // # 5
       username: 'mikey1',
-      password: bcrypt.hashSync('abc123', 10),
-      email: 'mikey123@gmail.com',
       first_name: 'miguel',
       last_name: 'williamson',
-      role: 'user-dev'
+      signin_id: 5
     },
     //! # 6
     {
-      // # 6
       username: 'delaney3',
-      password: bcrypt.hashSync('del45', 10),
-      email: 'delannee45@gmail.com',
       first_name: 'delaney',
       last_name: 'apples',
-      role: 'user-dev'
+      signin_id: 6
     },
     //!! # 7
     {
-      // # 7
       username: 'userdev',
-      password: bcrypt.hashSync('user123', 10),
-      email: 'devuser@gmail.com',
       first_name: 'devman',
       last_name: 'prouser',
-      role: 'user-dev'
+      signin_id: 7
+    },
+    // # 8
+    {
+      username: 'admin-mills',
+      first_name: 'david',
+      last_name: 'mills',
+      signin_id: 8
     }
+  ]);
+
+  await knex('user-roles').insert([
+    {
+      // # 1 mickey65
+      role: 'user-dev',
+      user_id: 1,
+    },
+    {
+      // # 2 bri34fal
+      role: 'user-dev',
+      user_id: 2,
+    },
+    {
+      // # 3 trippygoof#2
+      role: 'user-dev',
+      user_id: 3,
+    },
+    {
+      // # 4 menzinger54
+      role: 'user-dev',
+      user_id: 4,
+    },
+    {
+      // # 5 mikey1
+      role: 'user-dev',
+      user_id: 5,
+    },
+    {
+      // # 6 delaney3
+      role: 'user-dev',
+      user_id: 6,
+    },
+    {
+      // # 7 userdev
+      role: 'user-dev',
+      user_id: 7,
+    },
+    {
+      // # 8 admin-mills
+      role: 'admin',
+      user_id: 8,
+    },
   ]);
 
   await knex('questions').insert([
@@ -86,7 +167,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'looked through articles but did not find an answer yet.',
       comments: 'n/a',
       solved: true,
-      user_id: 1
+      user_id: 1,
     },
     //? # 2 question w/ # 1 user
     {
@@ -97,7 +178,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'n/a',
       solved: true,
-      user_id: 1
+      user_id: 1,
     },
     //? # 3 question w/ # 2 user
     {
@@ -109,7 +190,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'n/a',
       solved: true,
-      user_id: 2
+      user_id: 2,
     },
     //? # 4 question w/ # 3 user | has answer
     {
@@ -121,7 +202,7 @@ exports.seed = async function (knex) {
       comments:
         'I have applied mostly JWT tokens but have little experience to compare cookies with',
       solved: false,
-      user_id: 3
+      user_id: 3,
     },
     //? # 5 question w/ # 4 user | has answer
     {
@@ -133,7 +214,7 @@ exports.seed = async function (knex) {
         'my VsCode editor gave an error when I created a package.json that had a capital in it.',
       comments: 'n/a',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //? # 6 question w/ # 4 user | has answer
     {
@@ -145,7 +226,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'just creating a package.json from scratch.',
       comments: 'n/a',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //? # 7 question w/ # 4 user | has answer
     {
@@ -157,7 +238,7 @@ exports.seed = async function (knex) {
         'I have added it in one app in the index.js and in another in the app.js file',
       comments: 'I am not sure it matters but i wanted a second opinion.',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //! # 8 question w/ # 2 user || NO answer
     //!! UPDATE TEST QUESTION
@@ -168,7 +249,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'I was wondering who created node.js for a report',
       solved: false,
-      user_id: 2
+      user_id: 2,
     },
     //!! # 9 question w/ # 3 user || NO answer
     //
@@ -180,8 +261,8 @@ exports.seed = async function (knex) {
       comments:
         'what is your preferred css framework if not one of these and why',
       solved: false,
-      user_id: 3
-    }
+      user_id: 3,
+    },
   ]);
 
   await knex('answers').insert([
@@ -195,7 +276,7 @@ exports.seed = async function (knex) {
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       best_answer: true,
       question_id: 1,
-      dev_id: 5
+      dev_id: 5,
     },
     //? answer # 2 -> question # 2 -> dev # 5
     {
@@ -207,7 +288,7 @@ exports.seed = async function (knex) {
         'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
       best_answer: false,
       question_id: 2,
-      dev_id: 5
+      dev_id: 5,
     },
     //? answer # 3 -> question # 3 -> dev # 6
     {
@@ -217,7 +298,7 @@ exports.seed = async function (knex) {
       comments: 'then you should have access to all the knex commands.',
       best_answer: false,
       question_id: 3,
-      dev_id: 6
+      dev_id: 6,
     },
     //! answer # 4 -> question # 3 => dev # 5
     //!! updated answer test
@@ -229,8 +310,8 @@ exports.seed = async function (knex) {
       comments: 'n/a',
       best_answer: false,
       question_id: 3,
-      dev_id: 5
-    }
+      dev_id: 5,
+    },
     // //? answer # 5 -> question # 5 => dev 6
     // {
     //   // answer # 5 -> question # 5 => dev 6

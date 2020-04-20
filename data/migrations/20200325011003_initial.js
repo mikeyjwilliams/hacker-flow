@@ -1,14 +1,24 @@
 /** @format */
 
 exports.up = async function (knex) {
+  await knex.schema.createTable('sign_in', (tbl) => {
+    tbl.increments('id');
+    tbl.string('email', 165).notNullable().unique();
+    tbl.text('password').notNullable();
+  });
+
   await knex.schema.createTable('users', (tbl) => {
     tbl.increments('id');
     tbl.string('username', 165).notNullable().unique();
-    tbl.text('password').notNullable();
-    tbl.string('email', 165).notNullable().unique();
     tbl.string('first_name', 125).notNullable();
     tbl.string('last_name', 125).notNullable();
+    tbl.integer('signin_id').references('id').inTable('sign_in');
+  });
+
+  await knex.schema.createTable('user_roles', (tbl) => {
+    tbl.increments('id');
     tbl.string('role', 15).notNullable();
+    tbl.integer('user_id').references('id').inTable('users');
   });
 
   await knex.schema.createTable('questions', (tbl) => {
@@ -36,5 +46,7 @@ exports.up = async function (knex) {
 exports.down = async function (knex) {
   await knex.schema.dropTableIfExists('answers');
   await knex.schema.dropTableIfExists('questions');
+  await knex.schema.dropTableIfExists('user_roles');
   await knex.schema.dropTableIfExists('users');
+  await knex.schema.dropTableIfExists('sign_in');
 };
