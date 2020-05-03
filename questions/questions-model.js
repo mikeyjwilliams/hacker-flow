@@ -12,7 +12,7 @@ module.exports = {
   getAllQuestionAnswers,
   getAllQuestions,
   getQuestionAndAnswers,
-  updateQuestion
+  updateQuestion,
 };
 
 function unansweredQuestions() {
@@ -111,12 +111,12 @@ function getAllQuestionAnswers(question_id) {
       'a.solution as solution',
       'a.comments as comments',
       'a.best_answer as best_answer',
-      'd.username as username',
+      'u.username as username',
       'q.id as question_id',
       'a.id as answer_id'
     )
     .join('answers as a', 'a.question_id', 'q.id')
-    .join('users as d', 'a.dev_id', 'd.id')
+    .join('users as u', 'a.user_id', 'u.id')
     .where('q.id', question_id);
 }
 
@@ -155,7 +155,7 @@ function getQuestionAndAnswers(question_id) {
     )
     .join('answers as a', 'a.question_id', 'q.id')
     .join('users as user', 'q.user_id', 'user.id')
-    .join('users as answer', 'a.dev_id', 'answer.id')
+    .join('users as answer', 'a.user_id', 'answer.id')
     .where('q.id', question_id);
 }
 
