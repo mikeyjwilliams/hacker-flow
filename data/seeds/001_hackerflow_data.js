@@ -5,37 +5,37 @@ exports.seed = async function (knex) {
   await knex('sign_ins').insert([
     //? # 1
     {
-      username: 'mickey65',
+      email: 'mickey@gmail.com',
       password: bcrypt.hashSync('123', 10),
     },
     //? # 2
     {
-      username: 'bri34fal',
+      email: 'brianfallon@hotmail.com',
       password: bcrypt.hashSync('abc123', 10),
     },
     //? # 3
     {
-      username: 'trippygoof#2',
+      email: 'gooft345@outlook.com',
       password: bcrypt.hashSync('abc', 10),
     },
     //? # 4
     {
-      username: 'menzinger54',
+      email: 'menzingers@gmail.com',
       password: bcrypt.hashSync('34Dc', 10),
     },
     //? # 5
     {
-      username: 'mikey1',
+      email: 'mikey123@gmail.com',
       password: bcrypt.hashSync('abc123', 10),
     },
     //! # 6 | admin
     {
-      username: 'delaney3',
+      email: 'delannee45@gmail.com',
       password: bcrypt.hashSync('del45', 10),
     },
     //! # 7 | admin
     {
-      username: 'userdev',
+      email: 'devuser@gmail.com',
       password: bcrypt.hashSync('user123', 10),
     },
   ]);
@@ -44,53 +44,49 @@ exports.seed = async function (knex) {
     //? # 1 mikey65 | 123
     {
       //? # 1 mickey65 | 123
-      email: 'mickey@gmail.com',
+      username: 'mickey65',
       first_name: 'mickey',
       last_name: 'mouse',
     },
     //? # 2 bri34fal | abc123
     {
       //? # 2  bri34fal | abc123
-      email: 'brianfallon@hotmail.com',
+      username: 'bri34fal',
       first_name: 'brian',
       last_name: 'fallon',
     },
     //? # 3 trippygoof#2 | abc
     {
       //? # 3 trippygoof#2 | abc
-
-      email: 'gooft345@outlook.com',
+      username: 'trippygoof#2',
       first_name: 'goofy',
       last_name: 'dog',
     },
     //? # 4 menzinger54 | 34Dc
     {
       //? # 4 menzinger54 | 34Dc
-
-      email: 'menzingers@gmail.com',
+      username: 'menzinger54',
       first_name: 'matt',
       last_name: 'jones',
     },
     //? # 5 mikey1 | abc123
     {
       //? # 5 mikey1 | abc123
-
-      email: 'mikey123@gmail.com',
+      username: 'mikey1',
       first_name: 'miguel',
       last_name: 'williamson',
     },
     //! # 6 delaney3 | del45 | admin
     {
       //? # 6 delaney3 | del45 | admin
-
-      email: 'delannee45@gmail.com',
+      username: 'delaney3',
       first_name: 'delaney',
       last_name: 'apples',
     },
     //!! # 7 userdev | user123 | admin
     {
       //? # 7 userdev | user123 | admin
-      email: 'devuser@gmail.com',
+      username: 'userdev',
       first_name: 'devman',
       last_name: 'prouser',
     },
@@ -254,7 +250,7 @@ exports.seed = async function (knex) {
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       best_answer: true,
       question_id: 1,
-      dev_id: 5,
+      user_id: 5,
     },
     //? answer # 2 -> question # 2 -> dev # 5
     {
@@ -266,7 +262,7 @@ exports.seed = async function (knex) {
         'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
       best_answer: false,
       question_id: 2,
-      dev_id: 5,
+      user_id: 5,
     },
     //? answer # 3 -> question # 3 -> user-dev # 4
     {
@@ -276,7 +272,7 @@ exports.seed = async function (knex) {
       comments: 'then you should have access to all the knex commands.',
       best_answer: false,
       question_id: 3,
-      dev_id: 4,
+      user_id: 4,
     },
     //! answer # 4 -> question # 3 => user-dev # 2
     //!! updated answer test
@@ -288,7 +284,7 @@ exports.seed = async function (knex) {
       comments: 'n/a',
       best_answer: false,
       question_id: 3,
-      dev_id: 2,
+      user_id: 2,
     },
   ]);
 };

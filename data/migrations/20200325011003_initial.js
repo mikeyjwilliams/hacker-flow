@@ -12,11 +12,17 @@ exports.up = async function (knex) {
     tbl.string('username', 165).notNullable().unique();
     tbl.string('first_name', 125).notNullable();
     tbl.string('last_name', 125).notNullable();
+    tbl
+      .integer('sing_in_id')
+      .references('id')
+      .inTable('sign_ins')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
   });
 
   await knex.schema.createTable('roles', (tbl) => {
     tbl.increments('id');
-    tbl.string('role', 15).notNullable();
+    tbl.string('role', 15).notNullable().defaultTo('user-dev');
     tbl
       .integer('user_id')
       .references('id')
