@@ -14,7 +14,7 @@ function findByPass(filter) {
 }
 
 function findById(id) {
-	return db('sign_ins').where({ id }).select('id', 'email').first();
+	return db('sign_ins').where({ id }).select('id', 'email');
 }
 
 async function addUser(user) {
