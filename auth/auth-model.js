@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   findByPass,
   findById,
+  addUser,
 };
 
 function findByPass(filter) {
@@ -14,4 +15,12 @@ function findByPass(filter) {
 
 function findById(id) {
   return db('sign_ins').where({ id }).select('id', 'email');
+}
+
+async function addUser(user) {
+  user.password = await bcrypt.hash(user.password, 10);
+
+  const [id] = await db('sign_ins').insert(user);
+
+  return findById(id);
 }
