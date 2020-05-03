@@ -146,6 +146,7 @@ exports.seed = async function (knex) {
 			question:
 				'how do i rerun node.js start every time i save my server without having to manually restart my server?',
 			attempt_tried: 'looked through articles but did not find an answer yet.',
+			solved: true,
 			comments: 'n/a',
 			user_id: 1
 		},
