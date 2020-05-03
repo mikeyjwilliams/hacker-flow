@@ -6,11 +6,24 @@ const server = require('../server');
 const db = require('../data/config');
 
 beforeAll(async () => {
-  await db.seed.run();
+	await db.seed.run();
 });
 
 afterAll(async () => {
-  await db.destroy();
+	await db.destroy();
+});
+
+describe('auth-router /register', () => {
+	test('POST register a user', async () => {
+		const res = await supertest(server).post('/api/register').send({
+			email: 'miguel@gmail.com',
+			password: 'abc'
+		});
+
+		expect(res.statusCode).toBe(201);
+		expect(res.type).toBe('application/json');
+		expect(res.body.email).toBe('miguel@gmail.com');
+	});
 });
 
 // describe('Auth Router', () => {

@@ -20,7 +20,7 @@ describe('Auth-model', () => {
 	});
 
 	test('get user by their id', async () => {
-		const res = await authModel.findById(2);
+		const res = await authModel.findById(2).first();
 
 		expect(res.email).toBe('brianfallon@hotmail.com');
 		expect(res.id).toBe(2);

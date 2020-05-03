@@ -3,9 +3,9 @@ const express = require('express');
 const QuestionModel = require('../questions/questions-model');
 
 // middle ware used --------------
-const restrict = require('../BACKEND/middleware/restrict');
-const questionVerify = require('../BACKEND/middleware/questionVerifyData');
-const restrictRole = require('../BACKEND/middleware/restrictRole');
+const restrict = require('../middleware/restrict');
+const questionVerify = require('../middleware/questionVerifyData');
+const restrictRole = require('../middleware/restrictRole');
 // end middle ware ---------------
 const router = express.Router();
 
@@ -16,24 +16,24 @@ const router = express.Router();
  * @errors 0 unanswered questions return a 400 'no questions to ask'
  */
 router.get(
-  '/unanswered',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    try {
-      const unanswered = await QuestionModel.unansweredQuestions();
+	'/unanswered',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		try {
+			const unanswered = await QuestionModel.unansweredQuestions();
 
-      if (unanswered.length <= 0) {
-        return res.status(400).json({
-          message: 'sorry no questions to ask.'
-        });
-      }
+			if (unanswered.length <= 0) {
+				return res.status(400).json({
+					message: 'sorry no questions to ask.'
+				});
+			}
 
-      res.status(200).json(unanswered);
-    } catch (err) {
-      next(err);
-    }
-  }
+			res.status(200).json(unanswered);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -43,23 +43,23 @@ router.get(
  * @errors none existent question id will return a 404
  */
 router.get(
-  '/unanswered/:id',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const unanswered = await QuestionModel.unansweredById(id);
-      if (!unanswered) {
-        return res
-          .status(404)
-          .json({ message: 'question with that ID does not exist' });
-      }
-      res.status(200).json(unanswered);
-    } catch (err) {
-      next(err);
-    }
-  }
+	'/unanswered/:id',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		const { id } = req.params;
+		try {
+			const unanswered = await QuestionModel.unansweredById(id);
+			if (!unanswered) {
+				return res
+					.status(404)
+					.json({ message: 'question with that ID does not exist' });
+			}
+			res.status(200).json(unanswered);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -69,18 +69,18 @@ router.get(
  * @errors 404, 500
  */
 router.get('/answered', restrict(), restrictRole(), async (req, res, next) => {
-  try {
-    const answeredQuestions = await QuestionModel.answeredQuestions();
+	try {
+		const answeredQuestions = await QuestionModel.answeredQuestions();
 
-    if (answeredQuestions.length <= 0) {
-      return res
-        .status(404)
-        .json({ message: 'there are no answered questions yet' });
-    }
-    res.status(200).json(answeredQuestions);
-  } catch (err) {
-    next(err);
-  }
+		if (answeredQuestions.length <= 0) {
+			return res
+				.status(404)
+				.json({ message: 'there are no answered questions yet' });
+		}
+		res.status(200).json(answeredQuestions);
+	} catch (err) {
+		next(err);
+	}
 });
 
 /**
@@ -90,22 +90,22 @@ router.get('/answered', restrict(), restrictRole(), async (req, res, next) => {
  * @errors 401, 404, 500
  */
 router.get(
-  '/answered/:id',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    const question_id = req.params.id;
-    try {
-      const answeredQuestion = await QuestionModel.answeredById(question_id);
+	'/answered/:id',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		const question_id = req.params.id;
+		try {
+			const answeredQuestion = await QuestionModel.answeredById(question_id);
 
-      if (!answeredQuestion) {
-        return res.status(404).json({ message: 'question ID does not exist' });
-      }
-      res.status(200).json(answeredQuestion);
-    } catch (err) {
-      next(err);
-    }
-  }
+			if (!answeredQuestion) {
+				return res.status(404).json({ message: 'question ID does not exist' });
+			}
+			res.status(200).json(answeredQuestion);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -115,28 +115,28 @@ router.get(
  * @errors 401, 400, 403, 500
  */
 router.post(
-  '/new-question',
-  restrict(),
-  restrictRole(),
-  questionVerify(),
-  async (req, res, next) => {
-    const { title, category, question, attempt_tried, comments } = req.body;
-    try {
-      const newQuestion = {
-        title: title,
-        category: category,
-        question: question,
-        attempt_tried: attempt_tried || 'n/a',
-        comments: comments || 'n/a',
-        solved: false,
-        user_id: req.token.userId
-      };
-      const questionAdd = await QuestionModel.addQuestion(newQuestion);
-      res.status(201).json(questionAdd);
-    } catch (err) {
-      next(err);
-    }
-  }
+	'/new-question',
+	restrict(),
+	restrictRole(),
+	questionVerify(),
+	async (req, res, next) => {
+		const { title, category, question, attempt_tried, comments } = req.body;
+		try {
+			const newQuestion = {
+				title: title,
+				category: category,
+				question: question,
+				attempt_tried: attempt_tried || 'n/a',
+				comments: comments || 'n/a',
+				solved: false,
+				user_id: req.token.userId
+			};
+			const questionAdd = await QuestionModel.addQuestion(newQuestion);
+			res.status(201).json(questionAdd);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -146,26 +146,26 @@ router.post(
  * @errors 404, 500
  */
 router.get(
-  '/question/:id/answers-only',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    const question_id = req.params.id;
-    try {
-      const questionAnswers = await QuestionModel.getAllQuestionAnswers(
-        question_id
-      );
-      if (questionAnswers.length <= 0) {
-        return res
-          .status(404)
-          .json({ message: 'Sorry there are no answers for this question.' });
-      }
+	'/question/:id/answers-only',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		const question_id = req.params.id;
+		try {
+			const questionAnswers = await QuestionModel.getAllQuestionAnswers(
+				question_id
+			);
+			if (questionAnswers.length <= 0) {
+				return res
+					.status(404)
+					.json({ message: 'Sorry there are no answers for this question.' });
+			}
 
-      res.status(200).json(questionAnswers);
-    } catch (err) {
-      next(err);
-    }
-  }
+			res.status(200).json(questionAnswers);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -175,22 +175,22 @@ router.get(
  * @errors 404, 500
  */
 router.get(
-  '/all-questions',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    try {
-      const allQuestions = await QuestionModel.getAllQuestions();
-      if (allQuestions.length <= 0) {
-        return res
-          .status(404)
-          .json({ message: 'sorry no questions to display at this time' });
-      }
-      res.status(200).json(allQuestions);
-    } catch (err) {
-      next(err);
-    }
-  }
+	'/all-questions',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		try {
+			const allQuestions = await QuestionModel.getAllQuestions();
+			if (allQuestions.length <= 0) {
+				return res
+					.status(404)
+					.json({ message: 'sorry no questions to display at this time' });
+			}
+			res.status(200).json(allQuestions);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 /**
@@ -200,60 +200,60 @@ router.get(
  * @errors 404, 500
  */
 router.get(
-  '/question/:id/answers',
-  restrict(),
-  restrictRole(),
-  async (req, res, next) => {
-    const question_id = req.params.id;
-    try {
-      const questionAnswers = await QuestionModel.getQuestionAndAnswers(
-        question_id
-      );
-      if (questionAnswers.length <= 0) {
-        return res
-          .status(404)
-          .json({ message: 'sorry this question has no answers' });
-      }
-      res.status(200).json(questionAnswers);
-    } catch (err) {
-      next(err);
-    }
-  }
+	'/question/:id/answers',
+	restrict(),
+	restrictRole(),
+	async (req, res, next) => {
+		const question_id = req.params.id;
+		try {
+			const questionAnswers = await QuestionModel.getQuestionAndAnswers(
+				question_id
+			);
+			if (questionAnswers.length <= 0) {
+				return res
+					.status(404)
+					.json({ message: 'sorry this question has no answers' });
+			}
+			res.status(200).json(questionAnswers);
+		} catch (err) {
+			next(err);
+		}
+	}
 );
 
 router.put(
-  '/question/:id',
-  restrict(),
-  restrictRole(),
-  questionVerify(),
-  async (req, res, next) => {
-    const { id } = req.params;
-    const { title, category, question, attempt_tried, comments } = req.body;
+	'/question/:id',
+	restrict(),
+	restrictRole(),
+	questionVerify(),
+	async (req, res, next) => {
+		const { id } = req.params;
+		const { title, category, question, attempt_tried, comments } = req.body;
 
-    const update = {
-      title: title,
-      category: category,
-      question: question,
-      attempt_tried: attempt_tried || 'n/a',
-      comments: comments || 'n/a',
-      solved: false,
-      user_id: req.token.userId
-    };
+		const update = {
+			title: title,
+			category: category,
+			question: question,
+			attempt_tried: attempt_tried || 'n/a',
+			comments: comments || 'n/a',
+			solved: false,
+			user_id: req.token.userId
+		};
 
-    try {
-      const updated = await QuestionModel.updateQuestion(id, update);
+		try {
+			const updated = await QuestionModel.updateQuestion(id, update);
 
-      if (!updated) {
-        return res
-          .status(404)
-          .json({ message: 'sorry question does not exist' });
-      }
-      res.status(200).json(updated);
-    } catch (err) {
-      console.log(err);
-      next(err);
-    }
-  }
+			if (!updated) {
+				return res
+					.status(404)
+					.json({ message: 'sorry question does not exist' });
+			}
+			res.status(200).json(updated);
+		} catch (err) {
+			console.log(err);
+			next(err);
+		}
+	}
 );
 
 module.exports = router;

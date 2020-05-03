@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = require('../../Secret/secret');
+const secret = require('../Secret/secret');
 /**
  * sets up user token for 'dev' || 'user' according to database.
  * @param {*} user

@@ -3,13 +3,55 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const genToken = require('./genToken');
-const userModel = require('../../users/users-model');
+const userModel = require('../users/users-model');
+const authModel = require('./auth-model');
 // middle ware ---
-const authVerify = require('../../middleware/authVerify');
-const registerVerify = require('../../middleware/registerVerify');
+const authVerify = require('../middleware/authVerify');
+const registerVerify = require('../middleware/registerVerify');
 // middleware end ---
 
 const router = express.Router();
+
+/**
+ * @type POST /api/register
+ * @description register a user.
+ * @checks all needed items or returns a 400 with specific message.
+ * @middleware registerVerify()
+ * @returns { user data that was set }
+ */
+router.post('/register', async (req, res, next) => {
+	try {
+		const { email, password } = req.body;
+		if (!email) {
+			return res.status(400).json({ message: 'email is required' });
+		} else if (email.length > 165) {
+			return res.status(400).json({
+				message: 'email is longer than 165 characters... sorry too long'
+			});
+		} else if (email.length < 3) {
+			return res.status(400).json({ message: 'email is too short' });
+		} else if (!email.includes('@')) {
+			return res
+				.status(400)
+				.json({ message: 'an email address requires an @ sign' });
+		}
+		const emailCheck = await authModel.findBy({ email }).first();
+
+		if (emailCheck) {
+			return res.status(409).json({ message: 'email is not available.' });
+		}
+
+		const newUser = {
+			email: email,
+			password: password
+		};
+		const user = await authModel.addUser(newUser);
+		res.status(201).json(user);
+	} catch (err) {
+		console.log(err);
+		next(err);
+	}
+});
 
 /**
  * @type POST /api/register
