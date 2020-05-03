@@ -84,7 +84,7 @@ SELECT
   a."best_answer" as "best_answer",
   d."username" as "username"
 FROM "answers" as a
-JOIN "users" as d ON d."id" = a."dev_id"
+JOIN "users" as d ON d."id" = a."user_id"
 JOIN "questions" as q ON a."question_id" = q."id"
 WHERE
   q."id" = ?;
@@ -100,7 +100,7 @@ SELECT
   a."id" as "answer_id"
 FROM "answers" as a
 JOIN "questions" as q ON a."question_id" = q."id"
-JOIN "users" as d ON a."dev_id" = d."id"
+JOIN "users" as d ON a."user_id" = d."id"
 WHERE
   q."id" = ?;
 --------------------------------------------------------------
@@ -123,6 +123,6 @@ SELECT
 FROM "questions" as q
 JOIN "answers" as a ON a."question_id" = q."id"
 JOIN "users" as user ON q."user_id" = user."id"
-JOIN "users" as answer ON a."dev_id" = answer."id"
+JOIN "users" as answer ON a."user_id" = answer."id"
 WHERE
   q."id" = ?;
