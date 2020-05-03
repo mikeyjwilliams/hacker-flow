@@ -60,7 +60,7 @@ exports.up = async function (knex) {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
     tbl
-      .integer('dev_id')
+      .integer('user_id')
       .references('id')
       .inTable('users')
       .onUpdate('CASCADE')
