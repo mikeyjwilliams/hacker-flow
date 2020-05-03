@@ -46,6 +46,7 @@ router.post('/register', async (req, res, next) => {
 			password: password
 		};
 		const user = await authModel.addUser(newUser);
+		const role = await userModel.addRole();
 		res.status(201).json(user);
 	} catch (err) {
 		console.log(err);

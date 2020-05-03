@@ -7,47 +7,43 @@ module.exports = {
 	getUsers,
 	findBy,
 	findById,
-	findPassByUser,
-	addUser
+	addUser,
+	addRole,
+	findByIdRole
 	//deleteUser,
 };
 
 function getUsers() {
-	return db('users').select(
-		'id',
-		'username',
-		'email',
-		'first_name',
-		'last_name',
-		'role'
-	);
+	return db('users').select('id', 'username', 'first_name', 'last_name');
 }
 
 function findBy(filter) {
 	return db('users')
 		.where(filter)
-		.select('id', 'username', 'email', 'first_name', 'last_name', 'role');
+		.select('id', 'username', 'email', 'first_name', 'last_name');
 }
 
 function findById(id) {
 	return db('users')
-		.select('id', 'username', 'email', 'first_name', 'last_name', 'role')
+		.select('id', 'username', 'first_name', 'last_name')
 		.where({ id })
 		.first();
 }
 
-function findPassByUser(filter) {
-	return db('users')
-		.select('id', 'username', 'password', 'email', 'role')
-		.where(filter)
-		.first();
-}
-
 async function addUser(user) {
-	user.password = await bcrypt.hash(user.password, 10);
 	const [id] = await db('users').insert(user);
 
 	return findById(id);
+}
+
+async function addRole(role = 'user-dev') {
+	const [id] = await db('roles').insert(role);
+
+	return findByIdRole(id);
+}
+
+function findByIdRole(id) {
+	return db('roles').where({ id }).select('id', 'role').first();
 }
 //!! Foreign key constraints this.
 // function deleteUser(id) {
