@@ -10,17 +10,20 @@ module.exports = {
 };
 
 function findByPass(filter) {
-  return db('sign_ins').where(filter).select('email', 'password');
+  return null;
+  //   return db('sign_ins').where(filter).select('email', 'password');
 }
 
 function findById(id) {
-  return db('sign_ins').where({ id }).select('id', 'email');
+  return null;
+  //   return db('sign_ins').where({ id }).select('id', 'email');
 }
 
 async function addUser(user) {
-  user.password = await bcrypt.hash(user.password, 10);
+  return null;
+  //   user.password = await bcrypt.hash(user.password, 10);
 
-  const [id] = await db('sign_ins').insert(user);
+  //   const [id] = await db('sign_ins').insert(user);
 
-  return findById(id);
+  //   return findById(id);
 }
