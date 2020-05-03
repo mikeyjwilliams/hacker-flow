@@ -18,66 +18,66 @@ const router = express.Router();
  * @middleware registerVerify()
  * @returns { user data that was set }
  */
-router.post('/register', registerVerify(), async (req, res, next) => {
-  const { username, password, email, first_name, last_name, role } = req.body;
+// router.post('/register', registerVerify(), async (req, res, next) => {
+//   const { username, password, email, first_name, last_name, role } = req.body;
 
-  try {
-    const user = await userModel.findBy({ username }).first();
-    if (user) {
-      res.status(409).json({ message: 'username already exists' });
-    }
+//   try {
+//     const user = await userModel.findBy({ username }).first();
+//     if (user) {
+//       res.status(409).json({ message: 'username already exists' });
+//     }
 
-    const userReg = {
-      username: username,
-      password: password,
-      email: email,
-      first_name: first_name,
-      last_name: last_name,
-      role: role.toLowerCase()
-    };
-    const newUser = await userModel.addUser(userReg);
-    res.status(201).json(newUser);
-  } catch (err) {
-    next(err);
-  }
-});
+//     const userReg = {
+//       username: username,
+//       password: password,
+//       email: email,
+//       first_name: first_name,
+//       last_name: last_name,
+//       role: role.toLowerCase()
+//     };
+//     const newUser = await userModel.addUser(userReg);
+//     res.status(201).json(newUser);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
-/**
- * @type POST /api/login
- * @description logs user in if username and password are correct.
- * @checks username & password exist, password matches users.
- * @middleware authVerify()
- * @returns { token, userId, role, username, greeting }
- */
-router.post('/login', authVerify(), async (req, res, next) => {
-  const { username, password } = req.body;
+// /**
+//  * @type POST /api/login
+//  * @description logs user in if username and password are correct.
+//  * @checks username & password exist, password matches users.
+//  * @middleware authVerify()
+//  * @returns { token, userId, role, username, greeting }
+//  */
+// router.post('/login', authVerify(), async (req, res, next) => {
+//   const { username, password } = req.body;
 
-  try {
-    const user = await userModel.findPassByUser({ username });
+//   try {
+//     const user = await userModel.findPassByUser({ username });
 
-    if (!user) {
-      return res.status(400).json({ message: 'user not found' });
-    }
+//     if (!user) {
+//       return res.status(400).json({ message: 'user not found' });
+//     }
 
-    const passwordValid = await bcrypt.compare(password, user.password);
+//     const passwordValid = await bcrypt.compare(password, user.password);
 
-    if (!passwordValid) {
-      return res.status(401).json({ message: 'invalid credentials' });
-    }
-    const token = genToken(user); // generate token for accessing other site sections. and pass role from db to api.
-    console.log('!! before production add expiresIn in genToken');
-    res.cookie('token', token); // token in cookie-parser for storage.
+//     if (!passwordValid) {
+//       return res.status(401).json({ message: 'invalid credentials' });
+//     }
+//     const token = genToken(user); // generate token for accessing other site sections. and pass role from db to api.
+//     console.log('!! before production add expiresIn in genToken');
+//     res.cookie('token', token); // token in cookie-parser for storage.
 
-    res.status(200).json({
-      message: `Welcome ${user.username}`,
-      userId: user.id,
-      username: user.username,
-      role: user.role,
-      token: token // cookie avail for front-end auth
-    });
-  } catch (err) {
-    next(err);
-  }
-});
+//     res.status(200).json({
+//       message: `Welcome ${user.username}`,
+//       userId: user.id,
+//       username: user.username,
+//       role: user.role,
+//       token: token // cookie avail for front-end auth
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = router;
