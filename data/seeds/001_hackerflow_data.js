@@ -2,77 +2,136 @@
 const bcrypt = require('bcryptjs');
 
 exports.seed = async function (knex) {
-  await knex('users').insert([
+  await knex('sign_ins').insert([
     //? # 1
     {
-      // # 1
       username: 'mickey65',
       password: bcrypt.hashSync('123', 10),
-      email: 'mickey@gmail.com',
-      first_name: 'mickey',
-      last_name: 'mouse',
-      role: 'user-dev'
     },
     //? # 2
     {
-      // # 2
       username: 'bri34fal',
       password: bcrypt.hashSync('abc123', 10),
-      email: 'brianfallon@hotmail.com',
-      first_name: 'brian',
-      last_name: 'fallon',
-      role: 'user-dev'
     },
     //? # 3
     {
-      // # 3
       username: 'trippygoof#2',
       password: bcrypt.hashSync('abc', 10),
-      email: 'gooft345@outlook.com',
-      first_name: 'goofy',
-      last_name: 'dog',
-      role: 'user-dev'
     },
     //? # 4
     {
-      // # 4
       username: 'menzinger54',
       password: bcrypt.hashSync('34Dc', 10),
+    },
+    //? # 5
+    {
+      username: 'mikey1',
+      password: bcrypt.hashSync('abc123', 10),
+    },
+    //! # 6 | admin
+    {
+      username: 'delaney3',
+      password: bcrypt.hashSync('del45', 10),
+    },
+    //! # 7 | admin
+    {
+      username: 'userdev',
+      password: bcrypt.hashSync('user123', 10),
+    },
+  ]);
+
+  await knex('users').insert([
+    //? # 1 mikey65 | 123
+    {
+      //? # 1 mickey65 | 123
+      email: 'mickey@gmail.com',
+      first_name: 'mickey',
+      last_name: 'mouse',
+    },
+    //? # 2 bri34fal | abc123
+    {
+      //? # 2  bri34fal | abc123
+      email: 'brianfallon@hotmail.com',
+      first_name: 'brian',
+      last_name: 'fallon',
+    },
+    //? # 3 trippygoof#2 | abc
+    {
+      //? # 3 trippygoof#2 | abc
+
+      email: 'gooft345@outlook.com',
+      first_name: 'goofy',
+      last_name: 'dog',
+    },
+    //? # 4 menzinger54 | 34Dc
+    {
+      //? # 4 menzinger54 | 34Dc
+
       email: 'menzingers@gmail.com',
       first_name: 'matt',
       last_name: 'jones',
-      role: 'user-dev'
     },
-    //! # 5
+    //? # 5 mikey1 | abc123
     {
-      // # 5
-      username: 'mikey1',
-      password: bcrypt.hashSync('abc123', 10),
+      //? # 5 mikey1 | abc123
+
       email: 'mikey123@gmail.com',
       first_name: 'miguel',
       last_name: 'williamson',
-      role: 'user-dev'
     },
-    //! # 6
+    //! # 6 delaney3 | del45 | admin
     {
-      // # 6
-      username: 'delaney3',
-      password: bcrypt.hashSync('del45', 10),
+      //? # 6 delaney3 | del45 | admin
+
       email: 'delannee45@gmail.com',
       first_name: 'delaney',
       last_name: 'apples',
-      role: 'user-dev'
     },
-    //!! # 7
+    //!! # 7 userdev | user123 | admin
     {
-      // # 7
-      username: 'userdev',
-      password: bcrypt.hashSync('user123', 10),
+      //? # 7 userdev | user123 | admin
       email: 'devuser@gmail.com',
       first_name: 'devman',
       last_name: 'prouser',
-      role: 'user-dev'
-    }
+    },
+  ]);
+
+  await knex('roles').insert([
+    //? # 1 mickey65 | user-dev
+    {
+      role: 'user-dev',
+      user_id: 1,
+    },
+    //? # 2 bri34fal | user-dev
+    {
+      role: 'user-dev',
+      user_id: 2,
+    },
+    //? # 3 trippygoof#2 | user-dev
+    {
+      role: 'user-dev',
+      user_id: 3,
+    },
+    //? # 4 menzinger54 | user-dev
+    {
+      role: 'user-dev',
+      user_id: 4,
+    },
+    //? # 5 mikey1 | user-dev
+    {
+      role: 'user-dev',
+      user_id: 5,
+    },
+    //? # 6 delaney3 | admin
+    {
+      role: 'admin',
+      user_id: 6,
+    },
+    //? # 7 userdev | admin
+    {
+      role: 'admin',
+      user_id: 7,
+    },
   ]);
 
   await knex('questions').insert([
@@ -86,7 +145,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'looked through articles but did not find an answer yet.',
       comments: 'n/a',
       solved: true,
-      user_id: 1
+      user_id: 1,
     },
     //? # 2 question w/ # 1 user
     {
@@ -97,7 +156,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'n/a',
       solved: true,
-      user_id: 1
+      user_id: 1,
     },
     //? # 3 question w/ # 2 user
     {
@@ -109,7 +168,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'n/a',
       solved: true,
-      user_id: 2
+      user_id: 2,
     },
     //? # 4 question w/ # 3 user | has answer
     {
@@ -121,7 +180,7 @@ exports.seed = async function (knex) {
       comments:
         'I have applied mostly JWT tokens but have little experience to compare cookies with',
       solved: false,
-      user_id: 3
+      user_id: 3,
     },
     //? # 5 question w/ # 4 user | has answer
     {
@@ -133,7 +192,7 @@ exports.seed = async function (knex) {
         'my VsCode editor gave an error when I created a package.json that had a capital in it.',
       comments: 'n/a',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //? # 6 question w/ # 4 user | has answer
     {
@@ -145,7 +204,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'just creating a package.json from scratch.',
       comments: 'n/a',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //? # 7 question w/ # 4 user | has answer
     {
@@ -157,7 +216,7 @@ exports.seed = async function (knex) {
         'I have added it in one app in the index.js and in another in the app.js file',
       comments: 'I am not sure it matters but i wanted a second opinion.',
       solved: false,
-      user_id: 4
+      user_id: 4,
     },
     //! # 8 question w/ # 2 user || NO answer
     //!! UPDATE TEST QUESTION
@@ -168,7 +227,7 @@ exports.seed = async function (knex) {
       attempt_tried: 'n/a',
       comments: 'I was wondering who created node.js for a report',
       solved: false,
-      user_id: 2
+      user_id: 2,
     },
     //!! # 9 question w/ # 3 user || NO answer
     //
@@ -180,8 +239,8 @@ exports.seed = async function (knex) {
       comments:
         'what is your preferred css framework if not one of these and why',
       solved: false,
-      user_id: 3
-    }
+      user_id: 3,
+    },
   ]);
 
   await knex('answers').insert([
@@ -195,7 +254,7 @@ exports.seed = async function (knex) {
         'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
       best_answer: true,
       question_id: 1,
-      dev_id: 5
+      dev_id: 5,
     },
     //? answer # 2 -> question # 2 -> dev # 5
     {
@@ -207,19 +266,19 @@ exports.seed = async function (knex) {
         'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
       best_answer: false,
       question_id: 2,
-      dev_id: 5
+      dev_id: 5,
     },
-    //? answer # 3 -> question # 3 -> dev # 6
+    //? answer # 3 -> question # 3 -> user-dev # 4
     {
-      // answer # 3 -> question # 3 -> dev # 6
+      //? answer # 3 -> question # 3 -> user-dev # 4
       title: 'knexJS',
       solution: 'you need the knex package installed `npm i knex` to install.',
       comments: 'then you should have access to all the knex commands.',
       best_answer: false,
       question_id: 3,
-      dev_id: 6
+      dev_id: 4,
     },
-    //! answer # 4 -> question # 3 => dev # 5
+    //! answer # 4 -> question # 3 => user-dev # 2
     //!! updated answer test
     {
       // answer # 4 -> question # 3 => dev # 5
@@ -229,52 +288,7 @@ exports.seed = async function (knex) {
       comments: 'n/a',
       best_answer: false,
       question_id: 3,
-      dev_id: 5
-    }
-    // //? answer # 5 -> question # 5 => dev 6
-    // {
-    //   // answer # 5 -> question # 5 => dev 6
-    //   title: 'proper package.json naming convention',
-    //   solution:
-    //     'proper package.json names do not have capitals in them. only lower case letters and dashes.',
-    //   comments: 'a proper name would look similar to `"name": "hacker-flow"`.',
-    //    best_answer: false,
-    //   dev_id: 6
-    // },
-    // //? answer # 6 -> question # 6 => dev 5
-    // {
-    //   // answer # 6 -> question # 6 => dev 5
-    //   title: 'add pre-populated package.json to project',
-    //   solution: 'you would go into the folder and use command `npm init -y`.',
-    //   comments:
-    // 'if you project folder is already connected to a github repo it will provide this info in the
-    // package too. also, then you can add your name to the Author, and change the license if you
-    // see fit.',
-    //     best_answer: false,
-    //   dev_id: 5
-    // },
-    // //? answer # 7 -> question # 7 => dev 6
-    // {
-    //   // answer # 7 -> question # 7 => dev 6
-    //   title: 'adding bootstrap css min to project',
-    //   solution:
-    //     'I would suggest adding the min css file to your index file so it has global roots sort to speak. It can reach through to everything and there is no question where it can or cannot reach its guaranteed to be accessible through the whole application.',
-    //   comments:
-    //     'the example at reactstrap i believe shows to put it here too, just to point this out.',
-    //     best_answer: false,
-    //   dev_id: 6
-    // },
-    // //! answer # 8 -> question # 4 => dev 6
-    // {
-    //   // answer # 8 -> question # 4 => dev 6
-    //   title: 'Sessions Vs. JWT tokens',
-    //   solution:
-    //     'Majority of the time you will use JWT tokens. once in a while a cookie will be a better or you will find a reason to use it. But most part JWT is the way to go.',
-    //   comments:
-    // 'there are many other uses for cookies that are more appropriate but once in a while you do
-    // need that ability to log users out easily, or sign users out, etc... cookies come in handy.',
-    //     best_answer: false,
-    //   dev_id: 6
-    // }
+      dev_id: 2,
+    },
   ]);
 };
