@@ -62,8 +62,8 @@ exports.seed = async function (knex) {
 			first_name: 'mickey',
 			last_name: 'mouse',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 1,
+			updated_at: 1588533445,
+			sign_in_id: 1
 		},
 		//? # 2 bri34fal | abc123
 		{
@@ -72,8 +72,8 @@ exports.seed = async function (knex) {
 			first_name: 'brian',
 			last_name: 'fallon',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 2
+			updated_at: 1588533445,
+			sign_in_id: 2
 		},
 		//? # 3 trippygoof#2 | abc
 		{
@@ -82,8 +82,8 @@ exports.seed = async function (knex) {
 			first_name: 'goofy',
 			last_name: 'dog',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 3
+			updated_at: 1588533445,
+			sign_in_id: 3
 		},
 		//? # 4 menzinger54 | 34Dc
 		{
@@ -92,8 +92,8 @@ exports.seed = async function (knex) {
 			first_name: 'matt',
 			last_name: 'jones',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 4
+			updated_at: 1588533445,
+			sign_in_id: 4
 		},
 		//? # 5 mikey1 | abc123
 		{
@@ -102,8 +102,8 @@ exports.seed = async function (knex) {
 			first_name: 'miguel',
 			last_name: 'williamson',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 5
+			updated_at: 1588533445,
+			sign_in_id: 5
 		},
 		//! # 6 delaney3 | del45 | admin
 		{
@@ -112,8 +112,8 @@ exports.seed = async function (knex) {
 			first_name: 'delaney',
 			last_name: 'apples',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id:
+			updated_at: 1588533445,
+			sign_in_id: 6
 		},
 		//!! # 7 userdev | user123 | admin
 		{
@@ -122,8 +122,8 @@ exports.seed = async function (knex) {
 			first_name: 'devman',
 			last_name: 'prouser',
 			created_at: 1588533445,
-      updated_at: 1588533445,
-      sign_in_id: 7
+			updated_at: 1588533445,
+			sign_in_id: 7
 		}
 	]);
 
@@ -341,9 +341,9 @@ exports.seed = async function (knex) {
 				'once nodemon is added and the script. run in the command line..`npm run server` to get auto save to run.',
 			best_answer: true,
 			question_id: 1,
-      user_id: 5,
-      created_at: 1588533445,
-			updated_at: 1588533445,
+			user_id: 5,
+			created_at: 1588533445,
+			updated_at: 1588533445
 		},
 		//? answer # 2 -> question # 2 -> dev # 5
 		{
@@ -355,9 +355,9 @@ exports.seed = async function (knex) {
 				'using that will give you the most up to date create-react-app available every time and is the best practice as of now.. the other ways have been deprecated.',
 			best_answer: false,
 			question_id: 2,
-      user_id: 5,
-      created_at: 1588533445,
-			updated_at: 1588533445,
+			user_id: 5,
+			created_at: 1588533445,
+			updated_at: 1588533445
 		},
 		//? answer # 3 -> question # 3 -> user-dev # 4
 		{
@@ -367,9 +367,9 @@ exports.seed = async function (knex) {
 			comments: 'then you should have access to all the knex commands.',
 			best_answer: false,
 			question_id: 3,
-      user_id: 4,
-      created_at: 1588533445,
-			updated_at: 1588533445,
+			user_id: 4,
+			created_at: 1588533445,
+			updated_at: 1588533445
 		},
 		//! answer # 4 -> question # 3 => user-dev # 2
 		//!! updated answer test
