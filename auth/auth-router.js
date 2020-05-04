@@ -20,38 +20,50 @@ const router = express.Router();
  * @returns { user data that was set }
  */
 router.post('/register', async (req, res, next) => {
-	try {
-		const { email, password } = req.body;
-		if (!email) {
-			return res.status(400).json({ message: 'email is required' });
-		} else if (email.length > 165) {
-			return res.status(400).json({
-				message: 'email is longer than 165 characters... sorry too long'
-			});
-		} else if (email.length < 3) {
-			return res.status(400).json({ message: 'email is too short' });
-		} else if (!email.includes('@')) {
-			return res
-				.status(400)
-				.json({ message: 'an email address requires an @ sign' });
-		}
-		const emailCheck = await authModel.findBy({ email }).first();
+  const emailAddressToLong = 165;
+  const emailAddressToShort = 3;
+  const passwordToShort = 3;
+  try {
+    const { email, password } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: 'email is required' });
+    } else if (email.length > emailAddressToLong) {
+      return res.status(400).json({
+        message: `email is longer than ${emailAddressToLong} characters... sorry too long`,
+      });
+    } else if (email.length < emailAddressToShort) {
+      return res.status(400).json({ message: 'email is too short' });
+    } else if (!email.includes('@')) {
+      return res
+        .status(400)
+        .json({ message: 'an email address requires an @ sign' });
+    }
+    if (!password) {
+      return res.status(400).json({ message: 'password is required' });
+    }
+    if (password.length < passwordToShort) {
+      return res.status(400).json({
+        message: `password too short ${passwordToShort} characters or longer`,
+      });
+    }
+    const emailCheck = await authModel.findBy({ email }).first();
 
-		if (emailCheck) {
-			return res.status(409).json({ message: 'email is not available.' });
-		}
+    if (emailCheck) {
+      return res
+        .status(409)
+        .json({ message: `email ${emailCheck.email} is not available.` });
+    }
 
-		const newUser = {
-			email: email,
-			password: password
-		};
-		const user = await authModel.addUser(newUser);
-		const role = await userModel.addRole();
-		res.status(201).json(user);
-	} catch (err) {
-		console.log(err);
-		next(err);
-	}
+    const newUser = {
+      email: email,
+      password: password,
+    };
+    const user = await authModel.addUser(newUser);
+    res.status(201).json(user);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 });
 
 /**
