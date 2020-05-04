@@ -35,13 +35,13 @@ router.post('/register', registerVerify(), async (req, res, next) => {
   }
 });
 
-// /**
-//  * @type POST /api/login
-//  * @description logs user in if username and password are correct.
-//  * @checks username & password exist, password matches users.
-//  * @middleware authVerify()
-//  * @returns { token, userId, role, username, greeting }
-//  */
+/**
+ * @type POST /api/login
+ * @description logs user in if username and password are correct.
+ * @checks username & password exist, password matches users.
+ * @middleware authVerify()
+ * @returns { token, userId, role, username, greeting }
+ */
 // router.post('/login', authVerify(), async (req, res, next) => {
 //   const { username, password } = req.body;
 
