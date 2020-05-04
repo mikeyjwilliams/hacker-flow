@@ -18,7 +18,7 @@ function getUsers() {
 function findBy(filter) {
   return db('users')
     .where(filter)
-    .select('id', 'username', 'email', 'first_name', 'last_name');
+    .select('id', 'username', 'first_name', 'last_name');
 }
 
 function findById(id) {
