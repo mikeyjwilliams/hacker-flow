@@ -1,24 +1,39 @@
+const authModel = require('../auth/auth-model');
+
 function registerVerify() {
     return (req, res, next) => {
-        const { username, password, email, first_name, last_name, role } = req.body;
-        if (!username) {
-            return res.status(400).json({ message: 'username required' });
-        }
-        if (!password) {
-            return res.status(400).json({ message: 'password required' });
-        }
-        if (!email) {
-            return res.status(400).json({ message: 'email required' });
-        }
-        if (!first_name) {
-            return res.status(400).json({ message: 'first_name required' });
-        }
-        if (!last_name) {
-            return res.status(400).json({ message: 'last_name required' });
-        }
-        if (!role) {
-            return res.status(400).json({ message: 'role is required' });
-        }
+        const emailAddressToLong = 165;
+        const emailAddressToShort = 3;
+        const passwordToShort = 3;
+        const { email, password } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: 'email is required' });
+    } else if (email.length > emailAddressToLong) {
+      return res.status(400).json({
+        message: `email is longer than ${emailAddressToLong} characters... sorry too long`,
+      });
+    } else if (email.length < emailAddressToShort) {
+      return res.status(400).json({ message: 'email is too short' });
+    } else if (!email.includes('@')) {
+      return res
+        .status(400)
+        .json({ message: 'an email address requires an @ sign' });
+    }
+    if (!password) {
+      return res.status(400).json({ message: 'password is required' });
+    }
+    if (password.length < passwordToShort) {
+      return res.status(400).json({
+        message: `password too short ${passwordToShort} characters or longer`,
+      });
+    }
+    const emailCheck = await authModel.findBy({ email }).first();
+
+    if (emailCheck) {
+      return res
+        .status(409)
+        .json({ message: `email ${emailCheck.email} is not available.` });
+    }
     next();
     }
 }

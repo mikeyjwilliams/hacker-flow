@@ -14,45 +14,14 @@ const router = express.Router();
 
 /**
  * @type POST /api/register
- * @description register a user.
+ * @description register email and password.
  * @checks all needed items or returns a 400 with specific message.
  * @middleware registerVerify()
  * @returns { user data that was set }
  */
-router.post('/register', async (req, res, next) => {
-  const emailAddressToLong = 165;
-  const emailAddressToShort = 3;
-  const passwordToShort = 3;
+router.post('/register', registerVerify(), async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    if (!email) {
-      return res.status(400).json({ message: 'email is required' });
-    } else if (email.length > emailAddressToLong) {
-      return res.status(400).json({
-        message: `email is longer than ${emailAddressToLong} characters... sorry too long`,
-      });
-    } else if (email.length < emailAddressToShort) {
-      return res.status(400).json({ message: 'email is too short' });
-    } else if (!email.includes('@')) {
-      return res
-        .status(400)
-        .json({ message: 'an email address requires an @ sign' });
-    }
-    if (!password) {
-      return res.status(400).json({ message: 'password is required' });
-    }
-    if (password.length < passwordToShort) {
-      return res.status(400).json({
-        message: `password too short ${passwordToShort} characters or longer`,
-      });
-    }
-    const emailCheck = await authModel.findBy({ email }).first();
-
-    if (emailCheck) {
-      return res
-        .status(409)
-        .json({ message: `email ${emailCheck.email} is not available.` });
-    }
 
     const newUser = {
       email: email,
@@ -65,37 +34,6 @@ router.post('/register', async (req, res, next) => {
     next(err);
   }
 });
-
-/**
- * @type POST /api/register
- * @description register a user || dev with their info included.
- * @checks all needed items or returns a 400 with specific message.
- * @middleware registerVerify()
- * @returns { user data that was set }
- */
-// router.post('/register', registerVerify(), async (req, res, next) => {
-//   const { username, password, email, first_name, last_name, role } = req.body;
-
-//   try {
-//     const user = await userModel.findBy({ username }).first();
-//     if (user) {
-//       res.status(409).json({ message: 'username already exists' });
-//     }
-
-//     const userReg = {
-//       username: username,
-//       password: password,
-//       email: email,
-//       first_name: first_name,
-//       last_name: last_name,
-//       role: role.toLowerCase()
-//     };
-//     const newUser = await userModel.addUser(userReg);
-//     res.status(201).json(newUser);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 // /**
 //  * @type POST /api/login
