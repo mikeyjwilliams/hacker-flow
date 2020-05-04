@@ -6,54 +6,59 @@ const server = require('../server');
 const db = require('../data/config');
 
 beforeAll(async () => {
-	await db.seed.run();
+  await db.seed.run();
 });
 
 afterAll(async () => {
-	await db.destroy();
+  await db.destroy();
 });
 
 describe('auth-router /register', () => {
-	test('POST register a user', async () => {
-		const res = await supertest(server).post('/api/register').send({
-			email: 'miguel@gmail.com',
-			password: 'abc'
-		});
+  test('POST register a user', async () => {
+    const res = await supertest(server).post('/api/register').send({
+      email: 'miguel@gmail.com',
+      password: 'abc',
+    });
 
-		expect(res.statusCode).toBe(201);
-		expect(res.type).toBe('application/json');
-		expect(res.body.email).toBe('miguel@gmail.com');
-	});
+    expect(res.statusCode).toBe(201);
+    expect(res.type).toBe('application/json');
+    expect(res.body.email).toBe('miguel@gmail.com');
+  });
 });
 
-// describe('Auth Router', () => {
-//   it.only('register a new user with email and password', async () => {
+describe('Register a User', () => {
+  describe('Register failing', () => {
+    test('email is not filled in', async () => {
+      const res = await supertest(server)
+        .post('/api/register')
+        .send({ email: null });
 
-//   })
-// })
+      expect(res.statusCode).toBe(400);
+      expect(res.type).toBe('application/json');
+      expect(res.body.message).toMatch(/email is required/i);
+    });
 
-// describe('Register a User', () => {
-//   describe('Register failing', () => {
-//     test('username is not filled in', async () => {
-//       const res = await supertest(server)
-//         .post('/api/register')
-//         .send({ username: null });
+    test('password is not filled in', async () => {
+      const res = await supertest(server)
+        .post('/api/register')
+        .send({ email: 'him@hotmail.com', password: null });
 
-//       expect(res.statusCode).toBe(400);
-//       expect(res.type).toBe('application/json');
-//       expect(res.body.message).toMatch(/username required/i);
-//     });
+      expect(res.statusCode).toBe(400);
+      expect(res.type).toBe('application/json');
+      expect(res.body.message).toMatch(/password is required/i);
+    });
 
-//     test('password is not filled in', async () => {
-//       const res = await supertest(server)
-//         .post('/api/register')
-//         .send({ username: 'mikey', password: null });
+    test('user signs in successfully', async () => {
+      const res = await supertest(server)
+        .post('/api/register')
+        .send({ email: 'hi@hotmail.com', password: 'run123' });
 
-//       expect(res.statusCode).toBe(400);
-//       expect(res.type).toBe('application/json');
-//       expect(res.body.message).toMatch(/password required/i);
-//     });
-
+      expect(res.statusCode).toBe(201);
+      expect(res.type).toBe('application/json');
+      expect(res.body.email).toBe('hi@hotmail.com');
+    });
+  });
+});
 //     test('email is not filled in', async () => {
 //       const res = await supertest(server)
 //         .post('/api/register')
@@ -178,7 +183,6 @@ describe('auth-router /register', () => {
 //       });
 //     });
 //   });
-// });
 
 // describe('Log in user fails', () => {
 //   describe('login missing username', () => {
@@ -266,4 +270,3 @@ describe('auth-router /register', () => {
 //       expect(res.body.role).toMatch(/user-dev/i);
 //     });
 //   });
-// });
