@@ -8,8 +8,6 @@ module.exports = {
   findBy,
   findById,
   addUser,
-  // addRole,
-  // findByIdRole
   //deleteUser,
 };
 
