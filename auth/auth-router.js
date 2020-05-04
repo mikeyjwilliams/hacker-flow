@@ -3,7 +3,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const genToken = require('./genToken');
-const userModel = require('../users/users-model');
 const authModel = require('./auth-model');
 // middle ware ---
 const authVerify = require('../middleware/authVerify');
