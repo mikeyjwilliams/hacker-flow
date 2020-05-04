@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
 const authRouter = require('./auth/auth-router');
+const userRouter = require('./users/user-router');
 const questionRouter = require('./questions/questions-router');
 const answerRouter = require('./answers/answers-router');
 
@@ -21,6 +22,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api', authRouter);
+server.use('/api', userRouter);
 server.use('/api', questionRouter);
 server.use('/api', answerRouter);
 
