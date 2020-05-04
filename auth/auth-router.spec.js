@@ -48,7 +48,7 @@ describe('Register a User', () => {
       expect(res.body.message).toMatch(/password is required/i);
     });
 
-    test('user signs in successfully', async () => {
+    test('create user successfully', async () => {
       const res = await supertest(server)
         .post('/api/register')
         .send({ email: 'hi@hotmail.com', password: 'run123' });
@@ -57,6 +57,40 @@ describe('Register a User', () => {
       expect(res.type).toBe('application/json');
       expect(res.body.email).toBe('hi@hotmail.com');
     });
+  });
+});
+
+describe('log in a user route', () => {
+  test('email is missing 400 come back', async () => {
+    const res = await supertest(server).post('/api/login').send({
+      email: null,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(/email is required/i);
+  });
+
+  test('password is missing 400 come back', async () => {
+    const res = await supertest(server).post('/api/login').send({
+      email: 'mickey@gmail.com',
+      password: null,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(/password is required/i);
+  });
+
+  test('login passes', async () => {
+    const res = await supertest(server).post('/api/login').send({
+      email: 'mickey@gmail.com',
+      password: '123',
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.type).toBe('application/json');
+    expect(res.body.email).toBe('mickey@gmail.com');
   });
 });
 //     test('email is not filled in', async () => {
