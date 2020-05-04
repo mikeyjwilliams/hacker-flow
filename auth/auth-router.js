@@ -37,8 +37,8 @@ router.post('/register', registerVerify(), async (req, res, next) => {
 
 /**
  * @type POST /api/login
- * @description logs user in if username and password are correct.
- * @checks username & password exist, password matches users.
+ * @description logs user in if email and password are correct.
+ * @checks email & password exist, password matches users.
  * @middleware authVerify()
  * @returns { token, userId, role, username, greeting }
  */
