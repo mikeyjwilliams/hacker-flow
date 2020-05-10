@@ -45,7 +45,7 @@ SELECT
 FROM "questions" as q
 JOIN "users" as u ON q."user_id" = u."id"
 WHERE
-  q.solved = true;
+  q."solved" = true;
 -------------------------------------
   -- answered question by id
 SELECT
@@ -63,8 +63,7 @@ WHERE
   AND q."id" = ?
 LIMIT
   1;
----------------------------------------
-  -- all questions answered or unanswered.
+-- all questions answered or unanswered.
 SELECT
   q."solved" as "solved",
   q."title" as "title",
@@ -126,3 +125,17 @@ JOIN "users" as user ON q."user_id" = user."id"
 JOIN "users" as answer ON a."user_id" = answer."id"
 WHERE
   q."id" = ?;
+---------------------------------------
+  --- ANSWER Queries ---------------------
+  ----------------------------------------
+  ---- findById answer-model-----
+SELECT
+  a."title" as "title",
+  a."solution" as "solution",
+  a."comments" as "comments",
+  a."best_answer" as "best_answer",
+  u."username" as "answer_username"
+FROM "answers" as a
+JOIN "users" as u ON a."user_id" = u."id"
+WHERE
+  a."id" = ?;
