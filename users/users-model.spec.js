@@ -7,80 +7,102 @@ const userModel = require('./users-model');
 const db = require('../data/config');
 
 beforeEach(async () => {
-  await db.seed.run();
+	await db.seed.run();
 });
 
 afterAll(async () => {
-  await db.destroy();
+	await db.destroy();
 });
 
 describe('User Model Methods', () => {
-  describe('getUsers in users table', () => {
-    test('get all users', async () => {
-      const res = await userModel.getUsers();
+	describe('getUsers in users table', () => {
+		test('get all users', async () => {
+			const res = await userModel.getUsers();
 
-      expect(res).toHaveLength(7);
-    });
-  });
+			expect(res).toHaveLength(7);
+		});
+	});
 
-  describe('find a user By Filter', () => {
-    test('findBy first_name Pass', async () => {
-      const res = await userModel.findBy({ first_name: 'mickey' }).first();
+	describe('getUser specific user by id with email', () => {
+		test('getUser w/ sigin_in join', async () => {
+			const res = await userModel.getUser(1);
 
-      expect(res.username).toBe('mickey65');
-      expect(res.last_name).toBe('mouse');
-    });
+			expect(res.username).toBe('mickey65');
+			expect(res.first_name).toBe('mickey');
+			expect(res.email).toBe('mickey@gmail.com');
+		});
+	});
 
-    test('findBy last_name Pass', async () => {
-      const res = await userModel.findBy({ last_name: 'fallon' }).first();
+	describe('find a user By Filter', () => {
+		test('findBy first_name Pass', async () => {
+			const res = await userModel.findBy({ first_name: 'mickey' }).first();
 
-      expect(res.username).toMatch(/bri34fal/i);
-      expect(res.first_name).toMatch(/brian/i);
-    });
-  });
+			expect(res.username).toBe('mickey65');
+			expect(res.last_name).toBe('mouse');
+		});
 
-  describe('find user by id', () => {
-    test('findById(1) mickey', async () => {
-      const res = await userModel.findById(1);
+		test('findBy last_name Pass', async () => {
+			const res = await userModel.findBy({ last_name: 'fallon' }).first();
 
-      expect(res.id).toBe(1);
-      expect(res.username).toBe('mickey65');
-      expect(res.last_name).toBe('mouse');
-    });
+			expect(res.username).toMatch(/bri34fal/i);
+			expect(res.first_name).toMatch(/brian/i);
+		});
+	});
 
-    test('findById(2) brian', async () => {
-      const res = await userModel.findById(2);
+	describe('find user by id', () => {
+		test('findById(1) mickey', async () => {
+			const res = await userModel.findById(1);
 
-      expect(res.id).toBe(2);
-      expect(res.username).toBe('bri34fal');
-      expect(res.first_name).toBe('brian');
-    });
-  });
+			expect(res.id).toBe(1);
+			expect(res.username).toBe('mickey65');
+			expect(res.last_name).toBe('mouse');
+		});
 
-  describe('Add User', () => {
-    test('add a user to user table', async () => {
-      const response = await authModel.addUser({
-        email: 'randy@gmail.com',
-        password: 'run123',
-      });
-      const res = await userModel.addUser({
-        username: 'randy1',
-        first_name: 'Randy',
-        last_name: 'Marsh',
-        sign_in_id: response.id,
-      });
-      expect(res.username).toMatch(/randy1/i);
-      expect(res.first_name).toMatch(/randy/i);
-      expect(res.last_name).toMatch(/marsh/i);
-    });
-  });
+		test('findById(2) brian', async () => {
+			const res = await userModel.findById(2);
 
-  //   //!! Foreign key constraint cannot do this right now.
-  //   //   describe('remove a user', () => {
-  //   //     test('delete user 5', async () => {
-  //   //       await User.deleteUser(5);
-  //   //       const res = await User.getUsers();
-  //   //       expect(res).toHaveLength(5);
-  //   // //    });
-  //   ////   });
+			expect(res.id).toBe(2);
+			expect(res.username).toBe('bri34fal');
+			expect(res.first_name).toBe('brian');
+		});
+	});
+
+	describe('Add User', () => {
+		test('add a user to user table', async () => {
+			const response = await authModel.addUser({
+				email: 'randy@gmail.com',
+				password: 'run123'
+			});
+			const res = await userModel.addUser({
+				username: 'randy1',
+				first_name: 'Randy',
+				last_name: 'Marsh',
+				sign_in_id: response.id
+			});
+			expect(res.username).toMatch(/randy1/i);
+			expect(res.first_name).toMatch(/randy/i);
+			expect(res.last_name).toMatch(/marsh/i);
+		});
+	});
+
+	describe('getUser by user_id to save username, user_id, main_id', () => {
+		test('getUser by id', async () => {
+			const res = await userModel.getUser(1);
+
+			expect(res.user_id).toBe(1);
+			expect(res.username).toBe('mickey65');
+			expect(res.last_name).toBe('mouse');
+			expect(res.email).toBe('mickey@gmail.com');
+			expect(res.main_id).toBe(1);
+		});
+	});
+
+	//   //!! Foreign key constraint cannot do this right now.
+	//   //   describe('remove a user', () => {
+	//   //     test('delete user 5', async () => {
+	//   //       await User.deleteUser(5);
+	//   //       const res = await User.getUsers();
+	//   //       expect(res).toHaveLength(5);
+	//   // //    });
+	//   ////   });
 });
