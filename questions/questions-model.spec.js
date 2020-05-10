@@ -27,6 +27,8 @@ describe('questions models', () => {
 			expect(res).toHaveLength(3);
 		});
 	});
+}
+
 
 	describe('single question models', () => {
 		test('unansweredById', async () => {
@@ -106,29 +108,38 @@ describe('questions models', () => {
 		});
 	});
 
-	describe('getQuestionAndAnswers', () => {
-		test('get question by id and all answers along with it', async () => {
-			const res = await QuestModel.getQuestionAndAnswers(3);
+	describe('allQuestionsByUser', () => {
+		test('get question of a user by user id', async () => {
+			const res = await QuestModel.allQuestionsByUser(2);
 
-			expect(res).toHaveLength(2);
+			expect(res.length).toH; ///aveLength(2);
+			expect(res.length).toBeGreaterThanOrEqual(1);
 		});
-	});
 
-	describe('updateQuestion model', () => {
-		test('update a question that was asked', async () => {
-			const res = await QuestModel.updateQuestion(8, {
-				title: 'node creator',
-				category: 'node.js',
-				question: 'who created node.js?',
-				attempt_tried: 'I looked through the docs...',
-				comments: 'I was wondering who created node.js for a report',
-				solved: false,
-				user_id: 2
+		describe('getQuestionAndAnswers', () => {
+			test('get question by id and all answers along with it', async () => {
+				const res = await QuestModel.getQuestionAndAnswers(3);
+
+				expect(res).toHaveLength(2);
 			});
+		});
 
-			expect(res.attempt_tried).toMatch(/i looked through the docs/i);
-			expect(res.category).toBe('node.js');
-			expect(res.title).toBe('node creator');
+		describe('updateQuestion model', () => {
+			test('update a question that was asked', async () => {
+				const res = await QuestModel.updateQuestion(8, {
+					title: 'node creator',
+					category: 'node.js',
+					question: 'who created node.js?',
+					attempt_tried: 'I looked through the docs...',
+					comments: 'I was wondering who created node.js for a report',
+					solved: false,
+					user_id: 2
+				});
+
+				expect(res.attempt_tried).toMatch(/i looked through the docs/i);
+				expect(res.category).toBe('node.js');
+				expect(res.title).toBe('node creator');
+			});
 		});
 	});
 });

@@ -11,6 +11,7 @@ module.exports = {
 	questionById,
 	getAllSpecificQuestionAnswers,
 	getAllQuestions,
+	allQuestionsByUser,
 	getQuestionAndAnswers,
 	updateQuestion
 };
@@ -133,6 +134,21 @@ function getAllQuestions() {
 			'u.username as username'
 		)
 		.join('users as u', 'q.user_id', 'u.id');
+}
+
+function allQuestionsByUser(user_id) {
+	return db('questions as q')
+		.select(
+			'q.id as question_id',
+			'q.title as title',
+			'q.category as category',
+			'q.attempt_tried as attempt_tried',
+			'q.comments as comments',
+			'q.solved as solved',
+			'u.username as username'
+		)
+		.join('users as u', 'q.user_id', 'u.id')
+		.join('sign_ins as s', 'u.sign_in_id', user_id);
 }
 
 function getQuestionAndAnswers(question_id) {
