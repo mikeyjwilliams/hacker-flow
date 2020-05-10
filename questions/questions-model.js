@@ -47,6 +47,21 @@ function unansweredById(id) {
 		.first();
 }
 
+function answeredQuestions() {
+	return db('questions as q')
+		.select(
+			'q.id as question_id',
+			'q.title as title',
+			'q.category as category',
+			'q.question as question',
+			'q.attempt_tried as attempt_tried',
+			'q.comments as comments',
+			'u.username as username'
+		)
+		.join('users as u', 'q.user_id', 'u.id')
+		.where('q.solved', true);
+}
+
 function answeredById(id) {
 	return db('questions as q')
 		.select(
@@ -61,21 +76,6 @@ function answeredById(id) {
 		.join('users as u', 'q.user_id', 'u.id')
 		.where({ 'q.solved': true, 'q.id': id })
 		.first();
-}
-
-function answeredQuestions() {
-	return db('questions as q')
-		.select(
-			'q.id as question_id',
-			'q.title as title',
-			'q.category as category',
-			'q.question as question',
-			'q.attempt_tried as attempt_tried',
-			'q.comments as comments',
-			'u.username as username'
-		)
-		.join('users as u', 'q.user_id', 'u.id')
-		.where('q.solved', true);
 }
 
 function questionById(id) {
