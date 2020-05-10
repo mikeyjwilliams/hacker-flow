@@ -12,6 +12,56 @@ afterAll(async () => {
   await db.destroy();
 });
 
+describe('user router fail tests', () => {
+  test('username is required', async () => {
+    const res = await supertest(server).post('/api/usersetup').send({
+      username: null,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(/username is required/i);
+  });
+
+  test('first name is required', async () => {
+    const res = await supertest(server).post('/api/usersetup').send({
+      username: 'Beth1',
+      first_name: null,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(/first name is required/i);
+  });
+
+  test('last_name is required', async () => {
+    const res = await supertest(server).post('/api/usersetup').send({
+      username: 'Beth1',
+      first_name: 'Beth',
+      last_name: null,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(/last name is required/i);
+  });
+
+  test('username is already in use', async () => {
+    const res = await supertest(server).post('/api/usersetup').send({
+      username: 'Beth1',
+      first_name: 'Beth',
+      last_name: 'smith',
+      username: 'mickey65',
+    });
+
+    expect(res.statusCode).toBe(409);
+    expect(res.type).toBe('application/json');
+    expect(res.body.message).toMatch(
+      /sorry, username mickey65 is taken please choose another/i
+    );
+  });
+});
+
 describe('user router', () => {
   test('user adds users data after registering', async () => {
     const response = await supertest(server).post('/api/register').send({
