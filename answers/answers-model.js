@@ -14,7 +14,7 @@ module.exports = {
  * @description find answer by id
  * @param {answer} id
  */
-function findById(id) {
+function findById(answer_id) {
   return db('answers as a')
     .select(
       'a.title as title',
@@ -24,7 +24,7 @@ function findById(id) {
       'u.username as username'
     )
     .join('users as u', 'a.user_id', 'u.id')
-    .where('a.id', id)
+    .where('a.id', answer_id)
     .first();
 }
 
