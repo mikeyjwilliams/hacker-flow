@@ -5,6 +5,7 @@ const db = require('../data/config');
 module.exports = {
   findById,
   addAnswer,
+  answersByQuestionId,
   updateAnswer,
   removeAnswer,
 };
@@ -37,6 +38,21 @@ async function addAnswer(answer) {
   const [id] = await db('answers').insert(answer);
 
   return findById(id);
+}
+
+function answersByQuestionId(question_id) {
+  return db('answers as a')
+    .select(
+      'a.id as answer_id',
+      'a.title as answer_title',
+      'a.solution as solution',
+      'a.comments as answer_comments',
+      'a.best_answer as best_answer',
+      'u.username as answer_username'
+    )
+    .join('users as u', 'a.user_id', 'u.id')
+    .join('questions as q', 'a.question_id', 'q.id')
+    .where('q.id', question_id);
 }
 
 async function updateAnswer(id, changes) {

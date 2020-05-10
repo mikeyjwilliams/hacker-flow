@@ -155,6 +155,21 @@ JOIN "users" as u ON a."user_id" = u."id"
 WHERE
   a."id" = ?;
 -------------------------------------------
+  -- get answers by question ID
+  -------------------------------------------
+SELECT
+  a."id" as "answer_id",
+  a."title" as "answer_title",
+  a."solution" as "answer_solution",
+  a."comments" as "answer_comments",
+  a."best_answer" as "best_answer",
+  u."username" as "answer_username"
+FROM "answers" as a
+JOIN "users" as u ON a."user_id" = u."id"
+JOIN "questions" as q ON a."question_id" = q."id"
+WHERE
+  q."id" = ?;
+-----------------------------------------
   -- getUser user-model ---------------------
   -------------------------------------------
 SELECT

@@ -23,6 +23,15 @@ describe('Answer models', () => {
         best_answer: expect.any(Boolean),
       });
     });
+
+    describe('answers by question id', () => {
+      test('answersByQuestionId', async () => {
+        const res = await Amodel.answersByQuestionId(3);
+
+        expect(res).toHaveLength(2);
+        expect(res.length).toBeLessThan(3);
+      });
+    });
   });
 
   describe('insert an answer return findById', () => {
