@@ -139,3 +139,17 @@ FROM "answers" as a
 JOIN "users" as u ON a."user_id" = u."id"
 WHERE
   a."id" = ?;
+-------------------------------------------
+  -- getUser user-model ---------------------
+  -------------------------------------------
+SELECT
+  u."id" as "user_id",
+  u."username" as "username",
+  u."first_name" as "first_name",
+  u."last_name" as "last_name",
+  s."email" as "email",
+  s."id" as "main_id"
+FROM "users" as u
+JOIN "sign_ins" as s ON u."sign_in_id" = s."id"
+WHERE
+  u."id" = ?;
