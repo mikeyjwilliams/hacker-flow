@@ -9,7 +9,7 @@ const secret = require('../Secret/secret');
 function genToken(user) {
   const payload = {
     userId: user.id,
-    username: user.username,
+    userEmail: user.email,
     role: user.role || 'user-dev',
   };
   // const options = {
