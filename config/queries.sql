@@ -75,6 +75,21 @@ SELECT
 FROM "questions" as q
 JOIN "users" as u ON q."user_id" = u."id";
 -------------------------------------------
+  -- allQuestionsByUsers in questions-model.js
+  -------------------------------------------
+SELECT
+  DISTINCT(q."id"),
+  q."id" as "question_id",
+  q."title" as "question_title",
+  q."category" as "question_category",
+  q."attempt_tried" as "attempt_tried",
+  q."comments" as "question_comments",
+  q."solved" as "question_solved",
+  u."username" as "question_username"
+FROM "questions" as q
+JOIN "users" as u ON q."user_id" = u."id"
+JOIN "sign_ins" as s ON u."sign_in_id" = ?;
+-------------------------------------------
   -- get answers for a specific question.
 SELECT
   a."title" as "title",
