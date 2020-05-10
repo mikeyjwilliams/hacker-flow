@@ -27,8 +27,6 @@ describe('questions models', () => {
 			expect(res).toHaveLength(3);
 		});
 	});
-}
-
 
 	describe('single question models', () => {
 		test('unansweredById', async () => {
