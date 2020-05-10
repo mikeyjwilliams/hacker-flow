@@ -39,7 +39,7 @@ router.post('/register', registerVerify(), async (req, res, next) => {
  * @description logs user in if email and password are correct.
  * @checks email & password exist, password matches users.
  * @middleware authVerify() => verify they are not empty
- * @returns { token, userId, role, username, greeting }
+ * @returns { token, userId, email, greeting }
  */
 router.post('/login', authVerify(), async (req, res, next) => {
   const { email, password } = req.body;
@@ -64,7 +64,6 @@ router.post('/login', authVerify(), async (req, res, next) => {
       message: `Welcome ${user.email}`,
       userId: user.id,
       email: user.email,
-      role: user.role,
       token: token, // cookie avail for front-end auth
     });
   } catch (err) {
