@@ -10,12 +10,19 @@ module.exports = {
   deleteComment,
 };
 
-function commentById(user_id, question_id) {
-  return null;
+function commentById(comment_id) {
+  return db('question_comments as qc')
+    .select('qc.comment as comment', 'u.username as username')
+    .join('users as u', 'qc.user_id', 'u.id')
+    .where('qc.id', comment_id)
+    .first();
 }
 
 function allComments(user_id) {
-  return null;
+  return db('question_comments as qc')
+    .select('qc.comment as comment', 'u.username as username')
+    .join('users as u', 'qc.user_id', 'u.id')
+    .where('qc.user_id', user_id);
 }
 
 async function addComment(question_id, comment) {
