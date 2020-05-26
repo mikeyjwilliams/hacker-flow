@@ -183,3 +183,23 @@ FROM "users" as u
 JOIN "sign_ins" as s ON u."sign_in_id" = s."id"
 WHERE
   u."id" = ?;
+------------------------------------------------------
+  --- question comments queries
+  ------------------------------------------------------
+SELECT
+  qc."comment" as "comment",
+  u."username" as "username"
+FROM "question_comments" as qc
+JOIN "users" as u ON qc."user_id" = u."id"
+WHERE
+  qc."id" = ?;
+--------------------------------------------
+  ---- all comments by a user ----------------
+  --------------------------------------------
+SELECT
+  qc."comment" as "comment",
+  u."username" as "username"
+FROM "question_comments" as qc
+JOIN "users" as u ON qc."user_id" = u."id"
+where
+  qc."user_id" = 1;
