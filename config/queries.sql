@@ -202,4 +202,15 @@ SELECT
 FROM "question_comments" as qc
 JOIN "users" as u ON qc."user_id" = u."id"
 where
-  qc."user_id" = 1;
+  qc."user_id" = ?;
+-----------------------------------------------
+  --- all comments for a question ---------------
+  -----------------------------------------------
+SELECT
+  c."comment" as "comment",
+  u."username" as "username"
+FROM "question_comments" as c
+JOIN "users" as u ON c."user_id" = u."id"
+WHERE
+  c."question_id" = ?;
+------------------------------------------

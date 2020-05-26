@@ -4,33 +4,45 @@ const db = require('../data/config');
 
 module.exports = {
   commentById,
-  allComments,
+  allCommentsForUser,
+  allCommentsForQuestion,
   addComment,
   updateComment,
   deleteComment,
 };
 
-function commentById(comment_id) {
+function commentById(questionComment_id) {
   return db('question_comments as qc')
     .select('qc.comment as comment', 'u.username as username')
     .join('users as u', 'qc.user_id', 'u.id')
-    .where('qc.id', comment_id)
+    .where('qc.id', questionComment_id)
     .first();
 }
 
-function allComments(user_id) {
+function allCommentsForUser(user_id) {
   return db('question_comments as qc')
     .select('qc.comment as comment', 'u.username as username')
     .join('users as u', 'qc.user_id', 'u.id')
     .where('qc.user_id', user_id);
 }
 
-async function addComment(question_id, comment) {
-  return null;
+function allCommentsForQuestion(question_id) {
+  return db('question_comments as qc')
+    .select('qc.comment as comment', 'u.username as username')
+    .join('users as u', 'qc.user_id', 'u.id')
+    .where('qc.question_id', question_id);
+}
+
+async function addComment(comment) {
+  const [id] = await db('question_comments').insert(comment);
+
+  return commentById(id);
 }
 
 async function updateComment(question_id, update) {
-  return null;
+  await db('question_comments').where('id', question_id).insert(update);
+
+  return commentById(question_id);
 }
 
 function deleteComment(question_id) {
