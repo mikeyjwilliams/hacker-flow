@@ -13,7 +13,12 @@ module.exports = {
 
 function commentById(questionComment_id) {
   return db('question_comments as qc')
-    .select('qc.comment as comment', 'u.username as username')
+    .select(
+      'qc.id as question_id',
+      'qc.id as question_id',
+      'qc.comment as comment',
+      'u.username as username'
+    )
     .join('users as u', 'qc.user_id', 'u.id')
     .where('qc.id', questionComment_id)
     .first();
@@ -40,11 +45,11 @@ async function addComment(comment) {
 }
 
 async function updateComment(question_id, update) {
-  await db('question_comments').where('id', question_id).insert(update);
+  await db('question_comments').where('id', question_id).update(update);
 
   return commentById(question_id);
 }
 
 function deleteComment(question_id) {
-  return null;
+  return db('question_comments').where({ id: question_id }).del();
 }

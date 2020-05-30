@@ -52,12 +52,31 @@ describe('question comments models testing', () => {
     });
     const res = await QCmodel.updateComment(2, {
       question_id: 2,
-      user_id: 7,
+      user_id: 1,
       comment: 'did you try google?',
     });
 
-    expect(res.username).toMatch(/userdev/i);
+    expect(res.username).toMatch(/mickey65/i);
     expect(res.comment).toMatch(/did you try google/i);
-    expect(res).toHaveLength(1);
+  });
+
+  test('delete a comment that has been made', async () => {
+    const comment = await QCmodel.addComment({
+      question_id: 2,
+      user_id: 7,
+      comment: 'useless coent',
+    });
+    expect(comment.question_id).toBe(5);
+    expect(comment.username).toMatch(/userdev/i);
+
+    const response = await QCmodel.allCommentsForQuestion(2);
+
+    expect(response.length).toBe(3);
+
+    const r = await QCmodel.deleteComment(5);
+
+    const res = await QCmodel.allCommentsForQuestion(2);
+
+    expect(res.length).toBe(2);
   });
 });
